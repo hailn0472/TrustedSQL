@@ -1,0 +1,24 @@
+systems:
+  trustedsql_minus_m1:
+    enabled: true
+    label: Full - M1
+    runtime_kind: trustedsql
+    modules: [C0, M2, M3, M4, M5, M6, M7, X1]
+
+  trustedsql_minus_m2:
+    enabled: true
+    label: Full - M2
+    runtime_kind: trustedsql
+    modules: [C0, M1, M3, M4, M5, M6, M7, X1]
+
+  trustedsql_minus_m3_m4_m5:
+    enabled: true
+    label: Full - M3/M4/M5
+    runtime_kind: trustedsql
+    modules: [C0, M1, M2, M6, M7, X1]
+
+  trustedsql_minus_m7:
+    enabled: true
+    label: Full - M7
+    runtime_kind: trustedsql
+    modules: [C0, M1, M2, M3, M4, M5, M6, X1]

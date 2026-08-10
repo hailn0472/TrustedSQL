@@ -1,0 +1,12 @@
+experiment:
+  id: ex3_ablation
+  dataset_profile: configs/datasets/v3_full.yaml
+  systems:
+    - full_trustedsql
+    - trustedsql_minus_m1
+    - trustedsql_minus_m2
+    - trustedsql_minus_m3_m4_m5
+    - trustedsql_minus_m7
+  providers:
+    - gemini_25_flash
+  repetitions: 1

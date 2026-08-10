@@ -1,0 +1,1368 @@
+﻿{
+    "schema_version":  "trustedsql_intent_gnn_model_v1",
+    "model_id":  "trustedsql-intent-gnn-v1",
+    "created_at":  "2026-07-03T17:23:16.731517+00:00",
+    "checkpoint":  {
+                       "path":  "artifacts/models/intent_gnn/v1/best.pt",
+                       "sha256":  "C4FBDA9D6518DB1EAA04D57FBEA85483C4925CCB1B5B468B5FA9D2DDABCF1141",
+                       "best_epoch":  19,
+                       "model_config":  {
+                                            "input_dim":  431,
+                                            "hidden_dim":  128,
+                                            "num_relations":  18,
+                                            "num_intents":  16,
+                                            "num_operations":  6,
+                                            "num_scopes":  8,
+                                            "num_target_relations":  8,
+                                            "num_transitions":  10,
+                                            "num_concepts":  39,
+                                            "num_security_transitions":  10,
+                                            "max_reference_distance":  8,
+                                            "num_layers":  3,
+                                            "dropout":  0.2
+                                        }
+                   },
+    "source":  {
+                   "training_git_commit":  "not_recorded",
+                   "manifest_generation_git_commit":  "1f1d372be9769fc0398cd045558ea1b7da3d26e2",
+                   "training_author_confirmation":  "codex-v3-0107-sync",
+                   "training_history":  "not_recorded"
+               },
+    "training_data":  {
+                          "manifest_path":  "data/training/intent_gnn/v1/dataset_manifest.json",
+                          "manifest_sha256":  "483A3DBC733D1063B71CD95EF37EB5CEFB96A1A3BE15D985D5A06B60137CD2DF",
+                          "version":  "3.0.0-0107-augmented",
+                          "split_hashes":  {
+                                               "train":  "60D4A772F0C47CBF8C1B743F1D3F1A5B5A0A54AC0DC6FD6E0D3B04E8DD449ECF",
+                                               "validation":  "8FB1F098EC101DEA8471017EC8EB1DE166D8C7AA1EDCC008CACA73ED5875AB97",
+                                               "test":  "9D9188DFBEA47CEAB4F6BA7E321EC135F02E058C471E92AC08067CE77A2010A6"
+                                           }
+                      },
+    "configuration_hashes":  {
+                                 "training_config.json":  "5FF71EA5A5678CACA10FD826BED9782DC7C28DE72545B096C25A27ADE4FCF1C1",
+                                 "graph_config.json":  "53940B4F3793F5DE1E2F5F16DAB1CF1DFEAE4662CFD986304F906509D2E8152D",
+                                 "intent_taxonomy_v1.json":  "C1102B332491C97B0ABBA613DF9DEB1D2CDBC0EBBB1624D43CC1BBBE32062D08",
+                                 "concept_catalog_v1.json":  "6E52AD997B2AD2EE14DE7BB9EED9EF93437A89C529D3EF88FD249A76F71B7764",
+                                 "legacy_intent_mapping_v1.json":  "36FA502DDE0494EF0D7DCFC2A980EBD8EDD593DB28764D76993146CAD0DFF8CA"
+                             },
+    "checkpoint_origin":  {
+                              "training_config_path":  "artifacts/models/intent_gnn/v1/training_config.origin.json",
+                              "training_config_file_sha256":  "EEDB436E35D21FA14FA72FBF976DE44BB0FC92895CF19734C912F6B3DB2E85CC",
+                              "training_config_canonical_json_sha256":  "FB5C670CAB9B6D0811308491571A16F721B7C88B2505AEE30E177BD8CA77FAF8",
+                              "note":  "Semantic JSON snapshot supplied with the confirmed checkpoint; line endings are not provenance-bearing."
+                          },
+    "encoder":  {
+                    "model_id":  "sentence-transformers/all-MiniLM-L6-v2",
+                    "license":  "Apache-2.0",
+                    "revision":  "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+                    "embedding_dimension":  384,
+                    "local_subpath":  "all-MiniLM-L6-v2",
+                    "local_only_verified":  true,
+                    "tokenizer_vocab_size":  30522,
+                    "model_safetensors_sha256":  "53AA51172D142C89D9012CCE15AE4D6CC0CA6895895114379CACB4FAB128D9DB",
+                    "vocab_txt_sha256":  "07ECED375CEC144D27C900241F3E339478DEC958F92FDDBC551F295C992038A3"
+                },
+    "metrics":  {
+                    "training_recorded_validation":  {
+                                                         "sample_count":  787,
+                                                         "intent_accuracy":  0.92122,
+                                                         "intent_macro_f1":  0.92802,
+                                                         "operation_accuracy":  0.904701,
+                                                         "operation_macro_f1":  0.902818,
+                                                         "scope_accuracy":  0.90216,
+                                                         "scope_macro_f1":  0.886167,
+                                                         "target_relation_accuracy":  0.923761,
+                                                         "target_relation_macro_f1":  0.936926,
+                                                         "transition_accuracy":  0.870394,
+                                                         "transition_macro_f1":  0.88289,
+                                                         "reference_distance_accuracy":  0.886912,
+                                                         "reference_distance_macro_f1":  0.79782,
+                                                         "security_transition_accuracy":  0.92122,
+                                                         "security_transition_macro_f1":  0.869869,
+                                                         "concept_micro_f1":  0.867523,
+                                                         "intent_by_category":  {
+                                                                                    "BENIGN_SINGLE_TURN":  {
+                                                                                                               "count":  75,
+                                                                                                               "accuracy":  1.0
+                                                                                                           },
+                                                                                    "MALICIOUS_MULTI_TURN":  {
+                                                                                                                 "count":  356,
+                                                                                                                 "accuracy":  0.904494
+                                                                                                             },
+                                                                                    "BENIGN_MULTI_TURN":  {
+                                                                                                              "count":  356,
+                                                                                                              "accuracy":  0.921348
+                                                                                                          }
+                                                                                },
+                                                         "intent_by_role":  {
+                                                                                "student":  {
+                                                                                                "count":  521,
+                                                                                                "accuracy":  0.927063,
+                                                                                                "macro_f1":  0.913528
+                                                                                            },
+                                                                                "lecturer":  {
+                                                                                                 "count":  222,
+                                                                                                 "accuracy":  0.891892,
+                                                                                                 "macro_f1":  0.793293
+                                                                                             },
+                                                                                "admin":  {
+                                                                                              "count":  44,
+                                                                                              "accuracy":  1.0,
+                                                                                              "macro_f1":  1.0
+                                                                                          }
+                                                                            },
+                                                         "intent_by_mt_family":  {
+                                                                                     "MT-02":  {
+                                                                                                   "count":  137,
+                                                                                                   "accuracy":  0.824818,
+                                                                                                   "macro_f1":  0.652937
+                                                                                               },
+                                                                                     "MT-07":  {
+                                                                                                   "count":  59,
+                                                                                                   "accuracy":  0.915254,
+                                                                                                   "macro_f1":  0.930097
+                                                                                               },
+                                                                                     "MT-01":  {
+                                                                                                   "count":  90,
+                                                                                                   "accuracy":  0.866667,
+                                                                                                   "macro_f1":  0.699048
+                                                                                               },
+                                                                                     "MT-05":  {
+                                                                                                   "count":  89,
+                                                                                                   "accuracy":  0.966292,
+                                                                                                   "macro_f1":  0.871491
+                                                                                               },
+                                                                                     "MT-04":  {
+                                                                                                   "count":  72,
+                                                                                                   "accuracy":  0.944444,
+                                                                                                   "macro_f1":  0.689543
+                                                                                               },
+                                                                                     "MT-08":  {
+                                                                                                   "count":  95,
+                                                                                                   "accuracy":  0.936842,
+                                                                                                   "macro_f1":  0.695811
+                                                                                               },
+                                                                                     "MT-03":  {
+                                                                                                   "count":  71,
+                                                                                                   "accuracy":  0.957746,
+                                                                                                   "macro_f1":  0.650648
+                                                                                               },
+                                                                                     "MT-06":  {
+                                                                                                   "count":  73,
+                                                                                                   "accuracy":  1.0,
+                                                                                                   "macro_f1":  1.0
+                                                                                               },
+                                                                                     "0107-BENIGN":  {
+                                                                                                         "count":  26,
+                                                                                                         "accuracy":  0.807692,
+                                                                                                         "macro_f1":  0.691166
+                                                                                                     }
+                                                                                 },
+                                                         "intent_by_micro_pattern":  {
+                                                                                         "MT02_BENIGN_LECTURER_NAME_ONLY_AUGMENTED":  {
+                                                                                                                                          "count":  60,
+                                                                                                                                          "accuracy":  0.616667,
+                                                                                                                                          "macro_f1":  0.127148
+                                                                                                                                      },
+                                                                                         "0107_0107_BENIGN_BENIGN_SEQ_LABEL_SAFE_BENIGN_ROSTER":  {
+                                                                                                                                                      "count":  12,
+                                                                                                                                                      "accuracy":  0.916667,
+                                                                                                                                                      "macro_f1":  0.478261
+                                                                                                                                                  },
+                                                                                         "0107_MT_07_GENERIC":  {
+                                                                                                                    "count":  9,
+                                                                                                                    "accuracy":  0.777778,
+                                                                                                                    "macro_f1":  0.626667
+                                                                                                                },
+                                                                                         "MT01_APPLICATION_TYPE_SCHEMA_CLARIFICATION":  {
+                                                                                                                                            "count":  9,
+                                                                                                                                            "accuracy":  1.0,
+                                                                                                                                            "macro_f1":  1.0
+                                                                                                                                        },
+                                                                                         "MT01_COMPLEMENT_QUERY_FOR_ALLOWED_SELF_DATA":  {
+                                                                                                                                             "count":  9,
+                                                                                                                                             "accuracy":  1.0,
+                                                                                                                                             "macro_f1":  1.0
+                                                                                                                                         },
+                                                                                         "MT01_COURSE_COMPONENT_FIELD_CLARIFICATION":  {
+                                                                                                                                           "count":  9,
+                                                                                                                                           "accuracy":  1.0,
+                                                                                                                                           "macro_f1":  1.0
+                                                                                                                                       },
+                                                                                         "MT01_PUBLIC_CATALOG_TO_SENSITIVE_FIELD_DISCOVERY":  {
+                                                                                                                                                  "count":  9,
+                                                                                                                                                  "accuracy":  1.0,
+                                                                                                                                                  "macro_f1":  1.0
+                                                                                                                                              },
+                                                                                         "MT01_PUBLIC_SCHEMA_TO_PUBLIC_CATALOG_HELP":  {
+                                                                                                                                           "count":  9,
+                                                                                                                                           "accuracy":  1.0,
+                                                                                                                                           "macro_f1":  1.0
+                                                                                                                                       },
+                                                                                         "MT01_PUBLIC_TABLE_TO_EXTERNAL_RECORD_PATH":  {
+                                                                                                                                           "count":  9,
+                                                                                                                                           "accuracy":  1.0,
+                                                                                                                                           "macro_f1":  1.0
+                                                                                                                                       },
+                                                                                         "MT01_SCHEMA_FIELD_TO_PRIVATE_JOIN_HINT":  {
+                                                                                                                                        "count":  9,
+                                                                                                                                        "accuracy":  0.0,
+                                                                                                                                        "macro_f1":  0.0
+                                                                                                                                    },
+                                                                                         "MT01_SELF_RESULT_FIELD_CLARIFICATION":  {
+                                                                                                                                      "count":  9,
+                                                                                                                                      "accuracy":  1.0,
+                                                                                                                                      "macro_f1":  1.0
+                                                                                                                                  },
+                                                                                         "MT01_SELF_RESULT_SCHEMA_TO_PEER_RESULT_JOIN":  {
+                                                                                                                                             "count":  9,
+                                                                                                                                             "accuracy":  1.0,
+                                                                                                                                             "macro_f1":  1.0
+                                                                                                                                         },
+                                                                                         "MT05_BENIGN_EARLIEST_SCHEDULE_TIME_ONLY":  {
+                                                                                                                                         "count":  9,
+                                                                                                                                         "accuracy":  1.0,
+                                                                                                                                         "macro_f1":  1.0
+                                                                                                                                     },
+                                                                                         "MT05_BENIGN_EXTREME_PUBLIC_CATALOG":  {
+                                                                                                                                    "count":  9,
+                                                                                                                                    "accuracy":  1.0,
+                                                                                                                                    "macro_f1":  1.0
+                                                                                                                                },
+                                                                                         "MT05_BENIGN_EXTREME_SELF_RESULT":  {
+                                                                                                                                 "count":  9,
+                                                                                                                                 "accuracy":  1.0,
+                                                                                                                                 "macro_f1":  1.0
+                                                                                                                             },
+                                                                                         "MT05_BENIGN_MAX_CREDITS_PUBLIC_COURSE":  {
+                                                                                                                                       "count":  9,
+                                                                                                                                       "accuracy":  1.0,
+                                                                                                                                       "macro_f1":  1.0
+                                                                                                                                   },
+                                                                                         "MT05_BENIGN_TOP_GRADE_VALUE_ONLY_NO_IDENTITY":  {
+                                                                                                                                              "count":  9,
+                                                                                                                                              "accuracy":  1.0,
+                                                                                                                                              "macro_f1":  1.0
+                                                                                                                                          },
+                                                                                         "MT05_LATEST_APPLICATION_TO_STUDENT_IDENTITY":  {
+                                                                                                                                             "count":  9,
+                                                                                                                                             "accuracy":  1.0,
+                                                                                                                                             "macro_f1":  1.0
+                                                                                                                                         },
+                                                                                         "MT05_LOWEST_AVERAGE_TO_STUDENT_CONTACT":  {
+                                                                                                                                        "count":  9,
+                                                                                                                                        "accuracy":  1.0,
+                                                                                                                                        "macro_f1":  1.0
+                                                                                                                                    },
+                                                                                         "MT05_MAX_ABSENCE_TO_STUDENT_PROFILE":  {
+                                                                                                                                     "count":  9,
+                                                                                                                                     "accuracy":  1.0,
+                                                                                                                                     "macro_f1":  1.0
+                                                                                                                                 },
+                                                                                         "MT05_TOP_GRADE_TO_STUDENT_IDENTITY":  {
+                                                                                                                                    "count":  9,
+                                                                                                                                    "accuracy":  1.0,
+                                                                                                                                    "macro_f1":  1.0
+                                                                                                                                },
+                                                                                         "MT08_BENIGN_EXPLAIN_PUBLIC_PRIVATE_DIFFERENCE":  {
+                                                                                                                                               "count":  9,
+                                                                                                                                               "accuracy":  1.0,
+                                                                                                                                               "macro_f1":  1.0
+                                                                                                                                           },
+                                                                                         "MT08_BENIGN_QUOTE_LITERAL_NOT_INSTRUCTION":  {
+                                                                                                                                           "count":  9,
+                                                                                                                                           "accuracy":  1.0,
+                                                                                                                                           "macro_f1":  1.0
+                                                                                                                                       },
+                                                                                         "MT08_BENIGN_SQL_KEYWORD_COURSE_MATERIAL":  {
+                                                                                                                                         "count":  9,
+                                                                                                                                         "accuracy":  1.0,
+                                                                                                                                         "macro_f1":  1.0
+                                                                                                                                     },
+                                                                                         "MT08_BENIGN_TERMINOLOGY_CLARIFICATION":  {
+                                                                                                                                       "count":  9,
+                                                                                                                                       "accuracy":  1.0,
+                                                                                                                                       "macro_f1":  1.0
+                                                                                                                                   },
+                                                                                         "MT08_ENCODED_OVERRIDE_TO_PRIVATE_TARGET":  {
+                                                                                                                                         "count":  9,
+                                                                                                                                         "accuracy":  1.0,
+                                                                                                                                         "macro_f1":  1.0
+                                                                                                                                     },
+                                                                                         "MT08_FAKE_SENSITIVITY_RECLASSIFICATION":  {
+                                                                                                                                        "count":  9,
+                                                                                                                                        "accuracy":  0.888889,
+                                                                                                                                        "macro_f1":  0.470588
+                                                                                                                                    },
+                                                                                         "MT08_NEW_POLICY_GRANTS_ACCESS":  {
+                                                                                                                               "count":  9,
+                                                                                                                               "accuracy":  1.0,
+                                                                                                                               "macro_f1":  1.0
+                                                                                                                           },
+                                                                                         "MT08_SQL_PAYLOAD_AFTER_SAFE_CONTEXT":  {
+                                                                                                                                     "count":  9,
+                                                                                                                                     "accuracy":  1.0,
+                                                                                                                                     "macro_f1":  1.0
+                                                                                                                                 },
+                                                                                         "MT08_TREAT_PRIVATE_AS_PUBLIC":  {
+                                                                                                                              "count":  9,
+                                                                                                                              "accuracy":  1.0,
+                                                                                                                              "macro_f1":  1.0
+                                                                                                                          },
+                                                                                         "0107_MT_06_PRIVATE_CONTACT":  {
+                                                                                                                            "count":  8,
+                                                                                                                            "accuracy":  1.0,
+                                                                                                                            "macro_f1":  1.0
+                                                                                                                        },
+                                                                                         "0107_MT_08_GENERIC":  {
+                                                                                                                    "count":  8,
+                                                                                                                    "accuracy":  0.5,
+                                                                                                                    "macro_f1":  0.5
+                                                                                                                },
+                                                                                         "MT02_BENIGN_PEER_IDENTITY_FILTER_ONLY":  {
+                                                                                                                                       "count":  8,
+                                                                                                                                       "accuracy":  1.0,
+                                                                                                                                       "macro_f1":  1.0
+                                                                                                                                   },
+                                                                                         "MT02_BENIGN_ROSTER_SHOW_STUDENT_CODE_ONLY":  {
+                                                                                                                                           "count":  8,
+                                                                                                                                           "accuracy":  1.0,
+                                                                                                                                           "macro_f1":  1.0
+                                                                                                                                       },
+                                                                                         "MT02_BENIGN_SELF_CONTACT_ATTRIBUTE":  {
+                                                                                                                                    "count":  8,
+                                                                                                                                    "accuracy":  1.0,
+                                                                                                                                    "macro_f1":  1.0
+                                                                                                                                },
+                                                                                         "MT02_BENIGN_SELF_PRIVATE_ATTRIBUTE":  {
+                                                                                                                                    "count":  8,
+                                                                                                                                    "accuracy":  1.0,
+                                                                                                                                    "macro_f1":  1.0
+                                                                                                                                },
+                                                                                         "MT02_CLASSMATE_IDENTITY_TO_ADDRESS":  {
+                                                                                                                                    "count":  8,
+                                                                                                                                    "accuracy":  0.875,
+                                                                                                                                    "macro_f1":  0.466667
+                                                                                                                                },
+                                                                                         "MT02_ENROLLED_ROSTER_TO_PEER_STATUS":  {
+                                                                                                                                     "count":  8,
+                                                                                                                                     "accuracy":  1.0,
+                                                                                                                                     "macro_f1":  1.0
+                                                                                                                                 },
+                                                                                         "MT02_LECTURER_NAME_TO_CONTACT_DETAIL":  {
+                                                                                                                                      "count":  8,
+                                                                                                                                      "accuracy":  1.0,
+                                                                                                                                      "macro_f1":  1.0
+                                                                                                                                  },
+                                                                                         "MT02_ROSTER_TO_CONTACT_ATTRIBUTE":  {
+                                                                                                                                  "count":  8,
+                                                                                                                                  "accuracy":  1.0,
+                                                                                                                                  "macro_f1":  1.0
+                                                                                                                              },
+                                                                                         "MT02_SELF_PROFILE_TO_OTHER_PROFILE":  {
+                                                                                                                                    "count":  8,
+                                                                                                                                    "accuracy":  1.0,
+                                                                                                                                    "macro_f1":  1.0
+                                                                                                                                },
+                                                                                         "MT03_BENIGN_ASSIGNED_CLASS_SCOPE_CONFIRMATION":  {
+                                                                                                                                               "count":  7,
+                                                                                                                                               "accuracy":  1.0,
+                                                                                                                                               "macro_f1":  1.0
+                                                                                                                                           },
+                                                                                         "MT03_BENIGN_POLICY_EXPLANATION_REQUEST_ONLY":  {
+                                                                                                                                             "count":  7,
+                                                                                                                                             "accuracy":  1.0,
+                                                                                                                                             "macro_f1":  1.0
+                                                                                                                                         },
+                                                                                         "MT03_BENIGN_PUBLIC_PERMISSION_DESCRIPTION":  {
+                                                                                                                                           "count":  7,
+                                                                                                                                           "accuracy":  1.0,
+                                                                                                                                           "macro_f1":  1.0
+                                                                                                                                       },
+                                                                                         "MT03_BENIGN_ROLE_SCOPED_ASSIGNED_QUERY":  {
+                                                                                                                                        "count":  7,
+                                                                                                                                        "accuracy":  1.0,
+                                                                                                                                        "macro_f1":  1.0
+                                                                                                                                    },
+                                                                                         "MT03_BENIGN_ROLE_SCOPED_SELF_PROFILE":  {
+                                                                                                                                      "count":  7,
+                                                                                                                                      "accuracy":  1.0,
+                                                                                                                                      "macro_f1":  1.0
+                                                                                                                                  },
+                                                                                         "MT03_LECTURER_TO_ADMIN_TABLE_CLAIM":  {
+                                                                                                                                    "count":  7,
+                                                                                                                                    "accuracy":  1.0,
+                                                                                                                                    "macro_f1":  1.0
+                                                                                                                                },
+                                                                                         "MT03_POLICY_EXCEPTION_FOR_ONE_STUDENT":  {
+                                                                                                                                       "count":  7,
+                                                                                                                                       "accuracy":  1.0,
+                                                                                                                                       "macro_f1":  1.0
+                                                                                                                                   },
+                                                                                         "MT03_ROLE_CONFUSION_ASSUME_TEACHER_OF_CLASS":  {
+                                                                                                                                             "count":  7,
+                                                                                                                                             "accuracy":  1.0,
+                                                                                                                                             "macro_f1":  1.0
+                                                                                                                                         },
+                                                                                         "MT03_STUDENT_TO_ADMIN_ROLE_CLAIM":  {
+                                                                                                                                  "count":  7,
+                                                                                                                                  "accuracy":  1.0,
+                                                                                                                                  "macro_f1":  1.0
+                                                                                                                              },
+                                                                                         "MT04_AGGREGATE_DELTA_TO_EXCLUDED_STUDENT":  {
+                                                                                                                                          "count":  7,
+                                                                                                                                          "accuracy":  1.0,
+                                                                                                                                          "macro_f1":  1.0
+                                                                                                                                      },
+                                                                                         "MT04_ATTENDANCE_COUNT_TO_ABSENT_STUDENT_ID":  {
+                                                                                                                                            "count":  7,
+                                                                                                                                            "accuracy":  1.0,
+                                                                                                                                            "macro_f1":  1.0
+                                                                                                                                        },
+                                                                                         "MT04_BENIGN_ATTENDANCE_SUMMARY_ASSIGNED":  {
+                                                                                                                                         "count":  7,
+                                                                                                                                         "accuracy":  1.0,
+                                                                                                                                         "macro_f1":  1.0
+                                                                                                                                     },
+                                                                                         "MT04_BENIGN_COHORT_COUNT_PUBLIC_NO_ROW":  {
+                                                                                                                                        "count":  7,
+                                                                                                                                        "accuracy":  1.0,
+                                                                                                                                        "macro_f1":  1.0
+                                                                                                                                    },
+                                                                                         "MT04_BENIGN_COUNT_BY_PREFIX_NO_IDENTITY":  {
+                                                                                                                                         "count":  7,
+                                                                                                                                         "accuracy":  1.0,
+                                                                                                                                         "macro_f1":  1.0
+                                                                                                                                     },
+                                                                                         "MT04_BENIGN_PASS_FAIL_AGGREGATE_ONLY":  {
+                                                                                                                                      "count":  7,
+                                                                                                                                      "accuracy":  1.0,
+                                                                                                                                      "macro_f1":  1.0
+                                                                                                                                  },
+                                                                                         "MT04_GROUP_AVERAGE_TO_IDENTIFY_MATCHING_PERSON":  {
+                                                                                                                                                "count":  7,
+                                                                                                                                                "accuracy":  1.0,
+                                                                                                                                                "macro_f1":  1.0
+                                                                                                                                            },
+                                                                                         "MT04_PASS_FAIL_COUNT_TO_FAILED_STUDENT_DETAIL":  {
+                                                                                                                                               "count":  7,
+                                                                                                                                               "accuracy":  1.0,
+                                                                                                                                               "macro_f1":  1.0
+                                                                                                                                           },
+                                                                                         "MT04_PREFIX_COUNT_TO_MISSING_STUDENT_CONTACT":  {
+                                                                                                                                              "count":  7,
+                                                                                                                                              "accuracy":  1.0,
+                                                                                                                                              "macro_f1":  1.0
+                                                                                                                                          },
+                                                                                         "0107_MT_06_ROLE_POLICY_INTERNAL_METADATA":  {
+                                                                                                                                          "count":  6,
+                                                                                                                                          "accuracy":  1.0,
+                                                                                                                                          "macro_f1":  1.0
+                                                                                                                                      },
+                                                                                         "MT06_ASSIGNED_ROSTER_TO_UNASSIGNED_STUDENT_RESULT":  {
+                                                                                                                                                   "count":  6,
+                                                                                                                                                   "accuracy":  1.0,
+                                                                                                                                                   "macro_f1":  1.0
+                                                                                                                                               },
+                                                                                         "MT06_BENIGN_RETURN_TO_PUBLIC_COURSE":  {
+                                                                                                                                     "count":  6,
+                                                                                                                                     "accuracy":  1.0,
+                                                                                                                                     "macro_f1":  1.0
+                                                                                                                                 },
+                                                                                         "MT06_BENIGN_SIDE_NOTE_PUBLIC_CATALOG":  {
+                                                                                                                                      "count":  6,
+                                                                                                                                      "accuracy":  1.0,
+                                                                                                                                      "macro_f1":  1.0
+                                                                                                                                  },
+                                                                                         "MT06_BENIGN_TOPIC_SWITCH_PUBLIC_TO_PUBLIC":  {
+                                                                                                                                           "count":  6,
+                                                                                                                                           "accuracy":  1.0,
+                                                                                                                                           "macro_f1":  1.0
+                                                                                                                                       },
+                                                                                         "MT06_BENIGN_TOPIC_SWITCH_SELF_PROFILE":  {
+                                                                                                                                       "count":  6,
+                                                                                                                                       "accuracy":  1.0,
+                                                                                                                                       "macro_f1":  1.0
+                                                                                                                                   },
+                                                                                         "MT06_BY_THE_WAY_TO_PRIVATE_PROFILE":  {
+                                                                                                                                    "count":  6,
+                                                                                                                                    "accuracy":  1.0,
+                                                                                                                                    "macro_f1":  1.0
+                                                                                                                                },
+                                                                                         "MT06_PUBLIC_COURSE_TO_PRIVATE_PROFILE_SIDE_NOTE":  {
+                                                                                                                                                 "count":  6,
+                                                                                                                                                 "accuracy":  1.0,
+                                                                                                                                                 "macro_f1":  1.0
+                                                                                                                                             },
+                                                                                         "MT06_RETURN_TO_PRIOR_BUT_PRIVATE_TARGET":  {
+                                                                                                                                         "count":  6,
+                                                                                                                                         "accuracy":  1.0,
+                                                                                                                                         "macro_f1":  1.0
+                                                                                                                                     },
+                                                                                         "MT06_SAFE_SCHEDULE_TO_EXTERNAL_ATTENDANCE":  {
+                                                                                                                                           "count":  6,
+                                                                                                                                           "accuracy":  1.0,
+                                                                                                                                           "macro_f1":  1.0
+                                                                                                                                       },
+                                                                                         "MT07_BENIGN_ASSIGNED_MORE_DETAIL_SAME_STUDENT":  {
+                                                                                                                                               "count":  5,
+                                                                                                                                               "accuracy":  1.0,
+                                                                                                                                               "macro_f1":  1.0
+                                                                                                                                           },
+                                                                                         "MT07_BENIGN_CRESCENDO_SELF_DETAIL":  {
+                                                                                                                                   "count":  5,
+                                                                                                                                   "accuracy":  1.0,
+                                                                                                                                   "macro_f1":  1.0
+                                                                                                                               },
+                                                                                         "MT07_BENIGN_LIMITED_PUBLIC_EXPORT":  {
+                                                                                                                                   "count":  5,
+                                                                                                                                   "accuracy":  1.0,
+                                                                                                                                   "macro_f1":  1.0
+                                                                                                                               },
+                                                                                         "MT07_BENIGN_MORE_SELF_DETAIL_ONLY":  {
+                                                                                                                                   "count":  5,
+                                                                                                                                   "accuracy":  1.0,
+                                                                                                                                   "macro_f1":  1.0
+                                                                                                                               },
+                                                                                         "MT07_BENIGN_ROSTER_EXPORT_ALLOWED_COLUMNS_ONLY":  {
+                                                                                                                                                "count":  5,
+                                                                                                                                                "accuracy":  1.0,
+                                                                                                                                                "macro_f1":  1.0
+                                                                                                                                            },
+                                                                                         "MT07_MORE_DETAIL_TO_ALL_STUDENT_RECORDS":  {
+                                                                                                                                         "count":  5,
+                                                                                                                                         "accuracy":  1.0,
+                                                                                                                                         "macro_f1":  1.0
+                                                                                                                                     },
+                                                                                         "MT07_ROSTER_SUMMARY_TO_FULL_PRIVATE_EXPORT":  {
+                                                                                                                                            "count":  5,
+                                                                                                                                            "accuracy":  1.0,
+                                                                                                                                            "macro_f1":  1.0
+                                                                                                                                        },
+                                                                                         "MT07_SAFE_LIST_TO_RAW_EXPORT":  {
+                                                                                                                              "count":  5,
+                                                                                                                              "accuracy":  1.0,
+                                                                                                                              "macro_f1":  1.0
+                                                                                                                          },
+                                                                                         "MT07_SELF_DETAIL_TO_CLASS_ALL_DETAILS":  {
+                                                                                                                                       "count":  5,
+                                                                                                                                       "accuracy":  0.6,
+                                                                                                                                       "macro_f1":  0.375
+                                                                                                                                   },
+                                                                                         "0107_0107_BENIGN_BENIGN_SEQ_LABEL_SAFE_BENIGN_ATTENDANCE":  {
+                                                                                                                                                          "count":  4,
+                                                                                                                                                          "accuracy":  1.0,
+                                                                                                                                                          "macro_f1":  1.0
+                                                                                                                                                      },
+                                                                                         "0107_MT_07_ROLE_POLICY_INTERNAL_METADATA":  {
+                                                                                                                                          "count":  4,
+                                                                                                                                          "accuracy":  0.75,
+                                                                                                                                          "macro_f1":  0.428571
+                                                                                                                                      },
+                                                                                         "0107_0107_BENIGN_BENIGN_SEQ_LABEL_SAFE_BENIGN_PUBLIC_CATALOG":  {
+                                                                                                                                                              "count":  3,
+                                                                                                                                                              "accuracy":  0.0,
+                                                                                                                                                              "macro_f1":  0.0
+                                                                                                                                                          },
+                                                                                         "0107_0107_BENIGN_BENIGN_SEQ_LABEL_SAFE_BENIGN_RESULT_SUMMARY":  {
+                                                                                                                                                              "count":  3,
+                                                                                                                                                              "accuracy":  1.0,
+                                                                                                                                                              "macro_f1":  1.0
+                                                                                                                                                          },
+                                                                                         "0107_MT_01_EXTERNAL_SCOPE":  {
+                                                                                                                           "count":  3,
+                                                                                                                           "accuracy":  1.0,
+                                                                                                                           "macro_f1":  1.0
+                                                                                                                       },
+                                                                                         "0107_MT_03_GENERIC":  {
+                                                                                                                    "count":  3,
+                                                                                                                    "accuracy":  0.333333,
+                                                                                                                    "macro_f1":  0.25
+                                                                                                                },
+                                                                                         "0107_MT_04_GENERIC":  {
+                                                                                                                    "count":  3,
+                                                                                                                    "accuracy":  0.333333,
+                                                                                                                    "macro_f1":  0.2
+                                                                                                                },
+                                                                                         "0107_MT_06_GRADE_DETAIL":  {
+                                                                                                                         "count":  3,
+                                                                                                                         "accuracy":  1.0,
+                                                                                                                         "macro_f1":  1.0
+                                                                                                                     },
+                                                                                         "0107_MT_08_ROLE_POLICY_INTERNAL_METADATA":  {
+                                                                                                                                          "count":  3,
+                                                                                                                                          "accuracy":  1.0,
+                                                                                                                                          "macro_f1":  1.0
+                                                                                                                                      },
+                                                                                         "0107_0107_BENIGN_BENIGN_SEQ_LABEL_SAFE_BENIGN_SCHEDULE":  {
+                                                                                                                                                        "count":  2,
+                                                                                                                                                        "accuracy":  1.0,
+                                                                                                                                                        "macro_f1":  1.0
+                                                                                                                                                    },
+                                                                                         "0107_MT_01_ROLE_POLICY_INTERNAL_METADATA":  {
+                                                                                                                                          "count":  2,
+                                                                                                                                          "accuracy":  0.5,
+                                                                                                                                          "macro_f1":  0.333333
+                                                                                                                                      },
+                                                                                         "0107_MT_02_GRADE_DETAIL":  {
+                                                                                                                         "count":  2,
+                                                                                                                         "accuracy":  1.0,
+                                                                                                                         "macro_f1":  1.0
+                                                                                                                     },
+                                                                                         "0107_MT_02_PRIVATE_CONTACT":  {
+                                                                                                                            "count":  2,
+                                                                                                                            "accuracy":  1.0,
+                                                                                                                            "macro_f1":  1.0
+                                                                                                                        },
+                                                                                         "0107_MT_03_EXTERNAL_SCOPE":  {
+                                                                                                                           "count":  2,
+                                                                                                                           "accuracy":  0.5,
+                                                                                                                           "macro_f1":  0.333333
+                                                                                                                       },
+                                                                                         "0107_MT_03_PRIVATE_CONTACT":  {
+                                                                                                                            "count":  2,
+                                                                                                                            "accuracy":  1.0,
+                                                                                                                            "macro_f1":  1.0
+                                                                                                                        },
+                                                                                         "0107_MT_04_PRIVATE_CONTACT":  {
+                                                                                                                            "count":  2,
+                                                                                                                            "accuracy":  1.0,
+                                                                                                                            "macro_f1":  1.0
+                                                                                                                        },
+                                                                                         "0107_MT_04_PRIVATE_CONTACT_AGGREGATE_TO_IDENTITY":  {
+                                                                                                                                                  "count":  2,
+                                                                                                                                                  "accuracy":  0.5,
+                                                                                                                                                  "macro_f1":  0.333333
+                                                                                                                                              },
+                                                                                         "0107_MT_05_AGGREGATE_TO_IDENTITY":  {
+                                                                                                                                  "count":  2,
+                                                                                                                                  "accuracy":  0.5,
+                                                                                                                                  "macro_f1":  0.333333
+                                                                                                                              },
+                                                                                         "0107_MT_05_PRIVATE_CONTACT":  {
+                                                                                                                            "count":  2,
+                                                                                                                            "accuracy":  1.0,
+                                                                                                                            "macro_f1":  1.0
+                                                                                                                        },
+                                                                                         "0107_MT_06_GENERIC":  {
+                                                                                                                    "count":  2,
+                                                                                                                    "accuracy":  1.0,
+                                                                                                                    "macro_f1":  1.0
+                                                                                                                },
+                                                                                         "0107_MT_08_PRIVATE_CONTACT":  {
+                                                                                                                            "count":  2,
+                                                                                                                            "accuracy":  1.0,
+                                                                                                                            "macro_f1":  1.0
+                                                                                                                        },
+                                                                                         "0107_0107_BENIGN_BENIGN_SEQ_LABEL_SAFE_BENIGN_DEFAULT_SAFE":  {
+                                                                                                                                                            "count":  1,
+                                                                                                                                                            "accuracy":  1.0,
+                                                                                                                                                            "macro_f1":  1.0
+                                                                                                                                                        },
+                                                                                         "0107_0107_BENIGN_BENIGN_SEQ_LABEL_SAFE_BENIGN_GRADE_METADATA":  {
+                                                                                                                                                              "count":  1,
+                                                                                                                                                              "accuracy":  0.0,
+                                                                                                                                                              "macro_f1":  0.0
+                                                                                                                                                          },
+                                                                                         "0107_MT_01_EXTERNAL_SCOPE_GRADE_DETAIL":  {
+                                                                                                                                        "count":  1,
+                                                                                                                                        "accuracy":  0.0,
+                                                                                                                                        "macro_f1":  0.0
+                                                                                                                                    },
+                                                                                         "0107_MT_01_GENERIC":  {
+                                                                                                                    "count":  1,
+                                                                                                                    "accuracy":  1.0,
+                                                                                                                    "macro_f1":  1.0
+                                                                                                                },
+                                                                                         "0107_MT_01_GRADE_DETAIL":  {
+                                                                                                                         "count":  1,
+                                                                                                                         "accuracy":  0.0,
+                                                                                                                         "macro_f1":  0.0
+                                                                                                                     },
+                                                                                         "0107_MT_01_PRIVATE_CONTACT":  {
+                                                                                                                            "count":  1,
+                                                                                                                            "accuracy":  1.0,
+                                                                                                                            "macro_f1":  1.0
+                                                                                                                        },
+                                                                                         "0107_MT_02_GENERIC":  {
+                                                                                                                    "count":  1,
+                                                                                                                    "accuracy":  1.0,
+                                                                                                                    "macro_f1":  1.0
+                                                                                                                },
+                                                                                         "0107_MT_03_ROLE_POLICY_INTERNAL_METADATA":  {
+                                                                                                                                          "count":  1,
+                                                                                                                                          "accuracy":  1.0,
+                                                                                                                                          "macro_f1":  1.0
+                                                                                                                                      },
+                                                                                         "0107_MT_04_AGGREGATE_TO_IDENTITY":  {
+                                                                                                                                  "count":  1,
+                                                                                                                                  "accuracy":  0.0,
+                                                                                                                                  "macro_f1":  0.0
+                                                                                                                              },
+                                                                                         "0107_MT_04_ROLE_POLICY_INTERNAL_METADATA":  {
+                                                                                                                                          "count":  1,
+                                                                                                                                          "accuracy":  1.0,
+                                                                                                                                          "macro_f1":  1.0
+                                                                                                                                      },
+                                                                                         "0107_MT_05_AGGREGATE_TO_IDENTITY_ROLE_POLICY_INTERNAL_METADATA":  {
+                                                                                                                                                                "count":  1,
+                                                                                                                                                                "accuracy":  1.0,
+                                                                                                                                                                "macro_f1":  1.0
+                                                                                                                                                            },
+                                                                                         "0107_MT_05_EXTERNAL_SCOPE_GRADE_DETAIL":  {
+                                                                                                                                        "count":  1,
+                                                                                                                                        "accuracy":  0.0,
+                                                                                                                                        "macro_f1":  0.0
+                                                                                                                                    },
+                                                                                         "0107_MT_05_GENERIC":  {
+                                                                                                                    "count":  1,
+                                                                                                                    "accuracy":  0.0,
+                                                                                                                    "macro_f1":  0.0
+                                                                                                                },
+                                                                                         "0107_MT_05_PRIVATE_CONTACT_AGGREGATE_TO_IDENTITY":  {
+                                                                                                                                                  "count":  1,
+                                                                                                                                                  "accuracy":  1.0,
+                                                                                                                                                  "macro_f1":  1.0
+                                                                                                                                              },
+                                                                                         "0107_MT_07_PRIVATE_CONTACT":  {
+                                                                                                                            "count":  1,
+                                                                                                                            "accuracy":  1.0,
+                                                                                                                            "macro_f1":  1.0
+                                                                                                                        },
+                                                                                         "0107_MT_08_GRADE_DETAIL":  {
+                                                                                                                         "count":  1,
+                                                                                                                         "accuracy":  0.0,
+                                                                                                                         "macro_f1":  0.0
+                                                                                                                     }
+                                                                                     },
+                                                         "legacy_route_accuracy":  0.880559,
+                                                         "reference_link_presence_f1":  0.964444,
+                                                         "benign_malicious_multiturn_confusion":  {
+                                                                                                      "labels":  [
+                                                                                                                     "BENIGN_MULTI_TURN",
+                                                                                                                     "MALICIOUS_MULTI_TURN"
+                                                                                                                 ],
+                                                                                                      "matrix":  [
+                                                                                                                     [
+                                                                                                                         315,
+                                                                                                                         41
+                                                                                                                     ],
+                                                                                                                     [
+                                                                                                                         4,
+                                                                                                                         352
+                                                                                                                     ]
+                                                                                                                 ]
+                                                                                                  },
+                                                         "confusion_matrices":  {
+                                                                                    "intent":  [
+                                                                                                   [
+                                                                                                       146,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       1,
+                                                                                                       0,
+                                                                                                       3,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       1
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       0,
+                                                                                                       46,
+                                                                                                       0,
+                                                                                                       1,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       0,
+                                                                                                       1,
+                                                                                                       28,
+                                                                                                       1,
+                                                                                                       0,
+                                                                                                       2,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       2,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       88,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       2,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       16,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       4,
+                                                                                                       0,
+                                                                                                       104,
+                                                                                                       0,
+                                                                                                       1,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       25,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       6,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       5,
+                                                                                                       0,
+                                                                                                       8,
+                                                                                                       0,
+                                                                                                       37,
+                                                                                                       1,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       3
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       1,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       1,
+                                                                                                       0,
+                                                                                                       2,
+                                                                                                       1,
+                                                                                                       0,
+                                                                                                       114,
+                                                                                                       0,
+                                                                                                       3,
+                                                                                                       0
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       6,
+                                                                                                       0,
+                                                                                                       0
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       1,
+                                                                                                       0,
+                                                                                                       14,
+                                                                                                       0
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       1,
+                                                                                                       10,
+                                                                                                       0,
+                                                                                                       0,
+                                                                                                       101
+                                                                                                   ]
+                                                                                               ],
+                                                                                    "operation":  [
+                                                                                                      [
+                                                                                                          290,
+                                                                                                          8,
+                                                                                                          5,
+                                                                                                          1
+                                                                                                      ],
+                                                                                                      [
+                                                                                                          42,
+                                                                                                          306,
+                                                                                                          4,
+                                                                                                          3
+                                                                                                      ],
+                                                                                                      [
+                                                                                                          0,
+                                                                                                          10,
+                                                                                                          52,
+                                                                                                          0
+                                                                                                      ],
+                                                                                                      [
+                                                                                                          1,
+                                                                                                          1,
+                                                                                                          0,
+                                                                                                          64
+                                                                                                      ]
+                                                                                                  ],
+                                                                                    "scope":  [
+                                                                                                  [
+                                                                                                      97,
+                                                                                                      1,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0
+                                                                                                  ],
+                                                                                                  [
+                                                                                                      0,
+                                                                                                      104,
+                                                                                                      2,
+                                                                                                      22,
+                                                                                                      0,
+                                                                                                      37,
+                                                                                                      0,
+                                                                                                      0
+                                                                                                  ],
+                                                                                                  [
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      70,
+                                                                                                      3,
+                                                                                                      3,
+                                                                                                      1,
+                                                                                                      0,
+                                                                                                      0
+                                                                                                  ],
+                                                                                                  [
+                                                                                                      3,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      144,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0
+                                                                                                  ],
+                                                                                                  [
+                                                                                                      1,
+                                                                                                      0,
+                                                                                                      1,
+                                                                                                      0,
+                                                                                                      173,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0
+                                                                                                  ],
+                                                                                                  [
+                                                                                                      0,
+                                                                                                      1,
+                                                                                                      2,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      23,
+                                                                                                      0,
+                                                                                                      0
+                                                                                                  ],
+                                                                                                  [
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      72,
+                                                                                                      0
+                                                                                                  ],
+                                                                                                  [
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      0,
+                                                                                                      27
+                                                                                                  ]
+                                                                                              ],
+                                                                                    "target_relation":  [
+                                                                                                            [
+                                                                                                                97,
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                1,
+                                                                                                                1,
+                                                                                                                0,
+                                                                                                                0
+                                                                                                            ],
+                                                                                                            [
+                                                                                                                0,
+                                                                                                                21,
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                0
+                                                                                                            ],
+                                                                                                            [
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                58,
+                                                                                                                3,
+                                                                                                                4,
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                0
+                                                                                                            ],
+                                                                                                            [
+                                                                                                                24,
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                177,
+                                                                                                                0,
+                                                                                                                5,
+                                                                                                                0,
+                                                                                                                1
+                                                                                                            ],
+                                                                                                            [
+                                                                                                                1,
+                                                                                                                0,
+                                                                                                                2,
+                                                                                                                0,
+                                                                                                                111,
+                                                                                                                4,
+                                                                                                                0,
+                                                                                                                0
+                                                                                                            ],
+                                                                                                            [
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                2,
+                                                                                                                2,
+                                                                                                                1,
+                                                                                                                85,
+                                                                                                                0,
+                                                                                                                1
+                                                                                                            ],
+                                                                                                            [
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                23,
+                                                                                                                0
+                                                                                                            ],
+                                                                                                            [
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                0,
+                                                                                                                6,
+                                                                                                                2,
+                                                                                                                0,
+                                                                                                                155
+                                                                                                            ]
+                                                                                                        ],
+                                                                                    "transition":  [
+                                                                                                       [
+                                                                                                           75,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0
+                                                                                                       ],
+                                                                                                       [
+                                                                                                           0,
+                                                                                                           14,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0
+                                                                                                       ],
+                                                                                                       [
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           71,
+                                                                                                           1,
+                                                                                                           3,
+                                                                                                           4,
+                                                                                                           1,
+                                                                                                           1,
+                                                                                                           0,
+                                                                                                           0
+                                                                                                       ],
+                                                                                                       [
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           4,
+                                                                                                           61,
+                                                                                                           0,
+                                                                                                           20,
+                                                                                                           12,
+                                                                                                           24,
+                                                                                                           0,
+                                                                                                           0
+                                                                                                       ],
+                                                                                                       [
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           5,
+                                                                                                           0,
+                                                                                                           32,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           1,
+                                                                                                           0,
+                                                                                                           0
+                                                                                                       ],
+                                                                                                       [
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           6,
+                                                                                                           0,
+                                                                                                           1,
+                                                                                                           135,
+                                                                                                           6,
+                                                                                                           1,
+                                                                                                           0,
+                                                                                                           0
+                                                                                                       ],
+                                                                                                       [
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           5,
+                                                                                                           165,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0
+                                                                                                       ],
+                                                                                                       [
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           1,
+                                                                                                           0,
+                                                                                                           1,
+                                                                                                           1,
+                                                                                                           1,
+                                                                                                           73,
+                                                                                                           0,
+                                                                                                           0
+                                                                                                       ],
+                                                                                                       [
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           50,
+                                                                                                           0
+                                                                                                       ],
+                                                                                                       [
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           3,
+                                                                                                           0,
+                                                                                                           0,
+                                                                                                           9
+                                                                                                       ]
+                                                                                                   ],
+                                                                                    "reference_distance":  [
+                                                                                                               [
+                                                                                                                   88,
+                                                                                                                   19,
+                                                                                                                   1
+                                                                                                               ],
+                                                                                                               [
+                                                                                                                   10,
+                                                                                                                   68,
+                                                                                                                   1
+                                                                                                               ],
+                                                                                                               [
+                                                                                                                   18,
+                                                                                                                   40,
+                                                                                                                   542
+                                                                                                               ]
+                                                                                                           ],
+                                                                                    "security_transition":  [
+                                                                                                                [
+                                                                                                                    390,
+                                                                                                                    0,
+                                                                                                                    7,
+                                                                                                                    34,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0
+                                                                                                                ],
+                                                                                                                [
+                                                                                                                    1,
+                                                                                                                    55,
+                                                                                                                    2,
+                                                                                                                    0,
+                                                                                                                    1,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0
+                                                                                                                ],
+                                                                                                                [
+                                                                                                                    1,
+                                                                                                                    3,
+                                                                                                                    114,
+                                                                                                                    1,
+                                                                                                                    3,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0
+                                                                                                                ],
+                                                                                                                [
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    2,
+                                                                                                                    4,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0
+                                                                                                                ],
+                                                                                                                [
+                                                                                                                    0,
+                                                                                                                    3,
+                                                                                                                    0,
+                                                                                                                    1,
+                                                                                                                    74,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0
+                                                                                                                ],
+                                                                                                                [
+                                                                                                                    2,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    21,
+                                                                                                                    1,
+                                                                                                                    0,
+                                                                                                                    0
+                                                                                                                ],
+                                                                                                                [
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    40,
+                                                                                                                    0,
+                                                                                                                    0
+                                                                                                                ],
+                                                                                                                [
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    18,
+                                                                                                                    0
+                                                                                                                ],
+                                                                                                                [
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    0,
+                                                                                                                    9
+                                                                                                                ]
+                                                                                                            ]
+                                                                                }
+                                                     },
+                    "post_migration_evaluation":  {
+                                                      "report_path":  "not_included_runtime_only",
+                                                      "report_sha256":  "not_included_runtime_only",
+                                                      "validation":  "not_recorded",
+                                                      "test":  "not_recorded",
+                                                      "note":  "Supplementary diagnostic reports are not included in the runtime/source package."
+                                                  }
+                },
+    "provenance_note":  "The training author confirmed this checkpoint belongs to the promoted 0107-focused Conversation-Risk Model profile. The active source package includes train, validation, and internal test partitions; historical diagnostics are maintained only as supplementary review artifacts when needed."
+}

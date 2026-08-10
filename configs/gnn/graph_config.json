@@ -1,0 +1,44 @@
+{
+  "schema_version": "intent_graph_v1",
+  "max_turns": 8,
+  "max_reference_distance": 8,
+  "node_types": [
+    "Role",
+    "UserTurn",
+    "EntityMention",
+    "SemanticConceptCandidate",
+    "ReferenceExpression",
+    "PreviousSemanticState",
+    "ScopeCandidate",
+    "TargetCandidate"
+  ],
+  "edge_types": [
+    "follows",
+    "mentions",
+    "represents",
+    "refers_to_candidate",
+    "has_previous_intent",
+    "has_previous_scope",
+    "supports_scope",
+    "supports_target",
+    "continues_context"
+  ],
+  "reverse_edges": true,
+  "forbidden_current_turn_features": [
+    "semantic_intent",
+    "operation",
+    "scope",
+    "target_relation",
+    "transition",
+    "security_transition",
+    "sql_gt",
+    "risk_action",
+    "policy_decision",
+    "graph_label"
+  ],
+  "previous_state_training": {
+    "gold_state_probability_start": 0.9,
+    "gold_state_probability_end": 0.5,
+    "mask_probability": 0.1
+  }
+}

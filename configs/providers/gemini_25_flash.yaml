@@ -1,0 +1,73 @@
+llm:
+  provider: vertex
+  project_id: ""
+  location: global
+  model: gemini-2.5-flash
+  temperature: 0.0
+  top_p: 1.0
+  max_output_tokens: 2048
+  max_retries: 3
+  retry_backoff_base_s: 1.0
+  retry_backoff_cap_s: 60.0
+  retry_jitter_s: 1.0
+  max_json_retries: 1
+  thinking_config:
+    thinking_budget: 0
+
+modules:
+  D1:
+    llm_classifier: true
+    deny_on_attack: true
+  D2:
+    llm_extract_resources: true
+    schema_scope_mode: extracted_allowed_schema
+  G1: {}
+  D3:
+    strict_unknown_deny: true
+  D4:
+    rewrite_style: langshield_nested_subquery
+
+  M1:
+    llm_classifier: true
+    history_turn_limit: max
+    vertex:
+      model: gemini-2.5-flash
+      temperature: 0.0
+      max_output_tokens: 768
+      thinking_config:
+        thinking_budget: 0
+  M2:
+    engine: trustedsql_m2_intent_gnn
+    mode: calibrated
+    device: cpu
+    allow_hash_encoder: false
+    gnn_authority: false
+    intent_gnn:
+      device: cpu
+      allow_hash_encoder: false
+      mode: calibrated
+    vertex:
+      model: gemini-2.5-flash
+      temperature: 0.0
+      max_output_tokens: 512
+      thinking_config:
+        thinking_budget: 0
+  M3:
+    llm_planner: true
+    schema_scope_mode: policy_grounded_tables
+    log_prompts: false
+    vertex:
+      model: gemini-2.5-flash
+      temperature: 0.0
+      max_output_tokens: 3200
+      thinking_config:
+        thinking_budget: 0
+  M6:
+    vertex:
+      model: gemini-2.5-flash
+      temperature: 0.0
+      max_output_tokens: 1800
+      thinking_config:
+        thinking_budget: 0
+  M7:
+    strict_policy: true

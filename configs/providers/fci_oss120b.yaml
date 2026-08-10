@@ -1,0 +1,65 @@
+llm:
+  provider: fci
+  api_url: https://mkp-api.fptcloud.com/chat/completions
+  api_url_env: TRUSTEDSQL_FCI_API_URL
+  api_key_env: FPT_API_KEY_120B
+  model: gpt-oss-120b
+  temperature: 0.0
+  max_output_tokens: 2048
+  timeout_s: 240
+  response_format_json: false
+
+modules:
+  M1:
+    llm_classifier: true
+    history_turn_limit: max
+    llm:
+      provider: fci
+      api_url: https://mkp-api.fptcloud.com/chat/completions
+      api_url_env: TRUSTEDSQL_FCI_API_URL
+      api_key_env: FPT_API_KEY_120B
+      model: gpt-oss-120b
+      temperature: 0.0
+      max_output_tokens: 768
+      timeout_s: 180
+      response_format_json: true
+
+  M2:
+    engine: trustedsql_m2_intent_gnn
+    mode: calibrated
+    device: cpu
+    allow_hash_encoder: false
+    gnn_authority: false
+    intent_gnn:
+      device: cpu
+      allow_hash_encoder: false
+      mode: calibrated
+
+  M3:
+    llm_planner: true
+    schema_scope_mode: policy_grounded_tables
+    log_prompts: false
+    llm:
+      provider: fci
+      api_url: https://mkp-api.fptcloud.com/chat/completions
+      api_url_env: TRUSTEDSQL_FCI_API_URL
+      api_key_env: FPT_API_KEY_120B
+      model: gpt-oss-120b
+      temperature: 0.0
+      max_output_tokens: 3200
+      timeout_s: 240
+      response_format_json: true
+
+  M6:
+    llm:
+      provider: fci
+      api_url: https://mkp-api.fptcloud.com/chat/completions
+      api_url_env: TRUSTEDSQL_FCI_API_URL
+      api_key_env: FPT_API_KEY_120B
+      model: gpt-oss-120b
+      temperature: 0.0
+      max_output_tokens: 1800
+      timeout_s: 240
+
+  M7:
+    strict_policy: true

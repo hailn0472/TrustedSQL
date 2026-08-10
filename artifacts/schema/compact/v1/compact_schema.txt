@@ -1,0 +1,70 @@
+COMPACT DATABASE SCHEMA
+Source: ddl.md
+Meaning: all listed tables, columns, keys, and relationships exist in the database schema.
+Column examples, when present, illustrate value formats only; they are not authorization evidence.
+
+TABLES
+- application(application_id:int [PK]; student_id:int [FK->students.student_id]; type_id:int [FK->application_types.type_id]; reason:text; file_url:text; status:enum [ex: pending]; process_note:text; processed_by:int [FK->users.user_id]; create_date:timestamp; time_response:timestamp)
+- application_types(type_id:int [PK]; type_name:text [UNIQUE, ex: Don xin nghi hoc|Don xin xac nhan sinh vien]; category:text; description:text)
+- attendance(enrollment_id:int [PK, FK->enrollments.enrollment_id]; schedule_id:int [PK, FK->schedules.schedule_id]; status:text [ex: A|Absent|P])
+- campuses(campus_id:int [PK]; campus_name:text [ex: Campus A|FPT Can Tho|FPT Da Nang]; address:text)
+- classcourse(class_course_id:int [PK]; class_id:int [FK->classes.class_id]; course_id:int [FK->courses.course_id]; lecturer_id:int [FK->lecturers.lecturer_id]; semester:text [ex: FA23|FA24|FA25])
+- classes(class_id:int [PK]; class_name:text [UNIQUE, ex: CT-SE1801|CT-SE1801-NET|CT-SE1802])
+- course_clos(clo_id:int [PK]; course_id:int [FK->courses.course_id]; clo_name:text [ex: C|C:|CBDP301x_o1]; description:text)
+- course_grading_categories(category_id:int [PK]; course_id:int [FK->courses.course_id]; category_name:text [ex: (Field Trip) Project|01 Bài tập|01 Bài trắc nghiệm]; weight:numeric; question_type:text; grading_guide:text; note:text)
+- course_materials(material_id:int [PK]; course_id:int [FK->courses.course_id]; material_description:text; author:text; publisher:text; is_main_material:bool; is_online:bool)
+- course_sessions(session_id:int [PK]; course_id:int [FK->courses.course_id]; session_no:int; topic:text; learning_teaching_type:text; student_tasks:text; clo_mapping:text)
+- courses(course_id:int [PK]; course_code:text [UNIQUE, ex: 2DP491|3DP491|AAD305b]; syllabus_id_system:text; course_name_en:text [ex: 21ST CENTURY METHODOLOGY]; course_name_vn:text [ex: Cấu trúc dữ liệu và giải thuật|Lập trình cơ bản|Lập trình Mobile]; no_credit:int; time_allocation:text; description:text; min_avg_mark_to_pass:numeric; decision_no:text; is_approved:bool; approved_date:date; is_active:bool)
+- curriculum_frameworks(framework_id:int [PK]; framework_code:text [UNIQUE, ex: BIT_SE_18C_NET|BIT_SE_18C_NET_ALT]; framework_name_vn:text; framework_name_en:text; description:text; decision_no:text; major_id:int [FK->majors.major_id]; narrow_major_id:int [FK->narrow_majors.narrow_major_id]; batch:text; created_at:timestamp)
+- curriculum_subjects(framework_id:int [PK, FK->curriculum_frameworks.framework_id]; course_id:int [PK, FK->courses.course_id]; semester_no:int; pre_requisite:text)
+- departments(dep_id:int [PK]; dep_code:text [UNIQUE, ex: BA|CS|IT]; dep_name:text [ex: Khối Ngành Ngôn ngữ|Ngành Công nghệ thông tin|Ngành Công nghệ truyền thông])
+- enrollments(enrollment_id:int [PK]; student_id:int [FK->students.student_id]; class_course_id:int [FK->classcourse.class_course_id]; average:numeric; status:text [ex: Failed|Not Qualified|Passed])
+- grade_details(grade_detail_id:int [PK]; enrollment_id:int [FK->enrollments.enrollment_id]; category_id:int [FK->course_grading_categories.category_id]; grade_value:numeric; comment:text)
+- lecturers(lecturer_id:int [PK, FK->users.user_id]; dep_id:int [FK->departments.dep_id])
+- majors(major_id:int [PK]; major_code:text [UNIQUE, ex: AI_DS|AI_IT|AUTO]; major_name:text [ex: An ninh mạng và an toàn số|An toàn thông tin|Công nghệ ô tô số]; dep_id:int [FK->departments.dep_id])
+- narrow_majors(narrow_major_id:int [PK]; narrow_major_code:text [UNIQUE, ex: GAME|ICD|JAVA]; narrow_major_name:text [ex: .NET Programming|Game development|IC design (Thiết kế vi mạch)]; major_id:int [FK->majors.major_id]; description:text)
+- permissions(permission_id:int [PK]; permission_name:text [UNIQUE])
+- plos(plo_id:int [PK]; framework_id:int [FK->curriculum_frameworks.framework_id]; plo_code:text [ex: PLO1A|PLO1B|PLO2A]; plo_name:text [ex: Knowledge foundation|Professional skill]; description:text)
+- rolepermission(role_id:int [PK, FK->roles.role_id]; permission_id:int [PK, FK->permissions.permission_id])
+- roles(role_id:int [PK]; role_name:text [UNIQUE, ex: ADMIN|Lecturer|Student])
+- schedules(schedule_id:int [PK]; class_course_id:int [FK->classcourse.class_course_id]; start_time:timestamp; end_time:timestamp; room:text [ex: BE101|BE102|BE201]; slot:int [ex: 1|2|3])
+- students(student_id:int [PK, FK->users.user_id]; student_code:text [UNIQUE, ex: HE182001|HE182002|HE182003]; batch:text; major_id:int [FK->majors.major_id]; narrow_major_id:int [FK->narrow_majors.narrow_major_id]; start_date:date; end_date:date; status:enum [ex: studying|suspended]; framework_id:int [FK->curriculum_frameworks.framework_id])
+- userrole(user_id:int [PK, FK->users.user_id]; role_id:int [PK, FK->roles.role_id])
+- users(user_id:int [PK]; username:text [UNIQUE]; gmail:text [UNIQUE]; password:text; fullname:text; user_gender:text; user_dob:date; phone_number:text; user_address:text; campus_id:int [FK->campuses.campus_id]; status:enum [ex: active]; created_at:timestamp; updated_at:timestamp)
+
+RELATIONSHIPS
+- application.processed_by -> users.user_id
+- application.student_id -> students.student_id
+- application.type_id -> application_types.type_id
+- attendance.enrollment_id -> enrollments.enrollment_id
+- attendance.schedule_id -> schedules.schedule_id
+- classcourse.class_id -> classes.class_id
+- classcourse.course_id -> courses.course_id
+- classcourse.lecturer_id -> lecturers.lecturer_id
+- course_clos.course_id -> courses.course_id
+- course_grading_categories.course_id -> courses.course_id
+- course_materials.course_id -> courses.course_id
+- course_sessions.course_id -> courses.course_id
+- curriculum_frameworks.major_id -> majors.major_id
+- curriculum_frameworks.narrow_major_id -> narrow_majors.narrow_major_id
+- curriculum_subjects.course_id -> courses.course_id
+- curriculum_subjects.framework_id -> curriculum_frameworks.framework_id
+- enrollments.class_course_id -> classcourse.class_course_id
+- enrollments.student_id -> students.student_id
+- grade_details.category_id -> course_grading_categories.category_id
+- grade_details.enrollment_id -> enrollments.enrollment_id
+- lecturers.dep_id -> departments.dep_id
+- lecturers.lecturer_id -> users.user_id
+- majors.dep_id -> departments.dep_id
+- narrow_majors.major_id -> majors.major_id
+- plos.framework_id -> curriculum_frameworks.framework_id
+- rolepermission.permission_id -> permissions.permission_id
+- rolepermission.role_id -> roles.role_id
+- schedules.class_course_id -> classcourse.class_course_id
+- students.framework_id -> curriculum_frameworks.framework_id
+- students.major_id -> majors.major_id
+- students.narrow_major_id -> narrow_majors.narrow_major_id
+- students.student_id -> users.user_id
+- userrole.role_id -> roles.role_id
+- userrole.user_id -> users.user_id
+- users.campus_id -> campuses.campus_id

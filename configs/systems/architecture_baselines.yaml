@@ -1,0 +1,14 @@
+systems:
+  generator_only_control:
+    enabled: true
+    label: A0 Generator only
+    runtime_kind: architecture_baseline
+    description: Control without application-level security modules.
+    modules: [C0, G1, X1]
+
+  full_architecture:
+    enabled: true
+    label: A5 Full Architecture
+    runtime_kind: architecture_baseline
+    description: Complete old modular architecture baseline.
+    modules: [C0, D1, D2, G1, D3, D4, X1]

@@ -1,0 +1,240 @@
+{
+    "dataset_name":  "best_final_0107_augmented_v3",
+    "version":  "3.0.0-0107-augmented",
+    "created_at":  "2026-07-04T00:21:22.3299954+07:00",
+    "language":  "English utterances with Vietnamese project documentation",
+    "task":  "Multi-task intent classification for TrustedSQL GNN M2 execution safety, augmented for dataset-0107",
+    "total_conversations":  4786,
+    "split_counts":  {
+                         "train":  3384,
+                         "validation":  787,
+                         "test":  615
+                     },
+    "split_policy":  {
+                         "train":  "Primary optimization split: original best_final train plus 0107 train augmentation and hard-benign v3 examples.",
+                         "validation":  "Model selection and early-stopping split: original validation plus 0107 validation augmentation.",
+                         "test":  "Original best_final in-domain evaluation split, kept unchanged."
+                     },
+    "source":  {
+                   "original_dataset":  "best_final",
+                   "augmentation":  "dataset-0107 v3 rule/audit labeled augmentation",
+                   "seed":  20260702,
+                   "benign_audit_risk_count":  0,
+                   "hard_benign_v3":  {
+                                          "enabled":  true,
+                                          "train_count":  24,
+                                          "group_counts":  {
+                                                               "self_profile_private_self":  4,
+                                                               "self_attendance_result":  4,
+                                                               "enrolled_cohort_report_filter":  4,
+                                                               "lecturer_assigned_roster_count":  4,
+                                                               "lecturer_assigned_grade_metadata":  4,
+                                                               "lecturer_public_identity":  4
+                                                           }
+                                      },
+                   "source_0107_split_counts":  {
+                                                    "train":  514,
+                                                    "validation":  112
+                                                },
+                   "source_0107_category_counts":  {
+                                                       "train":  {
+                                                                     "BENIGN_MULTI_TURN":  269,
+                                                                     "MALICIOUS_MULTI_TURN":  245
+                                                                 },
+                                                       "validation":  {
+                                                                          "BENIGN_MULTI_TURN":  26,
+                                                                          "MALICIOUS_MULTI_TURN":  86
+                                                                      }
+                                                   }
+               },
+    "schema":  {
+                   "top_level_fields":  [
+                                            "conversation_id",
+                                            "category",
+                                            "role",
+                                            "turns",
+                                            "labels",
+                                            "entity_seed",
+                                            "mt_id",
+                                            "micro_pattern_id",
+                                            "contrastive_pair_id"
+                                        ],
+                   "label_heads":  [
+                                       "semantic_intent",
+                                       "operation",
+                                       "scope",
+                                       "target_relation",
+                                       "transition",
+                                       "target_concepts",
+                                       "security_transition",
+                                       "reference_targets"
+                                   ]
+               },
+    "quality_gates":  {
+                          "duplicate_conversation_ids":  0,
+                          "cross_split_duplicate_normalized_final_turns":  0,
+                          "benign_audit_risk_count":  0,
+                          "taxonomy_valid":  true,
+                          "note":  "Validation reported zero duplicate IDs and zero cross-split normalized final-turn duplicates across train, validation, and test."
+                      },
+    "splits":  {
+                   "train":  {
+                                 "file":  "train.jsonl",
+                                 "count":  3384,
+                                 "sha256":  "60D4A772F0C47CBF8C1B743F1D3F1A5B5A0A54AC0DC6FD6E0D3B04E8DD449ECF",
+                                 "category_counts":  {
+                                                         "MALICIOUS_MULTI_TURN":  1508,
+                                                         "BENIGN_MULTI_TURN":  1535,
+                                                         "BENIGN_SINGLE_TURN":  341
+                                                     },
+                                 "mt_family_counts":  {
+                                                          "MT-08":  339,
+                                                          "ANCHOR":  341,
+                                                          "MT-05":  348,
+                                                          "MT-02":  320,
+                                                          "MT-03":  330,
+                                                          "MT-01":  369,
+                                                          "MT-04":  360,
+                                                          "MT-06":  360,
+                                                          "MT-07":  348,
+                                                          "0107-HARD-BENIGN-V3":  24,
+                                                          "0107-BENIGN":  245
+                                                      },
+                                 "role_counts":  {
+                                                     "student":  2216,
+                                                     "lecturer":  949,
+                                                     "admin":  219
+                                                 },
+                                 "semantic_intent_counts":  {
+                                                                "PROFILE_LOOKUP":  675,
+                                                                "ADMIN_DATA_QUERY":  452,
+                                                                "CATALOG_LOOKUP":  579,
+                                                                "ROSTER_LOOKUP":  552,
+                                                                "APPLICATION_LOOKUP":  69,
+                                                                "ATTENDANCE_LOOKUP":  209,
+                                                                "RESULT_SUMMARY_LOOKUP":  470,
+                                                                "SCHEDULE_LOOKUP":  82,
+                                                                "GRADE_DETAIL_LOOKUP":  118,
+                                                                "COURSE_GRADING_METADATA_LOOKUP":  110,
+                                                                "CURRICULUM_LOOKUP":  41,
+                                                                "LECTURER_LOOKUP":  27
+                                                            },
+                                 "security_transition_counts":  {
+                                                                    "ENCODED_INSTRUCTION":  66,
+                                                                    "INSTRUCTION_OVERRIDE":  134,
+                                                                    "NONE":  1876,
+                                                                    "SQL_PAYLOAD":  33,
+                                                                    "AGGREGATE_TO_IDENTITY":  348,
+                                                                    "PUBLIC_OR_IDENTITY_TO_PRIVATE":  190,
+                                                                    "SAFE_TO_EXTERNAL_TARGET":  612,
+                                                                    "ROLE_MUTATION":  108,
+                                                                    "RANGE_OUTSIDE_ALLOWED_COHORT":  17
+                                                                },
+                                 "micro_pattern_count":  129
+                             },
+                   "validation":  {
+                                      "file":  "validation.jsonl",
+                                      "count":  787,
+                                      "sha256":  "8FB1F098EC101DEA8471017EC8EB1DE166D8C7AA1EDCC008CACA73ED5875AB97",
+                                      "category_counts":  {
+                                                              "BENIGN_SINGLE_TURN":  75,
+                                                              "MALICIOUS_MULTI_TURN":  356,
+                                                              "BENIGN_MULTI_TURN":  356
+                                                          },
+                                      "mt_family_counts":  {
+                                                               "ANCHOR":  75,
+                                                               "MT-02":  137,
+                                                               "MT-07":  59,
+                                                               "MT-01":  90,
+                                                               "MT-05":  89,
+                                                               "MT-04":  72,
+                                                               "MT-08":  95,
+                                                               "MT-03":  71,
+                                                               "MT-06":  73,
+                                                               "0107-BENIGN":  26
+                                                           },
+                                      "role_counts":  {
+                                                          "student":  521,
+                                                          "lecturer":  222,
+                                                          "admin":  44
+                                                      },
+                                      "semantic_intent_counts":  {
+                                                                     "RESULT_SUMMARY_LOOKUP":  92,
+                                                                     "CATALOG_LOOKUP":  122,
+                                                                     "PROFILE_LOOKUP":  151,
+                                                                     "ROSTER_LOOKUP":  109,
+                                                                     "SCHEDULE_LOOKUP":  25,
+                                                                     "APPLICATION_LOOKUP":  16,
+                                                                     "ADMIN_DATA_QUERY":  112,
+                                                                     "GRADE_DETAIL_LOOKUP":  32,
+                                                                     "COURSE_GRADING_METADATA_LOOKUP":  15,
+                                                                     "ATTENDANCE_LOOKUP":  47,
+                                                                     "CURRICULUM_LOOKUP":  6,
+                                                                     "LECTURER_LOOKUP":  60
+                                                                 },
+                                      "security_transition_counts":  {
+                                                                         "NONE":  431,
+                                                                         "PUBLIC_OR_IDENTITY_TO_PRIVATE":  59,
+                                                                         "SAFE_TO_EXTERNAL_TARGET":  122,
+                                                                         "AGGREGATE_TO_IDENTITY":  78,
+                                                                         "ENCODED_INSTRUCTION":  18,
+                                                                         "INSTRUCTION_OVERRIDE":  40,
+                                                                         "SQL_PAYLOAD":  9,
+                                                                         "ROLE_MUTATION":  24,
+                                                                         "RANGE_OUTSIDE_ALLOWED_COHORT":  6
+                                                                     },
+                                      "micro_pattern_count":  115
+                                  },
+                   "test":  {
+                                "file":  "test.jsonl",
+                                "count":  615,
+                                "sha256":  "9D9188DFBEA47CEAB4F6BA7E321EC135F02E058C471E92AC08067CE77A2010A6",
+                                "category_counts":  {
+                                                        "MALICIOUS_MULTI_TURN":  267,
+                                                        "BENIGN_MULTI_TURN":  264,
+                                                        "BENIGN_SINGLE_TURN":  84
+                                                    },
+                                "mt_family_counts":  {
+                                                         "MT-03":  81,
+                                                         "MT-08":  72,
+                                                         "ANCHOR":  84,
+                                                         "MT-02":  81,
+                                                         "MT-05":  45,
+                                                         "MT-06":  72,
+                                                         "MT-07":  99,
+                                                         "MT-04":  54,
+                                                         "MT-01":  27
+                                                     },
+                                "role_counts":  {
+                                                    "lecturer":  173,
+                                                    "student":  417,
+                                                    "admin":  25
+                                                },
+                                "semantic_intent_counts":  {
+                                                               "ADMIN_DATA_QUERY":  94,
+                                                               "ROSTER_LOOKUP":  108,
+                                                               "PROFILE_LOOKUP":  154,
+                                                               "CATALOG_LOOKUP":  87,
+                                                               "COURSE_GRADING_METADATA_LOOKUP":  10,
+                                                               "SCHEDULE_LOOKUP":  13,
+                                                               "RESULT_SUMMARY_LOOKUP":  66,
+                                                               "ATTENDANCE_LOOKUP":  39,
+                                                               "APPLICATION_LOOKUP":  15,
+                                                               "GRADE_DETAIL_LOOKUP":  25,
+                                                               "CURRICULUM_LOOKUP":  4
+                                                           },
+                                "security_transition_counts":  {
+                                                                   "ROLE_MUTATION":  27,
+                                                                   "NONE":  348,
+                                                                   "INSTRUCTION_OVERRIDE":  25,
+                                                                   "ENCODED_INSTRUCTION":  16,
+                                                                   "SQL_PAYLOAD":  8,
+                                                                   "PUBLIC_OR_IDENTITY_TO_PRIVATE":  36,
+                                                                   "SAFE_TO_EXTERNAL_TARGET":  105,
+                                                                   "AGGREGATE_TO_IDENTITY":  50
+                                                               },
+                                "micro_pattern_count":  72
+                            }
+               },
+    "model_development_conversations":  4786
+}

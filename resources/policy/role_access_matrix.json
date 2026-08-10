@@ -1,0 +1,533 @@
+{
+  "student": {
+    "application_types": [
+      "type_id",
+      "type_name",
+      "category",
+      "description"
+    ],
+    "campuses": [
+      "campus_id",
+      "campus_name",
+      "address"
+    ],
+    "classes": [
+      "class_id",
+      "class_name"
+    ],
+    "courses": [
+      "course_id",
+      "course_code",
+      "course_name_en",
+      "course_name_vn",
+      "no_credit",
+      "time_allocation",
+      "description",
+      "min_avg_mark_to_pass",
+      "is_active"
+    ],
+    "departments": [
+      "dep_id",
+      "dep_code",
+      "dep_name"
+    ],
+    "course_clos": [
+      "clo_id",
+      "course_id",
+      "clo_name",
+      "description"
+    ],
+    "course_grading_categories": [
+      "category_id",
+      "course_id",
+      "category_name",
+      "weight",
+      "question_type"
+    ],
+    "course_materials": [
+      "material_id",
+      "course_id",
+      "material_description",
+      "author",
+      "publisher",
+      "is_main_material",
+      "is_online"
+    ],
+    "course_sessions": [
+      "session_id",
+      "course_id",
+      "session_no",
+      "topic",
+      "learning_teaching_type",
+      "student_tasks",
+      "clo_mapping"
+    ],
+    "majors": [
+      "major_id",
+      "major_code",
+      "major_name",
+      "dep_id"
+    ],
+    "narrow_majors": [
+      "narrow_major_id",
+      "narrow_major_code",
+      "narrow_major_name",
+      "major_id",
+      "description"
+    ],
+    "users": [
+      "user_id",
+      "username",
+      "gmail",
+      "fullname",
+      "user_gender",
+      "user_dob",
+      "phone_number",
+      "user_address",
+      "campus_id",
+      "status"
+    ],
+    "application": [
+      "application_id",
+      "student_id",
+      "type_id",
+      "reason",
+      "file_url",
+      "status",
+      "process_note",
+      "processed_by",
+      "create_date",
+      "time_response"
+    ],
+    "curriculum_frameworks": [
+      "framework_id",
+      "framework_code",
+      "framework_name_vn",
+      "framework_name_en",
+      "description",
+      "major_id",
+      "narrow_major_id",
+      "batch"
+    ],
+    "curriculum_subjects": [
+      "framework_id",
+      "course_id",
+      "semester_no",
+      "pre_requisite"
+    ],
+    "lecturers": [
+      "lecturer_id",
+      "dep_id"
+    ],
+    "plos": [
+      "plo_id",
+      "framework_id",
+      "plo_code",
+      "plo_name",
+      "description"
+    ],
+    "students": [
+      "student_id",
+      "student_code",
+      "batch",
+      "major_id",
+      "narrow_major_id",
+      "start_date",
+      "end_date",
+      "status",
+      "framework_id"
+    ],
+    "classcourse": [
+      "class_course_id",
+      "class_id",
+      "course_id",
+      "lecturer_id",
+      "semester"
+    ],
+    "enrollments": [
+      "enrollment_id",
+      "student_id",
+      "class_course_id",
+      "average",
+      "status"
+    ],
+    "grade_details": [
+      "grade_detail_id",
+      "enrollment_id",
+      "category_id",
+      "grade_value",
+      "comment"
+    ],
+    "schedules": [
+      "schedule_id",
+      "class_course_id",
+      "start_time",
+      "end_time",
+      "room",
+      "slot"
+    ],
+    "attendance": [
+      "enrollment_id",
+      "schedule_id",
+      "status"
+    ]
+  },
+  "lecturer": {
+    "application_types": [
+      "type_id",
+      "type_name",
+      "category",
+      "description"
+    ],
+    "campuses": [
+      "campus_id",
+      "campus_name",
+      "address"
+    ],
+    "classes": [
+      "class_id",
+      "class_name"
+    ],
+    "courses": [
+      "course_id",
+      "course_code",
+      "course_name_en",
+      "course_name_vn",
+      "no_credit",
+      "time_allocation",
+      "description",
+      "min_avg_mark_to_pass",
+      "is_active"
+    ],
+    "departments": [
+      "dep_id",
+      "dep_code",
+      "dep_name"
+    ],
+    "course_clos": [
+      "clo_id",
+      "course_id",
+      "clo_name",
+      "description"
+    ],
+    "course_grading_categories": [
+      "category_id",
+      "course_id",
+      "category_name",
+      "weight",
+      "question_type",
+      "grading_guide",
+      "note"
+    ],
+    "course_materials": [
+      "material_id",
+      "course_id",
+      "material_description",
+      "author",
+      "publisher",
+      "is_main_material",
+      "is_online"
+    ],
+    "course_sessions": [
+      "session_id",
+      "course_id",
+      "session_no",
+      "topic",
+      "learning_teaching_type",
+      "student_tasks",
+      "clo_mapping"
+    ],
+    "majors": [
+      "major_id",
+      "major_code",
+      "major_name",
+      "dep_id"
+    ],
+    "narrow_majors": [
+      "narrow_major_id",
+      "narrow_major_code",
+      "narrow_major_name",
+      "major_id",
+      "description"
+    ],
+    "users": [
+      "user_id",
+      "username",
+      "gmail",
+      "fullname",
+      "user_gender",
+      "user_dob",
+      "phone_number",
+      "user_address",
+      "campus_id",
+      "status"
+    ],
+    "curriculum_frameworks": [
+      "framework_id",
+      "framework_code",
+      "framework_name_vn",
+      "framework_name_en",
+      "description",
+      "major_id",
+      "narrow_major_id",
+      "batch"
+    ],
+    "curriculum_subjects": [
+      "framework_id",
+      "course_id",
+      "semester_no",
+      "pre_requisite"
+    ],
+    "lecturers": [
+      "lecturer_id",
+      "dep_id"
+    ],
+    "plos": [
+      "plo_id",
+      "framework_id",
+      "plo_code",
+      "plo_name",
+      "description"
+    ],
+    "students": [
+      "student_id",
+      "student_code",
+      "major_id",
+      "narrow_major_id",
+      "framework_id"
+    ],
+    "classcourse": [
+      "class_course_id",
+      "class_id",
+      "course_id",
+      "lecturer_id",
+      "semester"
+    ],
+    "enrollments": [
+      "enrollment_id",
+      "student_id",
+      "class_course_id",
+      "average",
+      "status"
+    ],
+    "grade_details": [
+      "grade_detail_id",
+      "enrollment_id",
+      "category_id",
+      "grade_value",
+      "comment"
+    ],
+    "schedules": [
+      "schedule_id",
+      "class_course_id",
+      "start_time",
+      "end_time",
+      "room",
+      "slot"
+    ],
+    "attendance": [
+      "enrollment_id",
+      "schedule_id",
+      "status"
+    ]
+  },
+  "admin": {
+    "application_types": [
+      "type_id",
+      "type_name",
+      "category",
+      "description"
+    ],
+    "campuses": [
+      "campus_id",
+      "campus_name",
+      "address"
+    ],
+    "classes": [
+      "class_id",
+      "class_name"
+    ],
+    "courses": [
+      "course_id",
+      "course_code",
+      "syllabus_id_system",
+      "course_name_en",
+      "course_name_vn",
+      "no_credit",
+      "time_allocation",
+      "description",
+      "min_avg_mark_to_pass",
+      "decision_no",
+      "is_approved",
+      "approved_date",
+      "is_active"
+    ],
+    "departments": [
+      "dep_id",
+      "dep_code",
+      "dep_name"
+    ],
+    "permissions": [
+      "permission_id",
+      "permission_name"
+    ],
+    "roles": [
+      "role_id",
+      "role_name"
+    ],
+    "course_clos": [
+      "clo_id",
+      "course_id",
+      "clo_name",
+      "description"
+    ],
+    "course_grading_categories": [
+      "category_id",
+      "course_id",
+      "category_name",
+      "weight",
+      "question_type",
+      "grading_guide",
+      "note"
+    ],
+    "course_materials": [
+      "material_id",
+      "course_id",
+      "material_description",
+      "author",
+      "publisher",
+      "is_main_material",
+      "is_online"
+    ],
+    "course_sessions": [
+      "session_id",
+      "course_id",
+      "session_no",
+      "topic",
+      "learning_teaching_type",
+      "student_tasks",
+      "clo_mapping"
+    ],
+    "majors": [
+      "major_id",
+      "major_code",
+      "major_name",
+      "dep_id"
+    ],
+    "narrow_majors": [
+      "narrow_major_id",
+      "narrow_major_code",
+      "narrow_major_name",
+      "major_id",
+      "description"
+    ],
+    "rolepermission": [
+      "role_id",
+      "permission_id"
+    ],
+    "users": [
+      "user_id",
+      "username",
+      "gmail",
+      "fullname",
+      "user_gender",
+      "user_dob",
+      "phone_number",
+      "user_address",
+      "campus_id",
+      "status",
+      "created_at",
+      "updated_at"
+    ],
+    "application": [
+      "application_id",
+      "student_id",
+      "type_id",
+      "reason",
+      "file_url",
+      "status",
+      "process_note",
+      "processed_by",
+      "create_date",
+      "time_response"
+    ],
+    "curriculum_frameworks": [
+      "framework_id",
+      "framework_code",
+      "framework_name_vn",
+      "framework_name_en",
+      "description",
+      "decision_no",
+      "major_id",
+      "narrow_major_id",
+      "batch",
+      "created_at"
+    ],
+    "curriculum_subjects": [
+      "framework_id",
+      "course_id",
+      "semester_no",
+      "pre_requisite"
+    ],
+    "lecturers": [
+      "lecturer_id",
+      "dep_id"
+    ],
+    "plos": [
+      "plo_id",
+      "framework_id",
+      "plo_code",
+      "plo_name",
+      "description"
+    ],
+    "students": [
+      "student_id",
+      "student_code",
+      "batch",
+      "major_id",
+      "narrow_major_id",
+      "start_date",
+      "end_date",
+      "status",
+      "framework_id"
+    ],
+    "userrole": [
+      "user_id",
+      "role_id"
+    ],
+    "classcourse": [
+      "class_course_id",
+      "class_id",
+      "course_id",
+      "lecturer_id",
+      "semester"
+    ],
+    "enrollments": [
+      "enrollment_id",
+      "student_id",
+      "class_course_id",
+      "average",
+      "status"
+    ],
+    "grade_details": [
+      "grade_detail_id",
+      "enrollment_id",
+      "category_id",
+      "grade_value",
+      "comment"
+    ],
+    "schedules": [
+      "schedule_id",
+      "class_course_id",
+      "start_time",
+      "end_time",
+      "room",
+      "slot"
+    ],
+    "attendance": [
+      "enrollment_id",
+      "schedule_id",
+      "status"
+    ]
+  }
+}

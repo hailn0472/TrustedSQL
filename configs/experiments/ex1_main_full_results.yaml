@@ -1,0 +1,10 @@
+experiment:
+  id: ex1_main_full_results
+  dataset_profile: configs/datasets/v3_full.yaml
+  systems:
+    - full_trustedsql
+  providers:
+    - gemini_25_flash
+    - fci_oss20b
+    - fci_oss120b
+  repetitions: 1

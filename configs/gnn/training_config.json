@@ -1,0 +1,43 @@
+{
+  "schema_version": "intent_training_v1",
+  "seed": 20260609,
+  "text_encoder": {
+    "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "dimension": 384,
+    "frozen": true
+  },
+  "model": {
+    "hidden_dim": 128,
+    "num_layers": 3,
+    "dropout": 0.2
+  },
+  "training": {
+    "epochs": 30,
+    "batch_size": 1,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "early_stopping_patience": 5,
+    "gradient_clip_norm": 1.0
+  },
+  "loss_weights": {
+    "intent": 1.0,
+    "scope": 0.5,
+    "target_relation": 0.5,
+    "reference_distance": 0.5,
+    "operation": 0.3,
+    "transition": 0.3,
+    "concepts": 0.3,
+    "security_transition": 0.2
+  },
+  "split": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15
+  },
+  "release_quota": {
+    "BENIGN_SINGLE_TURN": 500,
+    "BENIGN_MULTI_TURN": 2250,
+    "MALICIOUS_MULTI_TURN": 2250
+  }
+}

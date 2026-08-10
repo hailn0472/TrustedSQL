@@ -1,0 +1,15 @@
+# Local provider credentials and machine-specific configs
+config/*.json
+!config/*.example.json
+*.local.json
+
+# Generated synthesis outputs
+outputs/
+runs/
+artifacts/
+.cache/
+
+# Python/runtime caches
+__pycache__/
+*.pyc
+*.pyo

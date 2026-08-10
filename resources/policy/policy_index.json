@@ -1,0 +1,656 @@
+{
+  "default_policy": "DENY",
+  "roles": [
+    "student",
+    "lecturer",
+    "admin"
+  ],
+  "actions": [
+    "SELECT"
+  ],
+  "violation_taxonomy": {
+    "RB-01": {
+      "name": "table-level violation",
+      "definition": "The query references a table/relation outside the role permission scope."
+    },
+    "RB-02": {
+      "name": "column-level violation",
+      "definition": "The query references a denied or non-permitted column within an otherwise permitted relation."
+    },
+    "RB-03": {
+      "name": "row/scope-level violation",
+      "definition": "The query lacks or exceeds the required ownership, enrollment, or assignment row filter."
+    }
+  },
+  "permissions": {
+    "C01": {
+      "title_vi": "Xem tất cả ngành học",
+      "title_en": "View all majors",
+      "permission_group": "common",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student",
+        "lecturer",
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-01"
+      ]
+    },
+    "C02": {
+      "title_vi": "Xem tất cả khoa/bộ môn",
+      "title_en": "View all departments",
+      "permission_group": "common",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student",
+        "lecturer",
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-01"
+      ]
+    },
+    "C03": {
+      "title_vi": "Xem tất cả chuyên ngành hẹp",
+      "title_en": "View all narrow majors",
+      "permission_group": "common",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student",
+        "lecturer",
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-01"
+      ]
+    },
+    "C04": {
+      "title_vi": "Xem tất cả cơ sở đào tạo",
+      "title_en": "View all campuses",
+      "permission_group": "common",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student",
+        "lecturer",
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-01"
+      ]
+    },
+    "C05": {
+      "title_vi": "Xem tên lớp học (name lookup)",
+      "title_en": "View class names",
+      "permission_group": "common",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student",
+        "lecturer",
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-01"
+      ]
+    },
+    "C06": {
+      "title_vi": "Xem khung chương trình đào tạo",
+      "title_en": "View curriculum frameworks",
+      "permission_group": "common",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student",
+        "lecturer",
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-02"
+      ]
+    },
+    "C07": {
+      "title_vi": "Xem học phần trong khung chương trình",
+      "title_en": "View curriculum subjects",
+      "permission_group": "common",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student",
+        "lecturer",
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-01"
+      ]
+    },
+    "C08": {
+      "title_vi": "Xem thông tin chi tiết học phần",
+      "title_en": "View course details",
+      "permission_group": "common",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student",
+        "lecturer",
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-02"
+      ]
+    },
+    "C09": {
+      "title_vi": "Xem cấu trúc thành phần điểm (student/common subset)",
+      "title_en": "View public course grading category structure",
+      "permission_group": "common",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student",
+        "lecturer",
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-02"
+      ]
+    },
+    "C10": {
+      "title_vi": "Xem chuẩn đầu ra học phần (CLO)",
+      "title_en": "View course learning outcomes",
+      "permission_group": "common",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student",
+        "lecturer",
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-01"
+      ]
+    },
+    "C11": {
+      "title_vi": "Xem tài liệu học tập học phần",
+      "title_en": "View course materials",
+      "permission_group": "common",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student",
+        "lecturer",
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-01"
+      ]
+    },
+    "C12": {
+      "title_vi": "Xem kế hoạch giảng dạy (session plan)",
+      "title_en": "View course session plans",
+      "permission_group": "common",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student",
+        "lecturer",
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-01"
+      ]
+    },
+    "C13": {
+      "title_vi": "Xem chuẩn đầu ra chương trình đào tạo (PLO)",
+      "title_en": "View program learning outcomes",
+      "permission_group": "common",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student",
+        "lecturer",
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-01"
+      ]
+    },
+    "C14": {
+      "title_vi": "Xem loại đơn từ",
+      "title_en": "View application types",
+      "permission_group": "common",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student",
+        "lecturer",
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-01"
+      ]
+    },
+    "S01": {
+      "title_vi": "Sinh viên xem thông tin cá nhân của chính mình",
+      "title_en": "Student views own user profile",
+      "permission_group": "student",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student"
+      ],
+      "action": "SELECT",
+      "scope_type": "SELF",
+      "row_filter": "users.user_id = @user_id",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-02",
+        "RB-03"
+      ]
+    },
+    "S02": {
+      "title_vi": "Sinh viên xem hồ sơ sinh viên của chính mình",
+      "title_en": "Student views own student record",
+      "permission_group": "student",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student"
+      ],
+      "action": "SELECT",
+      "scope_type": "SELF",
+      "row_filter": "students.student_id = @user_id",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-03"
+      ]
+    },
+    "S03": {
+      "title_vi": "Sinh viên xem danh sách lớp học phần đã đăng ký và kết quả học tập",
+      "title_en": "Student views own enrolled course sections and results",
+      "permission_group": "student",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student"
+      ],
+      "action": "SELECT",
+      "scope_type": "SELF",
+      "row_filter": "enrollments.student_id = @user_id",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-03"
+      ]
+    },
+    "S04": {
+      "title_vi": "Sinh viên xem danh sách bạn cùng lớp học phần",
+      "title_en": "Student views classmates in enrolled course sections",
+      "permission_group": "student",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student"
+      ],
+      "action": "SELECT",
+      "scope_type": "ENROLLED",
+      "row_filter": "enrollments.class_course_id IN (SELECT class_course_id FROM enrollments WHERE student_id = @user_id) AND enrollments.student_id != @user_id",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-02",
+        "RB-03"
+      ]
+    },
+    "S05": {
+      "title_vi": "Sinh viên xem lịch học của lớp học phần đã đăng ký",
+      "title_en": "Student views schedules of enrolled course sections",
+      "permission_group": "student",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student"
+      ],
+      "action": "SELECT",
+      "scope_type": "ENROLLED",
+      "row_filter": "schedules.class_course_id IN (SELECT class_course_id FROM enrollments WHERE student_id = @user_id)",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-03"
+      ]
+    },
+    "S06": {
+      "title_vi": "Sinh viên xem lịch sử điểm danh của chính mình",
+      "title_en": "Student views own attendance history",
+      "permission_group": "student",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student"
+      ],
+      "action": "SELECT",
+      "scope_type": "SELF",
+      "row_filter": "attendance.enrollment_id IN (SELECT enrollment_id FROM enrollments WHERE student_id = @user_id)",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-03"
+      ]
+    },
+    "S07": {
+      "title_vi": "Sinh viên xem điểm thành phần của chính mình",
+      "title_en": "Student views own grade components",
+      "permission_group": "student",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student"
+      ],
+      "action": "SELECT",
+      "scope_type": "SELF",
+      "row_filter": "grade_details.enrollment_id IN (SELECT enrollment_id FROM enrollments WHERE student_id = @user_id)",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-03"
+      ]
+    },
+    "S08": {
+      "title_vi": "Sinh viên xem đơn từ đã nộp của chính mình",
+      "title_en": "Student views own submitted applications",
+      "permission_group": "student",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student"
+      ],
+      "action": "SELECT",
+      "scope_type": "SELF",
+      "row_filter": "application.student_id = @user_id",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-02",
+        "RB-03"
+      ]
+    },
+    "S09": {
+      "title_vi": "Sinh viên xem thông tin cơ bản giảng viên phụ trách lớp học phần của mình",
+      "title_en": "Student views basic information of lecturers teaching own classes",
+      "permission_group": "student",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "student"
+      ],
+      "action": "SELECT",
+      "scope_type": "ENROLLED",
+      "row_filter": "lecturers.lecturer_id IN (SELECT cc.lecturer_id FROM classcourse cc JOIN enrollments e ON cc.class_course_id = e.class_course_id WHERE e.student_id = @user_id)",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-02",
+        "RB-03"
+      ]
+    },
+    "L01": {
+      "title_vi": "Giảng viên xem thông tin cá nhân của chính mình",
+      "title_en": "Lecturer views own user profile",
+      "permission_group": "lecturer",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "lecturer"
+      ],
+      "action": "SELECT",
+      "scope_type": "SELF",
+      "row_filter": "users.user_id = @user_id",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-02",
+        "RB-03"
+      ]
+    },
+    "L02": {
+      "title_vi": "Giảng viên xem hồ sơ giảng viên của chính mình",
+      "title_en": "Lecturer views own lecturer record",
+      "permission_group": "lecturer",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "lecturer"
+      ],
+      "action": "SELECT",
+      "scope_type": "SELF",
+      "row_filter": "lecturers.lecturer_id = @user_id",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-03"
+      ]
+    },
+    "L03": {
+      "title_vi": "Giảng viên xem danh sách lớp học phần được phân công giảng dạy",
+      "title_en": "Lecturer views assigned course sections",
+      "permission_group": "lecturer",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "lecturer"
+      ],
+      "action": "SELECT",
+      "scope_type": "ASSIGNED",
+      "row_filter": "classcourse.lecturer_id = @user_id",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-03"
+      ]
+    },
+    "L04": {
+      "title_vi": "Giảng viên xem lịch dạy của lớp học phần được phân công",
+      "title_en": "Lecturer views schedules of assigned course sections",
+      "permission_group": "lecturer",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "lecturer"
+      ],
+      "action": "SELECT",
+      "scope_type": "ASSIGNED",
+      "row_filter": "schedules.class_course_id IN (SELECT class_course_id FROM classcourse WHERE lecturer_id = @user_id)",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-03"
+      ]
+    },
+    "L05": {
+      "title_vi": "Giảng viên xem điểm danh sinh viên trong lớp được phân công",
+      "title_en": "Lecturer views attendance in assigned classes",
+      "permission_group": "lecturer",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "lecturer"
+      ],
+      "action": "SELECT",
+      "scope_type": "ASSIGNED",
+      "row_filter": "attendance.enrollment_id IN (SELECT e.enrollment_id FROM enrollments e JOIN classcourse cc ON e.class_course_id = cc.class_course_id WHERE cc.lecturer_id = @user_id)",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-03"
+      ]
+    },
+    "L06": {
+      "title_vi": "Giảng viên xem điểm thành phần sinh viên trong lớp được phân công",
+      "title_en": "Lecturer views grade details in assigned classes",
+      "permission_group": "lecturer",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "lecturer"
+      ],
+      "action": "SELECT",
+      "scope_type": "ASSIGNED",
+      "row_filter": "grade_details.enrollment_id IN (SELECT e.enrollment_id FROM enrollments e JOIN classcourse cc ON e.class_course_id = cc.class_course_id WHERE cc.lecturer_id = @user_id)",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-03"
+      ]
+    },
+    "L07": {
+      "title_vi": "Giảng viên xem trạng thái và điểm tổng kết sinh viên trong lớp được phân công",
+      "title_en": "Lecturer views enrollment status and averages in assigned classes",
+      "permission_group": "lecturer",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "lecturer"
+      ],
+      "action": "SELECT",
+      "scope_type": "ASSIGNED",
+      "row_filter": "enrollments.class_course_id IN (SELECT class_course_id FROM classcourse WHERE lecturer_id = @user_id)",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-03"
+      ]
+    },
+    "L08": {
+      "title_vi": "Giảng viên xem danh sách sinh viên trong lớp được phân công",
+      "title_en": "Lecturer views student list in assigned classes",
+      "permission_group": "lecturer",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "lecturer"
+      ],
+      "action": "SELECT",
+      "scope_type": "ASSIGNED",
+      "row_filter": "students.student_id IN (SELECT e.student_id FROM enrollments e JOIN classcourse cc ON e.class_course_id = cc.class_course_id WHERE cc.lecturer_id = @user_id)",
+      "requires_current_user_binding": true,
+      "context_variables": [
+        "app.user_id"
+      ],
+      "violation_boundaries": [
+        "RB-02",
+        "RB-03"
+      ]
+    },
+    "L09": {
+      "title_vi": "Giảng viên xem thông tin cơ bản của tất cả giảng viên",
+      "title_en": "Lecturer views basic information of other lecturers",
+      "permission_group": "lecturer",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "lecturer"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-02"
+      ]
+    },
+    "L10": {
+      "title_vi": "Giảng viên xem toàn bộ thành phần điểm bao gồm rubric chấm điểm",
+      "title_en": "Lecturer views full grading category and rubric details",
+      "permission_group": "lecturer",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "lecturer"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-02"
+      ]
+    },
+    "A01": {
+      "title_vi": "Admin xem toàn bộ dữ liệu hệ thống",
+      "title_en": "Admin views all system data except user passwords",
+      "permission_group": "admin",
+      "effect": "PERMIT",
+      "allowed_roles": [
+        "admin"
+      ],
+      "action": "SELECT",
+      "scope_type": "ALL",
+      "row_filter": null,
+      "requires_current_user_binding": false,
+      "violation_boundaries": [
+        "RB-02"
+      ]
+    }
+  }
+}

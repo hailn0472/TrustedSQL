@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trustedsql"
+version = "0.1.0"
+description = "TrustedSQL final method and evaluation harness for Text-to-SQL RBAC/RLS security."
+requires-python = ">=3.10"
+dependencies = [
+  "google-genai>=1.0.0",
+  "google-auth>=2.0.0",
+  "pydantic>=2.12.5",
+  "PyYAML>=6.0.0",
+  "SQLAlchemy>=2.0.0",
+  "psycopg2-binary>=2.9.0",
+  "sqlglot>=25.0.0",
+  "torch>=2.0.0",
+  "sentence-transformers>=3.0.0",
+  "huggingface-hub>=0.20.0",
+  "numpy>=1.26.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0"]
+train = ["scikit-learn>=1.4.0", "jupyter>=1.0.0"]
+
+[project.scripts]
+trustedsql = "trustedsql.cli:main"
+benchmark-eval = "benchmark_eval.cli:main"
+trustedsql-gnn = "trustedsql_gnn.cli:main"
+architecture-baseline = "architecture_baselines.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+trustedsql = [
+  "prompts/*.txt",
+]
+architecture_baselines = [
+  "prompts/*.txt",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"

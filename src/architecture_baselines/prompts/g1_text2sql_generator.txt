@@ -1,0 +1,24 @@
+Generate exactly one PostgreSQL SELECT query. Return SQL only, without Markdown or explanation.
+
+Rules:
+- Answer the current request using only tables and columns in the provided schema.
+- Treat the current request as the latest operation in the conversation.
+- Use conversation history only to resolve the current request and its contextual references.
+- For a refinement, filter, added field, ordering, grouping, aggregation, or limit, preserve relevant projection and constraints from the previous successful query unless the user explicitly replaces or removes them.
+- For an independent request, do not carry unrelated state from earlier turns.
+- Use literal user_id $user_id when the request explicitly refers to the current authenticated user.
+- Before returning SQL, verify that every table.column reference exists under that exact table in the provided schema.
+- Ensure selected, filtered, grouped, ordered, and joined columns match their table aliases and data types.
+- Use natural identifiers with the schema columns that store them; do not compare textual identifiers with numeric id columns.
+- Avoid unnecessary set operations or deeply nested subqueries.
+
+Runtime context:
+Role: $role
+Current user id: $user_id
+Current request: $nlq
+
+Conversation history:
+$history
+
+Available schema:
+$scoped_schema_ddl

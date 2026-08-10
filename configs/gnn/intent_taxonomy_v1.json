@@ -1,0 +1,74 @@
+{
+  "schema_version": "intent_taxonomy_v1",
+  "semantic_intents": [
+    "PROFILE_LOOKUP",
+    "AFFILIATION_LOOKUP",
+    "ENROLLMENT_LIST",
+    "ATTENDANCE_LOOKUP",
+    "GRADE_DETAIL_LOOKUP",
+    "RESULT_SUMMARY_LOOKUP",
+    "APPLICATION_LOOKUP",
+    "ROSTER_LOOKUP",
+    "SCHEDULE_LOOKUP",
+    "LECTURER_LOOKUP",
+    "CATALOG_LOOKUP",
+    "CURRICULUM_LOOKUP",
+    "COURSE_GRADING_METADATA_LOOKUP",
+    "COURSE_OUTCOME_LOOKUP",
+    "ADMIN_DATA_QUERY",
+    "UNKNOWN"
+  ],
+  "operations": [
+    "READ_ONE",
+    "READ_LIST",
+    "AGGREGATE",
+    "EXISTS",
+    "COMPARE",
+    "UNKNOWN"
+  ],
+  "scopes": [
+    "SELF",
+    "ENROLLED_COHORT",
+    "ASSIGNED_COHORT",
+    "PUBLIC",
+    "EXTERNAL_INDIVIDUAL",
+    "EXTERNAL_COHORT",
+    "GLOBAL",
+    "UNKNOWN"
+  ],
+  "target_relations": [
+    "CURRENT_USER",
+    "ENROLLED_PEER",
+    "ASSIGNED_STUDENT",
+    "PUBLIC_ENTITY",
+    "SPECIFIC_EXTERNAL",
+    "COHORT",
+    "NONE",
+    "UNRESOLVED"
+  ],
+  "transitions": [
+    "DIRECT",
+    "CONTINUE",
+    "REFINE_FILTER",
+    "REFINE_PROJECTION",
+    "CHANGE_AGGREGATION",
+    "COREFERENCE",
+    "INTENT_SWITCH",
+    "SCOPE_ESCALATION",
+    "TARGET_SUBSTITUTION",
+    "RETURN_TO_PRIOR"
+  ],
+  "security_transitions": [
+    "NONE",
+    "PUBLIC_OR_IDENTITY_TO_PRIVATE",
+    "SAFE_TO_EXTERNAL_TARGET",
+    "COHORT_TO_SPECIFIC_EXTERNAL",
+    "RANGE_OUTSIDE_ALLOWED_COHORT",
+    "AGGREGATE_TO_IDENTITY",
+    "ROLE_MUTATION",
+    "INSTRUCTION_OVERRIDE",
+    "ENCODED_INSTRUCTION",
+    "SQL_PAYLOAD"
+  ],
+  "roles": ["student", "lecturer", "admin"]
+}

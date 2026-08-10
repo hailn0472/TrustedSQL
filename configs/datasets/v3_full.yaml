@@ -1,0 +1,16 @@
+datasets:
+  benign_single:
+    path: data/benchmark/v3/full/SingleTurn_Benign_records.json
+    turn_type: single
+  benign_multi:
+    path: data/benchmark/v3/full/Multiturn_Benign_records.json
+    turn_type: multi
+  rbac_single:
+    path: data/benchmark/v3/full/SingleTurn_RBAC_Violation_records.json
+    turn_type: single
+  pi_single:
+    path: data/benchmark/v3/full/SingleTurn_PromptInjection_Malicious_records.json
+    turn_type: single
+  malicious_multi:
+    path: data/benchmark/v3/full/Multiturn_Malicious_records.json
+    turn_type: multi

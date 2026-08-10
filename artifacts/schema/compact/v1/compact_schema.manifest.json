@@ -1,0 +1,18 @@
+{
+  "source_ddl": "resources\\schema\\ddl.md",
+  "output_path": "artifacts\\schema\\compact\\v1\\compact_schema.txt",
+  "examples": {
+    "enabled": true,
+    "source": "database_whitelisted_columns",
+    "limit_per_column": 3,
+    "column_count": 27
+  },
+  "stats": {
+    "output_path": "artifacts\\schema\\compact\\v1\\compact_schema.txt",
+    "table_count": 27,
+    "column_count": 144,
+    "relationship_count": 35,
+    "characters": 7047,
+    "example_column_count": 27
+  }
+}

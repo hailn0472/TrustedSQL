@@ -1,0 +1,33 @@
+{
+  "source_package_dir": "../../../data/training/intent_gnn/v1",
+  "output_dir": "../../../artifacts/generated/datatrain_v1_rebuilt",
+  "overwrite": true,
+  "expected_split_counts": {
+    "train": 3384,
+    "validation": 787,
+    "test": 615
+  },
+  "expected_category_counts": {
+    "train": {
+      "BENIGN_MULTI_TURN": 1535,
+      "BENIGN_SINGLE_TURN": 341,
+      "MALICIOUS_MULTI_TURN": 1508
+    },
+    "validation": {
+      "BENIGN_MULTI_TURN": 356,
+      "BENIGN_SINGLE_TURN": 75,
+      "MALICIOUS_MULTI_TURN": 356
+    },
+    "test": {
+      "BENIGN_MULTI_TURN": 264,
+      "BENIGN_SINGLE_TURN": 84,
+      "MALICIOUS_MULTI_TURN": 267
+    }
+  },
+  "expected_conversation_id_prefixes": [
+    "FULLMT-",
+    "ANCHOR-",
+    "0107-",
+    "AUGMT-"
+  ]
+}

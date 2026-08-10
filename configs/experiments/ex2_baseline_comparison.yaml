@@ -1,0 +1,9 @@
+experiment:
+  id: ex2_baseline_comparison
+  dataset_profile: configs/datasets/v3_full.yaml
+  systems:
+    - generator_only_control
+    - full_architecture
+  providers:
+    - gemini_25_flash
+  repetitions: 1

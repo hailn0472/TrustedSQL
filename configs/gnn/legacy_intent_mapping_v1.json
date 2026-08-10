@@ -1,0 +1,38 @@
+{
+  "schema_version": "legacy_intent_mapping_v1",
+  "rules": [
+    {"priority": 10, "roles": ["student"], "semantic_intent": "PROFILE_LOOKUP", "scopes": ["SELF"], "legacy_intent": "VIEW_STUDENT_PROFILE_OWN"},
+    {"priority": 11, "roles": ["student"], "semantic_intent": "AFFILIATION_LOOKUP", "scopes": ["SELF"], "target_concepts": ["MAJOR"], "legacy_intent": "VIEW_STUDENT_MAJOR_OWN"},
+    {"priority": 12, "roles": ["student"], "semantic_intent": "ENROLLMENT_LIST", "scopes": ["SELF"], "legacy_intent": "VIEW_STUDENT_ENROLLMENTS_OWN"},
+    {"priority": 13, "roles": ["student"], "semantic_intent": "ATTENDANCE_LOOKUP", "scopes": ["SELF"], "legacy_intent": "VIEW_STUDENT_ATTENDANCE_OWN"},
+    {"priority": 14, "roles": ["student"], "semantic_intent": "GRADE_DETAIL_LOOKUP", "scopes": ["SELF"], "legacy_intent": "VIEW_STUDENT_GRADES_OWN"},
+    {"priority": 15, "roles": ["student"], "semantic_intent": "RESULT_SUMMARY_LOOKUP", "scopes": ["SELF"], "legacy_intent": "VIEW_STUDENT_AVERAGE_OWN"},
+    {"priority": 16, "roles": ["student"], "semantic_intent": "APPLICATION_LOOKUP", "scopes": ["SELF"], "legacy_intent": "VIEW_STUDENT_APPLICATIONS_OWN"},
+    {"priority": 17, "roles": ["student"], "semantic_intent": "ROSTER_LOOKUP", "scopes": ["ENROLLED_COHORT"], "legacy_intent": "VIEW_STUDENT_CLASSMATES_ENROLLED"},
+    {"priority": 18, "roles": ["student"], "semantic_intent": "SCHEDULE_LOOKUP", "scopes": ["ENROLLED_COHORT"], "legacy_intent": "VIEW_STUDENT_SCHEDULE_ENROLLED"},
+    {"priority": 19, "roles": ["student"], "semantic_intent": "LECTURER_LOOKUP", "scopes": ["ENROLLED_COHORT"], "legacy_intent": "VIEW_LECTURER_INFO_ENROLLED"},
+
+    {"priority": 20, "roles": ["lecturer"], "semantic_intent": "PROFILE_LOOKUP", "scopes": ["SELF"], "legacy_intent": "VIEW_LECTURER_PROFILE_OWN"},
+    {"priority": 21, "roles": ["lecturer"], "semantic_intent": "AFFILIATION_LOOKUP", "scopes": ["SELF"], "target_concepts": ["DEPARTMENT"], "legacy_intent": "VIEW_LECTURER_DEPARTMENT_OWN"},
+    {"priority": 22, "roles": ["lecturer"], "semantic_intent": "ENROLLMENT_LIST", "scopes": ["ASSIGNED_COHORT"], "target_concepts": ["CLASS_SECTION"], "legacy_intent": "VIEW_LECTURER_CLASSCOURSES_ASSIGNED"},
+    {"priority": 23, "roles": ["lecturer"], "semantic_intent": "SCHEDULE_LOOKUP", "scopes": ["ASSIGNED_COHORT"], "legacy_intent": "VIEW_LECTURER_SCHEDULE_ASSIGNED"},
+    {"priority": 24, "roles": ["lecturer"], "semantic_intent": "ATTENDANCE_LOOKUP", "scopes": ["ASSIGNED_COHORT"], "legacy_intent": "VIEW_STUDENT_ATTENDANCE_ASSIGNED"},
+    {"priority": 25, "roles": ["lecturer"], "semantic_intent": "GRADE_DETAIL_LOOKUP", "scopes": ["ASSIGNED_COHORT"], "legacy_intent": "VIEW_STUDENT_GRADES_ASSIGNED"},
+    {"priority": 26, "roles": ["lecturer"], "semantic_intent": "RESULT_SUMMARY_LOOKUP", "scopes": ["ASSIGNED_COHORT"], "legacy_intent": "VIEW_STUDENT_AVERAGE_ASSIGNED"},
+    {"priority": 27, "roles": ["lecturer"], "semantic_intent": "ROSTER_LOOKUP", "scopes": ["ASSIGNED_COHORT"], "legacy_intent": "VIEW_STUDENT_LIST_ASSIGNED"},
+    {"priority": 28, "roles": ["lecturer"], "semantic_intent": "PROFILE_LOOKUP", "scopes": ["ASSIGNED_COHORT"], "legacy_intent": "VIEW_STUDENT_INFO_ASSIGNED"},
+    {"priority": 29, "roles": ["lecturer", "admin"], "semantic_intent": "LECTURER_LOOKUP", "scopes": ["PUBLIC", "GLOBAL"], "legacy_intent": "VIEW_LECTURER_INFO"},
+
+    {"priority": 30, "roles": ["student", "lecturer", "admin"], "semantic_intent": "CATALOG_LOOKUP", "scopes": ["PUBLIC"], "target_concepts": ["MAJOR"], "legacy_intent": "VIEW_MAJORS"},
+    {"priority": 31, "roles": ["student", "lecturer", "admin"], "semantic_intent": "CURRICULUM_LOOKUP", "scopes": ["PUBLIC"], "target_concepts": ["CURRICULUM"], "legacy_intent": "VIEW_CURRICULUM"},
+    {"priority": 32, "roles": ["student", "lecturer", "admin"], "semantic_intent": "CATALOG_LOOKUP", "scopes": ["PUBLIC"], "target_concepts": ["COURSE"], "legacy_intent": "VIEW_COURSE"},
+    {"priority": 33, "roles": ["student", "lecturer", "admin"], "semantic_intent": "COURSE_GRADING_METADATA_LOOKUP", "scopes": ["PUBLIC"], "legacy_intent": "VIEW_COURSE_GRADES"},
+    {"priority": 34, "roles": ["student", "lecturer", "admin"], "semantic_intent": "CATALOG_LOOKUP", "scopes": ["PUBLIC"], "target_concepts": ["APPLICATION_TYPE"], "legacy_intent": "VIEW_APPLICATION_TYPES"},
+    {"priority": 35, "roles": ["student", "lecturer", "admin"], "semantic_intent": "COURSE_OUTCOME_LOOKUP", "scopes": ["PUBLIC"], "target_concepts": ["COURSE_OUTCOME"], "legacy_intent": "VIEW_COURSE_CLOS"},
+    {"priority": 36, "roles": ["student", "lecturer", "admin"], "semantic_intent": "CATALOG_LOOKUP", "scopes": ["PUBLIC"], "target_concepts": ["CAMPUS"], "legacy_intent": "VIEW_CAMPUSES"},
+    {"priority": 37, "roles": ["student", "lecturer", "admin"], "semantic_intent": "CATALOG_LOOKUP", "scopes": ["PUBLIC"], "target_concepts": ["NARROW_MAJOR"], "legacy_intent": "VIEW_NARROW_MAJORS"},
+    {"priority": 38, "roles": ["student", "lecturer", "admin"], "semantic_intent": "CATALOG_LOOKUP", "scopes": ["PUBLIC"], "target_concepts": ["DEPARTMENT"], "legacy_intent": "VIEW_DEPARTMENTS"},
+    {"priority": 39, "roles": ["admin"], "semantic_intent": "ADMIN_DATA_QUERY", "scopes": ["GLOBAL"], "legacy_intent": "VIEW_ALL_ADMIN"},
+    {"priority": 999, "roles": ["student", "lecturer", "admin"], "semantic_intent": "UNKNOWN", "scopes": ["UNKNOWN"], "legacy_intent": "UNKNOWN"}
+  ]
+}

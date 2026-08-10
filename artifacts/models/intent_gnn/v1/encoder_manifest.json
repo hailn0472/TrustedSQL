@@ -1,0 +1,11 @@
+{
+  "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+  "license": "Apache-2.0",
+  "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "embedding_dimension": 384,
+  "local_subpath": "all-MiniLM-L6-v2",
+  "local_only_verified": true,
+  "tokenizer_vocab_size": 30522,
+  "model_safetensors_sha256": "53AA51172D142C89D9012CCE15AE4D6CC0CA6895895114379CACB4FAB128D9DB",
+  "vocab_txt_sha256": "07ECED375CEC144D27C900241F3E339478DEC958F92FDDBC551F295C992038A3"
+}

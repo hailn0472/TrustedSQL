@@ -1,0 +1,37 @@
+.env
+.env.*
+!.env.example
+outputs/
+output/
+.cache/
+artifacts/generated/
+artifacts/text_encoder/
+**/embedding_cache/
+**/*.sqlite3
+logs/
+prompt_logs/
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+.idea
+tmp/
+# Runtime and evaluation artifacts
+reports/
+mvp-chatbot/
+gnn_intent_phase_overlay_eval_20260611/
+experiments/
+!configs/experiments/
+!configs/experiments/*.yaml
+
+# Local credentials and notebook checkpoints
+ferrous-linker-*.json
+trustedsql-*.json
+*.ipynb_checkpoints/
+src/*.egg-info/
+wandb/
+tensorboard/
+_local/
+
+# Accidental nested project copy
+TrustedSQL-Summer2026-Capstone-Project/
