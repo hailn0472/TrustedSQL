@@ -26,9 +26,11 @@ class DatabaseExecutor:
                 return {"executed": False, "rows": None, "row_count": 0, "db_error": "environment_select_assertion_failed", "signature": signature}
         limited_sql = sql.strip().rstrip(";")
         with self.engine.connect() as conn:
-            conn.execute(text(f"SET LOCAL statement_timeout = {int(self.statement_timeout_ms)}"))
-            result = conn.execute(text(limited_sql))
-            rows = [dict(row._mapping) for row in result.fetchmany(self.max_result_rows)]
+            with conn.begin():
+                conn.execute(text("SET TRANSACTION READ ONLY"))
+                conn.execute(text(f"SET LOCAL statement_timeout = {int(self.statement_timeout_ms)}"))
+                result = conn.execute(text(limited_sql))
+                rows = [dict(row._mapping) for row in result.fetchmany(self.max_result_rows)]
             return {"executed": True, "rows": rows, "row_count": len(rows), "columns": list(result.keys()), "db_error": None}
 
     def smoke_test(self) -> bool:

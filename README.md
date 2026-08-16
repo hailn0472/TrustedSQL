@@ -19,8 +19,8 @@ Reviewer-facing documentation:
 
 ```text
 configs/                    Runtime, provider, method, dataset, and GNN configuration
-data/benchmark/             Versioned evaluation benchmark snapshots
-database/                   Schema-only PostgreSQL bootstrap script
+data/benchmark/             Versioned evaluation benchmark records
+database/                   PostgreSQL schema bootstrap and benchmark snapshot manifest
 resources/                  Policy and database schema
 artifacts/                  Runtime model and compact-schema artifacts
 src/trustedsql/             Runtime method
@@ -41,6 +41,25 @@ python tools/preprocessing/fetch_text_encoder.py
 ```
 
 The text encoder is pinned by model ID, revision, and SHA-256 in `artifacts/models/intent_gnn/v1/encoder_manifest.json`. Its verified local files are stored under the Git-ignored `artifacts/text_encoder/` directory; this is a required model dependency, not a runtime result cache.
+
+`requirements.txt` and `pyproject.toml` keep lower bounds for normal
+installation. `requirements-lock.txt` records the direct package versions used
+for the public source-release smoke tests. For archival reproduction, regenerate
+a fully transitive lock file in the target environment and store it with the
+experiment artifacts.
+
+## Database State
+
+`database/script.sql` contains the public schema bootstrap. It does not include
+table rows. Full utility reproduction requires the benchmark database seed or
+snapshot used by the experiment runs because execution-equivalence metrics
+depend on actual row values.
+
+If rows can be public, place them at `database/seed/benchmark_seed.sql` and
+record checksums in `database/SHA256SUMS`. If rows are distributed separately,
+complete `database/benchmark_snapshot_manifest.example.json` with the archive
+URL or DOI, SHA-256 checksum, PostgreSQL version, snapshot date, restore command,
+and runtime database role.
 
 ## Runtime
 
@@ -72,7 +91,7 @@ outputs/runs/<run_id>/
 python evaluation/run_evaluation.py evaluate --run-id <run_id>
 ```
 
-The evaluator re-executes every ground-truth SQL against the current fixed database snapshot and writes evidence under `evaluation/evidence/` and canonical JSON/CSV metrics under `evaluation/metrics/`. It validates runtime completeness and benchmark dataset fingerprints before computing metrics; runtime-only resources such as prompts and GNN assets are retained in the run manifest for provenance. There is no runtime/evaluation result cache, human-review phase, or adjudication phase.
+The evaluator re-executes every ground-truth SQL against the configured fixed database snapshot and writes evidence under `evaluation/evidence/` and canonical JSON/CSV metrics under `evaluation/metrics/`. It validates runtime completeness and benchmark dataset fingerprints before computing metrics; runtime-only resources such as prompts and GNN assets are retained in the run manifest for provenance. There is no runtime/evaluation result cache, human-review phase, or adjudication phase.
 
 Metrics:
 

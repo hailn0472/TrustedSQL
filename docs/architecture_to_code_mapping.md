@@ -14,7 +14,7 @@ This document maps the paper notation to the runtime implementation. It is inten
 | `M5` | Deterministic row-scope proof verifier. | `src/trustedsql/modules/row_scope_verifier.py` |
 | `M6` | SQL generator constrained by the verified runtime context. | `src/trustedsql/modules/sql_generator.py` |
 | `M7` | SQL conformance validator. | `src/trustedsql/modules/sql_conformance_validator.py` |
-| `X1` | Read-only SQL executor with timeout and row-limit enforcement. | `src/trustedsql/modules/readonly_executor.py` |
+| `X1` | Database-enforced read-only SQL executor with timeout and row-limit enforcement. | `src/trustedsql/modules/readonly_executor.py`, `src/trustedsql/db/executor.py` |
 
 The full method path is:
 

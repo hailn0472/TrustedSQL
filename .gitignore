@@ -33,5 +33,5 @@ wandb/
 tensorboard/
 _local/
 
-# Accidental nested project copy
-TrustedSQL-Summer2026-Capstone-Project/
+# Accidental nested repository copies
+nested-project-copy/

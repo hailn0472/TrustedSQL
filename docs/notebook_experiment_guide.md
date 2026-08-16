@@ -36,7 +36,7 @@ MAX_SAMPLES = None
 
 | Field | Meaning |
 |---|---|
-| `PROJECT_ROOT` | Root of the `method_giang` project. Can be controlled by `TRUSTEDSQL_PROJECT_ROOT`. |
+| `PROJECT_ROOT` | Root of the TrustedSQL repository. Can be controlled by `TRUSTEDSQL_PROJECT_ROOT`. |
 | `EXPERIMENT_FILE` | YAML file defining the experiment protocol. |
 | `EXPERIMENT_RUN_ID` | Folder name under `outputs/experiments/`; keep it fixed when running runtime and evaluate in separate sessions. |
 | `SYSTEMS` | Optional system filter. Use `None` or `[]` to run all systems in the experiment YAML. |

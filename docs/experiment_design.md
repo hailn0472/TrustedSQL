@@ -182,7 +182,7 @@ Ly do:
 |---|---|---|---|
 | Generator-only baseline | `generator_only_control` | `C0 -> G1 -> X1` | `architecture_baselines` |
 | Previous architecture baseline | `full_architecture` | `C0 -> D1 -> D2 -> G1 -> D3 -> D4 -> X1` | `architecture_baselines` |
-| Proposed method | `full_trustedsql` | `C0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6 -> M7 -> X1` | `method_giang` |
+| Proposed method | `full_trustedsql` | `C0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6 -> M7 -> X1` | `src/trustedsql/` |
 
 ### Number of Runs
 

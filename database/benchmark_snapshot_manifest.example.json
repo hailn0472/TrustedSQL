@@ -1,0 +1,15 @@
+{
+  "artifact": "benchmark_database_snapshot",
+  "status": "external_artifact_required_if_seed_is_not_public",
+  "description": "Fill this manifest when the benchmark database rows are distributed outside the source repository.",
+  "archive_url_or_doi": "TODO",
+  "sha256": "TODO",
+  "postgresql_version": "17.6",
+  "snapshot_date": "TODO",
+  "schema_bootstrap": "database/script.sql",
+  "restore_command": "psql \"$TRUSTEDSQL_DATABASE_URL\" -f <snapshot.sql>",
+  "runtime_database_role": {
+    "name": "TODO",
+    "required_privileges": ["SELECT"]
+  }
+}

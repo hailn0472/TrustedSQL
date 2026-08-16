@@ -1,6 +1,6 @@
 # TrustedSQL Runtime Architecture
 
-This document describes the current runtime implemented in `method_giang`.
+This document describes the current runtime implemented in `src/trustedsql/`.
 
 ## Scientific Boundary
 
@@ -191,7 +191,7 @@ M7 does not enforce a generation contract, rewrite SQL, or validate row-scope se
 
 ## X1 Executor
 
-X1 executes the final SELECT with statement timeout and row limit. Runtime output includes decision, SQL, execution result, module trace, latency, token usage, and error state.
+X1 executes the final SELECT through a database-enforced read-only transaction with statement timeout and row limit. Runtime output includes decision, SQL, execution result, module trace, latency, token usage, and error state.
 
 ## Evaluation
 

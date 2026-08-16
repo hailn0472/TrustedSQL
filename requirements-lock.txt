@@ -1,0 +1,21 @@
+# Direct dependency lock for the TrustedSQL public source release.
+# Generated from the local Python 3.11 environment used for repository smoke tests on 2026-08-16.
+# This file pins the direct runtime/dev/training packages declared by pyproject.toml.
+# For a fully transitive lock, regenerate with pip-tools or uv in the target release environment.
+
+google-genai==2.17.0
+google-auth==2.56.3
+pydantic==2.13.2
+PyYAML==6.0.3
+SQLAlchemy==2.0.51
+psycopg2-binary==2.9.12
+sqlglot==30.15.0
+torch==2.13.0
+sentence-transformers==5.7.0
+huggingface-hub==1.27.0
+numpy==2.5.2
+
+# Development and optional training/notebook dependencies.
+pytest==9.1.1
+scikit-learn==1.9.0
+jupyter==1.1.1

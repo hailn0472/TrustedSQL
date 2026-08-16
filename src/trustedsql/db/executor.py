@@ -7,6 +7,8 @@ from typing import Any
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine
 
+from trustedsql.sql.analysis import analyze_sql
+
 
 @dataclass
 class QueryResult:
@@ -46,14 +48,17 @@ class DatabaseExecutor:
         if not self._engine:
             return QueryResult(False, [], 0, "DATABASE_NOT_CONFIGURED", 0.0)
         stripped = sql.strip()
-        if not stripped.lower().startswith(("select", "with")):
+        ok, signature = _assert_select_only(stripped)
+        if not ok:
             return QueryResult(False, [], 0, "READ_ONLY_ASSERTION_FAILED", 0.0)
         try:
             with self._engine.connect() as conn:
-                conn.execute(text(f"SET statement_timeout = {int(self.statement_timeout_ms)}"))
-                result = conn.execute(text(stripped))
-                columns = list(result.keys())
-                rows = [dict(row._mapping) for row in result.fetchmany(self.max_rows)]
+                with conn.begin():
+                    conn.execute(text("SET TRANSACTION READ ONLY"))
+                    conn.execute(text(f"SET LOCAL statement_timeout = {int(self.statement_timeout_ms)}"))
+                    result = conn.execute(text(signature["normalized_sql"] or stripped))
+                    columns = list(result.keys())
+                    rows = [dict(row._mapping) for row in result.fetchmany(self.max_rows)]
             return QueryResult(True, rows, len(rows), None, (time.perf_counter() - started) * 1000, columns)
         except Exception as exc:  # noqa: BLE001
             return QueryResult(False, [], 0, str(exc), (time.perf_counter() - started) * 1000)
@@ -63,9 +68,29 @@ class DatabaseExecutor:
             return None, "DATABASE_NOT_CONFIGURED"
         try:
             with self._engine.connect() as conn:
-                conn.execute(text(f"SET statement_timeout = {int(self.statement_timeout_ms)}"))
-                value = conn.execute(text(sql), params).scalar()
+                with conn.begin():
+                    conn.execute(text("SET TRANSACTION READ ONLY"))
+                    conn.execute(text(f"SET LOCAL statement_timeout = {int(self.statement_timeout_ms)}"))
+                    value = conn.execute(text(sql), params).scalar()
                 return bool(value), None
         except Exception as exc:  # noqa: BLE001
             return None, str(exc)
+
+
+def _assert_select_only(sql: str) -> tuple[bool, dict[str, Any]]:
+    analysis = analyze_sql(sql)
+    signature = analysis.to_dict()
+    dangerous = {
+        "DANGEROUS_KEYWORD",
+        "COMMENT_MARKER",
+        "UNION_SELECT",
+        "UNRESOLVED_PLACEHOLDER",
+    }
+    ok = (
+        analysis.parser_status == "PARSED"
+        and analysis.is_select_only
+        and not analysis.multi_statement
+        and not (set(analysis.risks) & dangerous)
+    )
+    return ok, signature
 
