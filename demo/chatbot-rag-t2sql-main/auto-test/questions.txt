@@ -1,0 +1,9 @@
+Find the username of the user with ID HE00003.
+Get the class ID where the course CSD201 is taught.
+List the application IDs that are "Approved" and were created after 01/08/2025.
+Provide the full name of student HE00028.
+Find the application type name that student HE00052 submitted.
+Get the lecturer ID teaching the class with ID IA_K1_FA23_IAS302_SP25.
+List the full names and gender of all lecturers.
+Count the number of classes that lecturer Lê Hoàng Long is currently teaching (future schedule).
+Find the names of courses belonging to the Information Assurance major that have 3 credits.

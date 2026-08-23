@@ -1,0 +1,104 @@
+/* DiagramEdge Styles */
+
+.diagram-edge {
+  transition: all 0.3s ease;
+}
+
+.diagram-edge__path {
+  stroke: #d0d0d0;
+  stroke-linecap: round;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+/* State-based styling */
+
+.diagram-edge--inactive .diagram-edge__path {
+  stroke: #d0d0d0;
+  stroke-width: 2;
+}
+
+.diagram-edge--active .diagram-edge__path {
+  stroke: #10B981;
+  stroke-width: 3;
+  marker-end: url(#arrowhead-active);
+}
+
+/* Type-based styling */
+
+.diagram-edge--conditional .diagram-edge__path {
+  stroke-dasharray: none;
+}
+
+.diagram-edge--default .diagram-edge__path {
+  stroke-dasharray: none;
+}
+
+/* Edge label styling */
+
+.diagram-edge__label-group {
+  pointer-events: none;
+}
+
+.diagram-edge__label-bg {
+  fill: #ffffff;
+  stroke: #d0d0d0;
+  stroke-width: 1;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+.diagram-edge--active .diagram-edge__label-bg {
+  fill: #10B981;
+  stroke: #10B981;
+}
+
+.diagram-edge__label-text {
+  fill: #666666;
+  font-weight: 600;
+  user-select: none;
+  transition: fill 0.3s ease;
+}
+
+.diagram-edge--active .diagram-edge__label-text {
+  fill: #ffffff;
+}
+
+/* Arrowhead styling */
+
+.diagram-edge__arrowhead {
+  transition: fill 0.3s ease;
+}
+
+.diagram-edge__arrowhead-active {
+  fill: #10B981;
+}
+
+/* Active edge animation */
+
+.diagram-edge--active .diagram-edge__path {
+  animation: edge-flow 1.5s ease-in-out infinite;
+}
+
+@keyframes edge-flow {
+  0%, 100% {
+    stroke-opacity: 1;
+  }
+  50% {
+    stroke-opacity: 0.7;
+  }
+}
+
+/* Reduced motion support */
+
+@media (prefers-reduced-motion: reduce) {
+  .diagram-edge,
+  .diagram-edge__path,
+  .diagram-edge__label-bg,
+  .diagram-edge__label-text,
+  .diagram-edge__arrowhead {
+    transition: none;
+  }
+  
+  .diagram-edge--active .diagram-edge__path {
+    animation: none;
+  }
+}

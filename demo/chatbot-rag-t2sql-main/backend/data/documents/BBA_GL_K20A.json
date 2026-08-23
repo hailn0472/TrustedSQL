@@ -1,0 +1,347 @@
+{
+  "CurriculumCode": "BBA_GL_K20A",
+  "Name": "Global logistics and supply chain management_Quản lý logistics và chuỗi cung ứng toàn cầu",
+  "English Name": "Global logistics and supply chain management",
+  "Description": "The objective of the Bachelor of Business Administration – Global logistics and supply chain management program of FPT University is to train students into specialists in logistics and supply chain management, managers, and entrepreneurs. Students will be equipped with all essential knowledge and skills to work in the field of logistics and supply chain and in an international working environment, or to continue into the next higher level of education.\n\nThe program consists of four main modules:\n• General knowledge and skills (13 subjects – 35 credits): Provide the general knowledge of political, cultural and social issues, and all essential skills to study and work in an active and changing environment.\n• Major knowledge and skills (15 subjects – 52 credits): Provide the basic knowledge of the business administration major; and all essential skills and attitudes to become specialists in the business administration field.\n• Specialized knowledge and skills (11 subjects – 40 credits): Provide the general knowledge of logistics and supply chain management, including planning, purchasing, manufacturing, transportation, distribution, strategic and bussiness management . Equip students with all the managerial tools and the ability of independent research in the field of logistics and supply chain management.\n• Elective combo (4 subjects – 12 credits for each combo): Provide knowledge and skills in 2 minors Logistics Management and Supply Chain Management, and in 3 related majors Marketing, Finance and Communication and Multimedia.\n\nUpon graduation, students can build their career in logistics and supply chain management such as planning, purchasing, manufacturing, transportation, distribution, strategic and bussiness management, and start-up.\n\nMục tiêu tổng thể của chương trình cử nhân Quản trị Kinh doanh (QTKD) Trường Đại học FPT nhằm đào tạo người học thành các nhà chuyên môn trong lĩnh vực quản lý logistics và chuỗi cung ứng toàn cầu, thành các nhà quản lý, doanh nhân tiềm năng năng động và sáng tạo làm việc được trong môi trường quốc tế, tạo tiền đề cho việc học tập, nghiên cứu ở bậc học cao hơn.\n\n\nChương trình bao gồm bốn khối kiến thức lớn:\n• Kiến thức kỹ năng chung (13 môn – 35 tín chỉ): Cung cấp cho người học các kiến thức chung về chính trị, văn hóa, xã hội; và các kỹ năng cần thiết để học tập và làm việc trong môi trường năng động luôn thay đổi.\n• Kiến thức kỹ năng ngành (15 môn – 52 tín chỉ): Cung cấp các kiến thức cơ sở ngành quản trị kinh doanh; các kỹ năng và thái độ cần thiết để trở thành các nhà chuyên môn trong lĩnh vực quản trị kinh doanh.\n• Kiến thức kỹ năng chuyên ngành (11 môn – 40 tín chỉ): Cung cấp các kiến thức chung về các lĩnh vực quản lý logistics và chuỗi cung ứng gồm lập kế hoạch, thu mua, sản xuất, vận chuyển, phân phối, quản lý chiến lược và kinh doanh. Trang bị cho người học các công cụ quản lý và khả năng nghiên cứu độc lập trong lĩnh vực quản lý logistics và chuỗi cung ứng.\n• Lựa chọn (4 môn – 12 tín chỉ cho mỗi lựa chọn): Cung cấp các kiến thức và kỹ năng chuyên sâu về hai lĩnh vực Quản lý logistics, Quản lý chuỗi cung ứng và ba lĩnh vực chuyên ngành gần là Marketing, Tài chính và Quản trị truyền thông đa phương tiện.\n\nSau khi tốt nghiệp, sinh viên có thể thực hiện các công việc quản lý logistics và chuỗi cung ứng như lập kế hoạch, thu mua, sản xuất, vận chuyển, phân phối, quản lý chiến lược và kinh tế, và khởi nghiệp.",
+  "DecisionNo MM/dd/yyyy": "22/QĐ-ĐHFPT dated 01/10/2025",
+  "PLOs": [
+    {
+      "Code": "1",
+      "Name": "PLO1",
+      "Description": "Have basic knowledge of social science, law and politics, national security and defense, contribute to form a worldview and scientific methodology."
+    },
+    {
+      "Code": "2",
+      "Name": "PLO2",
+      "Description": "Demonstrate the mindset and ability to implement start-up projects, creative spirits, critical thinking and problem-solving skills."
+    },
+    {
+      "Code": "3",
+      "Name": "PLO3",
+      "Description": "Communicate and team work effectively in academic and practical environments."
+    },
+    {
+      "Code": "4",
+      "Name": "PLO4",
+      "Description": "Good at English to communicate and study; can simply communicate in a second foreign language."
+    },
+    {
+      "Code": "5",
+      "Name": "PLO5",
+      "Description": "Be professional, ethical, have social responsibility, have a spirit of service to the community."
+    },
+    {
+      "Code": "6",
+      "Name": "PLO6",
+      "Description": "Be strong mentally and physically, express the national identity, and confidently integrate into the world."
+    },
+    {
+      "Code": "7",
+      "Name": "PLO7",
+      "Description": "Have the spirit of self-study, lifelong learning, adapt to the continuous changes of technology and society."
+    },
+    {
+      "Code": "8",
+      "Name": "PLO8",
+      "Description": "Recognize, understand, and adequately evaluate internal and external factors that participate in or affect the business activities of the enterprise."
+    },
+    {
+      "Code": "9",
+      "Name": "PLO9",
+      "Description": "Flexibly apply knowledge, business administration skills and analytical tools to deploy and manage business activities of the enterprise."
+    },
+    {
+      "Code": "10",
+      "Name": "PLO10",
+      "Description": "Have positive professional ethics including deliberation, risk awareness, respect and compliance to occupational regulations and business ethics, for the sake of customers and society."
+    },
+    {
+      "Code": "11",
+      "Name": "PLO11",
+      "Description": "Recognize, understand and adequately evaluate the domestic and international environment where logistics and supply activities take place, as well as the development of the global logistics and supply sector. Understand and analyze factors affecting logistics and supply management of businesses."
+    },
+    {
+      "Code": "12",
+      "Name": "PLO12",
+      "Description": "Have core skills to manage logistics and supply activities within the entreprise, including planning, purchasing, manufacturing, transportation, distribution, strategic and bussiness management to meet customers expectations and demands."
+    },
+    {
+      "Code": "13",
+      "Name": "PLO13",
+      "Description": "Apply models, analytical tools, and technology applications to implement and evaluate enterprise logistics and supply management activities."
+    },
+    {
+      "Code": "14",
+      "Name": "PLO14",
+      "Description": "Apply models, analytical tools, and technology applications to implement and evaluate enterprise logistics and supply management activities."
+    }
+  ],
+  "Subjects": [
+    {
+      "SubjectCode": "OTP101",
+      "Subject Name": "Orientation and General Training Program_Định hướng và Rèn luyện tập trung",
+      "Semester": "0",
+      "NoCredit": "0",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "ECO102",
+      "Subject Name": "Business Environment_Môi trường kinh doanh",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "ENM302",
+      "Subject Name": "Business English - Level 1_Tiếng Anh Thương mại - Cấp 1",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "MGT103",
+      "Subject Name": "Introduction to Management_Nhập môn quản lý",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "MKT101",
+      "Subject Name": "Marketing Principles_Nguyên lý Marketing",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SSL101c",
+      "Subject Name": "Academic Skills for University Success_Kỹ năng học tập đại học",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "ACC101",
+      "Subject Name": "Principles of Accounting_Nguyên lý kế toán",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "ENM402",
+      "Subject Name": "Business English - Level 2_Tiếng Anh Thương mại - Cấp 2",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "Passed ENM302"
+    },
+    {
+      "SubjectCode": "OBE102c",
+      "Subject Name": "Organizational Behavior_Hành vi tổ chức",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SCM202",
+      "Subject Name": "'Nhập môn Quản lý Logistics và chuỗi cung ứng_Introduction to Logistics and Supply Chain Management",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SSG104",
+      "Subject Name": "Communication and In-Group Working Skills_Kỹ năng giao tiếp và cộng tác",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "FIN202",
+      "Subject Name": "Principles of Corporate Finance_Tài chính doanh nghiệp",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "GLH301",
+      "Subject Name": "Goods and Insurance_Hàng hóa và bảo hiểm",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "GLI201",
+      "Subject Name": "Thương mại quốc tế_International Trade",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "GLT301",
+      "Subject Name": "International Transport Management_Quản trị vận tải quốc tế",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "HRM202c",
+      "Subject Name": "Human Resource Management_Quản trị nhân sự",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "MGT101 or MGT103"
+    },
+    {
+      "SubjectCode": "BDT201",
+      "Subject Name": "Chuyển đổi số trong kinh doanh_Business Digital Transformation",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "CHN113",
+      "Subject Name": "Elementary Chinese 1_Hán ngữ sơ cấp 1",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "Không"
+    },
+    {
+      "SubjectCode": "GLA301",
+      "Subject Name": "Air Transport_Vận tải hàng hóa bằng đường hàng không",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "MAS202",
+      "Subject Name": "Applied Statistics for Business_Thống kê ứng dụng trong kinh doanh",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SCM302m",
+      "Subject Name": "Procurement and Global Sourcing_Thu mua toàn cầu",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "CHN123",
+      "Subject Name": "Elementary Chinese 2_Hán ngữ sơ cấp 2",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "CHN113"
+    },
+    {
+      "SubjectCode": "GLC301",
+      "Subject Name": "E-Customs_Khai báo hải quan điện tử",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "GSF301",
+      "Subject Name": "Sea Transport and Forwarding_Vận tải, giao nhận hàng hóa bằng đường biển",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "SAP312",
+      "Subject Name": "Hệ thống ERP: khái niệm và thực hành với SAP_ERP System: Concepts and practice with SAP",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "SSB201",
+      "Subject Name": "Advanced Business Communication/Kỹ năng giao tiếp nâng cao trong kinh doanh",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "SSG103/SSG104"
+    },
+    {
+      "SubjectCode": "ENW492c",
+      "Subject Name": "Academic Writing Skills_Kỹ năng viết học thuật",
+      "Semester": "6",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "OJB202",
+      "Subject Name": "On-the-job training_Đào tạo trong môi trường thực tế",
+      "Semester": "6",
+      "NoCredit": "10",
+      "PreRequisite": "Sinh viên đạt 90% tổng số tín chỉ trước kỳ OJT (không tính GDTC và chương trình định hướng) Students attained 90% of the total credits prior to the OJT term (excluding Physical Education and OTP Programs)"
+    },
+    {
+      "SubjectCode": "EXE101",
+      "Subject Name": "Experiential Entrepreneurship 1_Trải nghiệm khởi nghiệp 1",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "LAW102",
+      "Subject Name": "Business Law and Ethics Fundamentals_Luật và Đạo đức kinh doanh",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "EXE201",
+      "Subject Name": "Experiential Entrepreneurship 2_Trải nghiệm khởi nghiệp 2",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "EXE101"
+    },
+    {
+      "SubjectCode": "MLN111",
+      "Subject Name": "Philosophy of Marxism – Leninism_Triết học Mác - Lê-nin",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "MLN122",
+      "Subject Name": "Political economics of Marxism – Leninism_Kinh tế chính trị Mác - Lê-nin",
+      "Semester": "8",
+      "NoCredit": "2",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "PMG201c",
+      "Subject Name": "Project Management",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "RMB302",
+      "Subject Name": "Research Methods & Quantitative Analysis_Phương pháp nghiên cứu và phân tích định lượng",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "MAS202"
+    },
+    {
+      "SubjectCode": "HCM202",
+      "Subject Name": "HCM Ideology_Tư tưởng Hồ Chí Minh",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    },
+    {
+      "SubjectCode": "MLN131",
+      "Subject Name": "Scientific socialism_Chủ nghĩa xã hội khoa học",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    },
+    {
+      "SubjectCode": "VNR202",
+      "Subject Name": "History of CPV_Lịch sử Đảng Cộng sản Việt Nam",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    }
+  ]
+}

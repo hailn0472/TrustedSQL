@@ -1,0 +1,292 @@
+{
+  "CurriculumCode": "BCH_EN_K20A",
+  "Name": "Chương trình đào tạo cử nhân ngành Ngôn Ngữ Trung Quốc, chuyên ngành song ngữ Trung_Anh",
+  "English Name": "Bachelor Program of Chinese Language, Chinese-English bilingual majo",
+  "Description": "1. Mục tiêu chung:\nChương trình Cử nhân ngành Ngôn ngữ Trung, chuyên ngành Song ngữ Trung - Anh nhằm đào tạo người học trở thành các công dân toàn cầu, những nhà chuyên môn với khả năng thích ứng cao, sử dụng linh hoạt tiếng Trung và tiếng Anh. Sinh viên có kỹ năng ngôn ngữ và sử dụng thành thạo cả hai ngoại ngữ này vào công việc chuyên môn và học tập nâng cao khi làm việc tại các cơ quan ban ngành của chính phủ, các tổ chức, doanh nghiệp trong và ngoài nước; thực hiện hoạt động nghiên cứu khoa học, hợp tác về đào tạo và nghiên cứu khoa học với các tổ chức trong nước và nước ngoài. Với hai định hướng là Tiếng Trung du lịch và tiếng Trung thương mại, sinh viên chuyên ngành Trung- Anh còn được đào tạo ngôn ngữ chuyên sâu trong hai lĩnh vực đang và sẽ là điểm mạnh trong thị trường tuyển dụng của Việt Nam và các nước.\nChương trình Cử nhân ngành Ngôn ngữ Trung, chuyên ngành Song ngữ Trung - Anh nhằm đào tạo những cử nhân có phẩm chất chính trị, đạo đức nghề nghiệp, năng lực đáp ứng nhu cầu thực tế của xã hội.\nĐồng thời, Chương trình cũng hướng tới việc trang bị cho người học các kỹ năng mềm như giao tiếp, làm việc nhóm, tư duy phản biện, tư duy khởi nghiệp và tinh thần lao động nghiêm túc, cống hiến, sáng tạo, khả năng học tập suốt đời và những hiểu biết cơ bản về chính trị, pháp luật, đạo đức cũng như phương pháp luận khoa học.\nChương trình cũng hướng tới việc gìn giữ các giá trị và bản sắc dân tộc Việt Nam bằng việc đưa vào các học phần về Nhạc cụ truyền thống và Vovinam. Những giá trị này sẽ giúp bồi đắp cho sinh viên lòng tự hào dân tộc, và đem lại sự khác biệt, nét đặc trưng cho người học khi làm việc trong các môi trường đa văn hóa sau này.\n2. Mục tiêu cụ thể: Các mục tiêu lớn trên đây được thể hiện rõ rệt hơn ở các mục tiêu cụ thể sau:\nPO1: Cung cấp cho người học kiến thức đại cương và giáo dục chuyên nghiệp. \n\nPO2: Cung cấp cho người học kiến thức lí luận cơ bản liên quan đến các bình diện ngữ âm, từ vựng, ngữ pháp của tiếng Trung Quốc và tiếng Anh nhằm củng cố cho kiến thức thực hành tiếng; kiến thức căn bản và khái quát về đất nước, con người, văn hoá Trung Quốc và Việt Nam, tạo khả năng thích ứng tốt, hòa nhập nhanh trong môi trường làm việc với đối tác Trung Quốc và đa văn hóa trong thời đại toàn cầu hoá.\nPO3: Xây dựng các kỹ năng bổ trợ như giao tiếp, tìm tòi, làm việc theo nhóm; giúp người học có định hướng chuyên môn về nghề nghiệp, đáp ứng nhu cầu phát triển của bản thân và xã hội về các ngành nghề hoạt động này.\nPO4: Hướng người học có thái độ và đạo đức nghề nghiệp đúng đắn, có nền tảng vững chắc để tự học tập và phát triển năng lực tự học, tạo tiền đề cho việc học tập, nghiên cứu ở bậc học cao hơn về chuyên ngành song ngữ Trung-Anh.",
+  "DecisionNo MM/dd/yyyy": "553/QĐ-ĐHFPT dated 05/15/2025",
+  "PLOs": [
+    {
+      "Code": "1",
+      "Name": "PLO1",
+      "Description": "Hiểu và vận dụng các kiến thức cơ bản về khoa học xã hội, chính trị pháp luật, an ninh quốc phòng, góp phần hình thành thế giới quan và phương pháp luận khoa học."
+    },
+    {
+      "Code": "2",
+      "Name": "PLO2",
+      "Description": "Sử dụng thành thạo tiếng Trung và tiếng Anh tương đương với bậc 5 trong Khung năng lực ngoại ngữ 6 bậc dùng cho Việt Nam."
+    },
+    {
+      "Code": "3",
+      "Name": "PLO3",
+      "Description": "Nắm vững lý thuyết và lý luận về ngôn ngữ; phân tích được tiếng Trung và tiếng Anh trên các bình diện ngữ âm, từ vựng, ngữ pháp; hiểu biết về đất nước, văn hóa, con người Trung Quốc."
+    },
+    {
+      "Code": "4",
+      "Name": "PLO4",
+      "Description": "Hiểu biết về quy trình dẫn tour, cách xử lý tình huống trong quá trình dẫn tour hoặc điều hành tour; các nguyên tắc quan trọng về lễ nghi trong thương mại và soạn thảo văn bản để vận dụng phù hợp trong thực tế công việc."
+    },
+    {
+      "Code": "5",
+      "Name": "PLO5",
+      "Description": "Có kiến thức về việc lập kế hoạch, tổ chức, giám sát và quản lý điều hành các công việc chuyên môn."
+    },
+    {
+      "Code": "6",
+      "Name": "PLO6",
+      "Description": "Có kỹ năng giao tiếp tiếng Trung và tiếng Anh ở mức thành thạo trong các tình huống giao tiếp xã hội và chuyên môn thông thường; có kỹ năng nghiên cứu, phản biện và giải quyết vấn đề."
+    },
+    {
+      "Code": "7",
+      "Name": "PLO7",
+      "Description": "Có tư duy khởi nghiệp, biết vận dụng kiến thức, kỹ năng khởi nghiệp để thực hiện dự án khởi nghiệp."
+    },
+    {
+      "Code": "8",
+      "Name": "PLO8",
+      "Description": "Thể hiện được tư duy tầm hệ thống, tổng hợp các kiến thức được tích lũy trong quá trình học để áp dụng vào thực tế công việc tại các cơ sở tiếp nhận thực tập; vào thực tiễn để tiến hành và hoàn thành một đề tài nghiên cứu hoặc một dự án tốt nghiệp, hoặc thực hiện một dự án khởi nghiệp tốt nghiệp thuộc nhóm ngành đào tạo dưới sự định hướng của giảng viên hướng dẫn; có khả năng phân tích, thống kê, đánh giá chất lượng công việc sau khi hoàn thành."
+    },
+    {
+      "Code": "9",
+      "Name": "PLO9",
+      "Description": "Phát triển khả năng làm việc độc lập, làm việc nhóm, có khả năng tự định hướng, đưa ra kết luận chuyên môn và bảo vệ quan điểm cá nhân, có thể tự lập kế hoạch, hướng dẫn, quản lý thực hiện và đánh giá hiệu quả công việc. Có tinh thần tự học, học tập suốt đời, thích ứng với sự thay đổi liên tục của công nghệ và xã hội."
+    },
+    {
+      "Code": "10",
+      "Name": "PLO10",
+      "Description": "Thể hiện rõ thái độ, tác phong làm việc chuyên nghiệp, có trách nhiệm, đạo đức trong công việc và ngoài xã hội, có tinh thần phục vụ cộng đồng, đồng thời mạnh mẽ về tinh thần và thể lực, thể hiện được bản sắc dân tộc, tự tin hội nhập quốc tế."
+    }
+  ],
+  "Subjects": [
+    {
+      "SubjectCode": "OTP101",
+      "Subject Name": "Orientation and General Training Program_Định hướng và Rèn luyện tập trung",
+      "Semester": "0",
+      "NoCredit": "0",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "CHI111",
+      "Subject Name": "Integrated Chinese 1_Tiếng Trung tổng hợp 1",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "Không"
+    },
+    {
+      "SubjectCode": "CHI121",
+      "Subject Name": "Integrated Chinese 2_Tiếng Trung tổng hợp 2",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "CHI111"
+    },
+    {
+      "SubjectCode": "CHS111",
+      "Subject Name": "Chinese speaking 1_Khẩu ngữ tiếng Trung 1",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "Không"
+    },
+    {
+      "SubjectCode": "SSL101c",
+      "Subject Name": "Academic Skills for University Success_Kỹ năng học tập đại học",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "CHI311",
+      "Subject Name": "Integrated Chinese 3_Tiếng Trung tổng hợp 3",
+      "Semester": "2",
+      "NoCredit": "6",
+      "PreRequisite": "Passed CHI121"
+    },
+    {
+      "SubjectCode": "CHS121",
+      "Subject Name": "Chinese speaking 2_Khẩu ngữ tiếng Trung 2",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "Passed CHS111"
+    },
+    {
+      "SubjectCode": "ENP102",
+      "Subject Name": "English phonetics and phonology in use_Thực hành ngữ âm và âm vị học tiếng Anh",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "CHI321",
+      "Subject Name": "Integrated Chinese 4_Tiếng Trung tổng hợp 4",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "CHI331",
+      "Subject Name": "Integrated Chinese 5_Tiếng Trung tổng hợp 5",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "CHS201",
+      "Subject Name": "Chinese Speaking 3_Khẩu ngữ tiếng Trung 3",
+      "Semester": "3",
+      "NoCredit": "6",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "ECR301",
+      "Subject Name": "Kỹ năng đọc tư duy phản biện tiếng Anh Critical Reading in English",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "ENG303",
+      "Subject Name": "Ngữ pháp tiếng Anh nâng cao",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "CHI401",
+      "Subject Name": "Integrated Chinese 6_Tiếng Trung tổng hợp 6",
+      "Semester": "4",
+      "NoCredit": "6",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "CHS301",
+      "Subject Name": "Chinese Speaking 4_Khẩu ngữ tiếng Trung 4",
+      "Semester": "4",
+      "NoCredit": "6",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "CPL401",
+      "Subject Name": "Phonetics - Lexicology - Chinese Character_Ngữ âm- Từ vựng- Hán tự",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "EAW301",
+      "Subject Name": "Viết tiếng Anh học thuật Academic English Writing",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "ENG303"
+    },
+    {
+      "SubjectCode": "CHC401",
+      "Subject Name": "Văn Hóa Trung Quốc",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "CHG401c",
+      "Subject Name": "Chinese Grammar _Ngữ pháp tiếng Trung Quốc",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "CHS401",
+      "Subject Name": "Chinese Speaking 5_Khẩu ngữ tiếng Trung 5",
+      "Semester": "5",
+      "NoCredit": "6",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "CTI401",
+      "Subject Name": "Translation & Interpreting_Biên - Phiên dịch",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "SSG104",
+      "Subject Name": "Communication and In-Group Working Skills_Kỹ năng giao tiếp và cộng tác",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "ENW492c",
+      "Subject Name": "Academic Writing Skills_Kỹ năng viết học thuật",
+      "Semester": "6",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "OJC202",
+      "Subject Name": "On-the-job Training_Đào tạo trong môi trường thực tế",
+      "Semester": "6",
+      "NoCredit": "10",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "CRM401",
+      "Subject Name": "Research Method_Phương pháp nghiên cứu",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "EXE101",
+      "Subject Name": "Experiential Entrepreneurship 1_Trải nghiệm khởi nghiệp 1",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SSC302m",
+      "Subject Name": "Nói trước công chúng_Public Speaking",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": "Passed ENP102"
+    },
+    {
+      "SubjectCode": "EXE201",
+      "Subject Name": "Experiential Entrepreneurship 2_Trải nghiệm khởi nghiệp 2",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "EXE101"
+    },
+    {
+      "SubjectCode": "MLN111",
+      "Subject Name": "Philosophy of Marxism – Leninism_Triết học Mác - Lê-nin",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "MLN122",
+      "Subject Name": "Political economics of Marxism – Leninism_Kinh tế chính trị Mác - Lê-nin",
+      "Semester": "8",
+      "NoCredit": "2",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "HCM202",
+      "Subject Name": "HCM Ideology_Tư tưởng Hồ Chí Minh",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    },
+    {
+      "SubjectCode": "MLN131",
+      "Subject Name": "Scientific socialism_Chủ nghĩa xã hội khoa học",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    },
+    {
+      "SubjectCode": "VNR202",
+      "Subject Name": "History of CPV_Lịch sử Đảng Cộng sản Việt Nam",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    }
+  ]
+}

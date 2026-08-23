@@ -1,0 +1,330 @@
+{
+  "CurriculumCode": "BEN_CHN_K19D,K20A",
+  "Name": "CTĐT ngành Ngôn ngữ Anh, chuyên ngành Anh-Trung",
+  "English Name": "Bachelor of English Studies, English-Chinese major",
+  "Description": "Objectives of the program\nGeneral objective:\nThe bachelor's program in the English language, majoring in English - Chinese aims to train bachelors of good quality: having the qualities and capacity to meet the actual needs of society; have the ability to use English fluently with a minimum level equivalent to level 5 according to The Vietnam Six-level of Foreign Language Proficiency Framework or level C1 according to the Common European Framework of Reference for Languages (CEFR) and Chinese with the minimum level is equivalent to HSK4 according to the six-level Chinese Proficiency Test or B2 level according to the Common European Framework of Reference for Languages (CEFR); have specialized knowledge of the language, culture, as well as the knowledge and skills necessary to work in the fields related to the specialized training. Students have a strong self-study ability, are capable of self-training and accumulating professional knowledge, qualities, and skills to participate in the study, research at higher levels, or become experts in the field of expertise, flexible working in a domestic and international environment.\nDetailed objectives:\nPO1: Enable students to develop physically, mentally, and intellectually, as well as develop students' outlook on life, and sense of national pride by equipping students with general knowledge of political theory, law, economics, social, physical education, music, and national defense education.\nPO2: Provide students with basic knowledge of English and Chinese languages, and knowledge of countries, cultures, and people of English or Chinese-speaking countries.\nPO3: Develop students' language skills, combined with communication skills, study, active research, and flexibility in studying and working in a multicultural environment; at the same time, equip knowledge and sharpen the entrepreneurship mindset and entrepreneurial experience.\nPO4: Orientate students towards having the right attitude and work ethic, being able to think creatively, working in groups, working independently, and having the ability to solve problems related to jobs and industries that use English and Chinese languages, and effectively combining professional knowledge, being capable of lifelong learning for personal and professional development.\nPO5: Help students to master the English language at an advanced level and the Chinese language at an intermediate level.\nCareer options after graduation\nStudents majoring in English, focusing on English - Chinese can work in domestic enterprises, foreign-invested enterprises, representative offices, and domestic and international organizations in the fields of tourism, commerce, business, import-export, communication, aviation, etc.,",
+  "DecisionNo MM/dd/yyyy": "972/QĐ-ĐHFPT dated 09/09/2024",
+  "PLOs": [
+    {
+      "Code": "1",
+      "Name": "PLO1",
+      "Description": "Demonstrate basic knowledge of social sciences, politics, law, and national defense and security, contributing to the formation of worldview and scientific methodology."
+    },
+    {
+      "Code": "2",
+      "Name": "PLO2",
+      "Description": "Demonstrate the mindset and ability to implement start-up projects, creative spirits, critical thinking and problem-solving skills."
+    },
+    {
+      "Code": "3",
+      "Name": "PLO3",
+      "Description": "Communicate and work in groups effectively in academic and practical environments."
+    },
+    {
+      "Code": "4",
+      "Name": "PLO4",
+      "Description": "Demonstrate professional behavior, ethicalness, social responsibility, and willingness to serve the community."
+    },
+    {
+      "Code": "5",
+      "Name": "PLO5",
+      "Description": "Cultivate strong mental and physical health, express national identity, and be confident in global integration."
+    },
+    {
+      "Code": "6",
+      "Name": "PLO6",
+      "Description": "Develop self-study and lifelong learning skills and capabilities to adapt to the constant change of technology and society."
+    },
+    {
+      "Code": "7",
+      "Name": "PLO7",
+      "Description": "Demonstrate English language capacity in 4 skills: Listening, Speaking, Reading, and Writing fluently and achieve language proficiency in level 5 according to the 6-level Foreign Language Proficiency Framework for Vietnam or equivalent to level C1 according to the Common European Framework of Reference for Languages (CEFR), to serve effectively for academic, social, and handle professional situations."
+    },
+    {
+      "Code": "8",
+      "Name": "PLO8",
+      "Description": "Acquire and apply basic knowledge of levels and aspects of the English language; integrate language competence and skills in research, synthesis, analysis, and evaluation of data and information into academic and professional work, and problem-solving in a variety of written/oral forms."
+    },
+    {
+      "Code": "9",
+      "Name": "PLO9",
+      "Description": "Recognize and understand basic human, cultural, and ethical knowledge and characteristics; and apply them to professional learning and working environments, as well as multicultural environments."
+    },
+    {
+      "Code": "10",
+      "Name": "PLO10",
+      "Description": "Demonstrate Chinese language capacity in 4 skills: Listening, Speaking, Reading, and Writing at a level equivalent to HSK4 according to the six-level Chinese Proficiency Test or equivalent to level B2 according to the Common European Framework of Reference for Languages (CEFR) or to level 5 according to the 6-level Foreign Language Proficiency Framework for Vietnam, to serve effectively in academics, social, and work professional situations."
+    },
+    {
+      "Code": "11",
+      "Name": "PLO11",
+      "Description": "Acquire the vocabulary, sentence patterns, terminology, and corresponding expressions in the profession; as well as comprehend the definitions, professional characteristics, and basic professional knowledge, competencies, attitudes, and necessary qualities in the chosen profession."
+    },
+    {
+      "Code": "12",
+      "Name": "PLO12",
+      "Description": "Be able to apply in practice the knowledge and skills of language, professional knowledge and skills, and interdisciplinary knowledge of languages, culture, technology, economy, politics, society and science, hence be able to study and work in the chosen field with confidence and a professional attitude and demeanor."
+    }
+  ],
+  "Subjects": [
+    {
+      "SubjectCode": "OTP101",
+      "Subject Name": "Orientation and General Training Program_Định hướng và Rèn luyện tập trung",
+      "Semester": "0",
+      "NoCredit": "0",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "CHI111",
+      "Subject Name": "Integrated Chinese 1_Tiếng Trung tổng hợp 1",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "Không"
+    },
+    {
+      "SubjectCode": "CHS111",
+      "Subject Name": "Chinese speaking 1_Khẩu ngữ tiếng Trung 1",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "Không"
+    },
+    {
+      "SubjectCode": "ENG303",
+      "Subject Name": "Ngữ pháp tiếng Anh nâng cao",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "ENP102",
+      "Subject Name": "English phonetics and phonology in use_Thực hành ngữ âm và âm vị học tiếng Anh",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SSL101c",
+      "Subject Name": "Academic Skills for University Success_Kỹ năng học tập đại học",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "CHI121",
+      "Subject Name": "Integrated Chinese 2_Tiếng Trung tổng hợp 2",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "CHI111"
+    },
+    {
+      "SubjectCode": "CHS121",
+      "Subject Name": "Chinese speaking 2_Khẩu ngữ tiếng Trung 2",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "Passed CHS111"
+    },
+    {
+      "SubjectCode": "EAW301",
+      "Subject Name": "Viết tiếng Anh học thuật Academic English Writing",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "ENG303"
+    },
+    {
+      "SubjectCode": "ECR301",
+      "Subject Name": "Kỹ năng đọc tư duy phản biện tiếng Anh Critical Reading in English",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SSG104",
+      "Subject Name": "Communication and In-Group Working Skills_Kỹ năng giao tiếp và cộng tác",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "CHI311",
+      "Subject Name": "Integrated Chinese 3_Tiếng Trung tổng hợp 3",
+      "Semester": "3",
+      "NoCredit": "6",
+      "PreRequisite": "Passed CHI121"
+    },
+    {
+      "SubjectCode": "ERW412",
+      "Subject Name": "Kỹ năng tư duy Đọc – Viết tiếng Anh 1 English Read-Think-Write 1",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "Với Khung Anh-Anh: Passed ECR201 & EAW221 Với khung Anh-Nhật, Anh-Trung, Anh-Hàn: Passed EAW301"
+    },
+    {
+      "SubjectCode": "LTG202",
+      "Subject Name": "Introduction to Linguistics_Dẫn luận ngôn ngữ",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SSC302m",
+      "Subject Name": "Nói trước công chúng_Public Speaking",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "Passed ENP102"
+    },
+    {
+      "SubjectCode": "CHI321",
+      "Subject Name": "Integrated Chinese 4_Tiếng Trung tổng hợp 4",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "CHS211",
+      "Subject Name": "Chinese speaking 3A_Khẩu ngữ tiếng Trung 3A",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "ECC301c",
+      "Subject Name": "Cross-cultural Communication_Giao tiếp trong môi trường đa văn hoá",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "ERW422",
+      "Subject Name": "Kỹ năng tư duy Đọc – Viết tiếng Anh 2 English Read-Think-Write 2",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "Passed ERW411"
+    },
+    {
+      "SubjectCode": "SEM101",
+      "Subject Name": "Semantics_Ngữ nghĩa học",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "Passed LTG202 and ENG302c and ENP101 or ENP102"
+    },
+    {
+      "SubjectCode": "CHI331",
+      "Subject Name": "Integrated Chinese 5_Tiếng Trung tổng hợp 5",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "ELI302",
+      "Subject Name": "Phiên dịch tiếng Anh 1 English Interpretation 1",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "Passed ENW401 or (ENS412 & ENS422) or ENT503 K15 onward: Passed EAL201 & SSC302c & LTG202"
+    },
+    {
+      "SubjectCode": "ELT302",
+      "Subject Name": "Biên dịch tiếng Anh 1 English Translation 1",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "ENS411 & ENS421 & ENR401 & ENW401 & ENP101 & ENG301 K15 onward: Passed ERW411 & LTG202"
+    },
+    {
+      "SubjectCode": "ENB302",
+      "Subject Name": "Viết tiếng Anh trong kinh doanh Business English Writing",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "Passed EAW221"
+    },
+    {
+      "SubjectCode": "ESL101",
+      "Subject Name": "Sociolinguistics_Ngôn ngữ học xã hội",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "Passed LTG202, SEM101, ECB101"
+    },
+    {
+      "SubjectCode": "EPE301c",
+      "Subject Name": "Professional Ethics_Đạo đức trong công việc",
+      "Semester": "6",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "OJE202",
+      "Subject Name": "On-The-Job Training_Đào tạo trong môi trường thực tế",
+      "Semester": "6",
+      "NoCredit": "10",
+      "PreRequisite": "Sinh viên đạt 90% tổng số tín chỉ từ kỳ 1-kỳ 5 (không tính GDTC, GDQP) Students attained 90% of the total credits from semester 1-semester 5 (excluding Physical Education PHE_COM* and Military Program)"
+    },
+    {
+      "SubjectCode": "ELI402",
+      "Subject Name": "Phiên dịch tiếng Anh 2 English Interpretation 2",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": "Passed ELI301"
+    },
+    {
+      "SubjectCode": "ELT402",
+      "Subject Name": "Biên dịch tiếng Anh 2 English Translation 2",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": "Passed ELT301"
+    },
+    {
+      "SubjectCode": "EXE101",
+      "Subject Name": "Experiential Entrepreneurship 1_Trải nghiệm khởi nghiệp 1",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "ELR301",
+      "Subject Name": "Research Methods_Phương pháp nghiên cứu",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "ERW421"
+    },
+    {
+      "SubjectCode": "EXE201",
+      "Subject Name": "Experiential Entrepreneurship 2_Trải nghiệm khởi nghiệp 2",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "EXE101"
+    },
+    {
+      "SubjectCode": "MLN111",
+      "Subject Name": "Philosophy of Marxism – Leninism_Triết học Mác - Lê-nin",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "MLN122",
+      "Subject Name": "Political economics of Marxism – Leninism_Kinh tế chính trị Mác - Lê-nin",
+      "Semester": "8",
+      "NoCredit": "2",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "HCM202",
+      "Subject Name": "HCM Ideology_Tư tưởng Hồ Chí Minh",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    },
+    {
+      "SubjectCode": "MLN131",
+      "Subject Name": "Scientific socialism_Chủ nghĩa xã hội khoa học",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    },
+    {
+      "SubjectCode": "VNR202",
+      "Subject Name": "History of CPV_Lịch sử Đảng Cộng sản Việt Nam",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    }
+  ]
+}

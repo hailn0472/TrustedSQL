@@ -1,0 +1,331 @@
+# TMG301m - Text Mining_Khai thác văn bản
+
+
+## Course Information - TMG301m
+
+- **Credits**: 3
+- **Degree Level**: Bachelor
+- **Time Allocation**: 45h (60 sessions) contact hours + 1h final exam + 104h self-study
+- **Pre-Requisite**: CSD203, AIL303m
+- **Min Avg Mark To Pass**: 5
+- **Scoring Scale**: 10
+
+### Description - TMG301m
+This course will cover the primary techniques for mining and analyzing text data to discover interesting patterns, extract practical knowledge, and support decision-making, emphasizing statistical approaches that can be generally applied to arbitrary text data in any natural language with no or minimum human effort. Detailed analysis of text data requires understanding natural language text, which is a difficult task for computers
+
+### Student Tasks - TMG301m
+- Students must attend at least 80% of contact slots in order to be accepted to the final examination. - Student is responsible to do all exercises, assignments and labs given by instructor in class or at home and submit on time - Use laptop in class only for learning purpose - Promptly access to the FU FLM at https://flm.fpt.edu.vn/ for up-to-date course information
+
+### Tools - TMG301m
+No
+
+## Course Learning Outcomes (CLOs) - TMG301m
+
+- **CLO1**: Students will develop a solid understanding of the fundamental concepts and principles of text mining, including techniques for extracting, transforming, and analyzing textual data.
+- **CLO2**: Students can use machine learning/deep learning (neural networks, neural language models, recurrent neural networks, LSMT) for specific text-mining applications.
+- **CLO3**: Students will explore the methods and algorithms used for text classification and clustering tasks. They will learn to apply techniques like Naive Bayes, Support Vector Machines, and k-means clustering.
+- **CLO4**: Students will learn about different methods for representing text data, such as bag-of-words, term frequency-inverse document frequency (TF-IDF), and word embeddings. They will understand the strengths and limitations of each approach.
+- **CLO5**: Students will be aware of the popular applications in text mining, such as machine translation, question answering, and chatbots to design text mining-related applications in real-world
+
+## Materials - TMG301m
+
+### Main Materials
+- **Natural Language Processing in Action: Understanding, Analyzing, and Generating Text with Python** | Author: Hobson Lane, Cole Howard and Hannes Max Hapke | Publisher: Manning | ISBN: 978-1617294631 (ISBN-13)
+- **Text Analytics with Python: A Practitioner's Guide to Natural Language Processing** | Author: Dipanjan Sarkar | Publisher: Apress | ISBN: 978-1484243534 (ISBN-13)
+
+### Reference Materials
+- **Applied Text Analysis with Python: Enabling Language-Aware Data Products with Machine Learning** | Author: Benjamin Bengfort, Rebecca Bilbro, Tony Ojeda | Publisher: O'Reilly Media | ISBN: 978-1491963043 (ISBN-13)
+- **Natural Language Processing with Python: Analyzing Text with the Natural Language Toolkit** | Author: Steven Bird, Ewan Klein, Edward Loper | Publisher: O'Reilly Media | ISBN: 978-0596516499 (ISBN-13)
+- **Speech and Language Processing** | Author: Daniel Jurafsky, James Martin | Publisher: Prentice Hall | ISBN: 978-0131873216 (ISBN-13)
+- **- PowerPoint Slides**
+- **- Assignments 1**
+- **- Assignments 2**
+- **- Quiz for Progress Tests**
+
+## Assessment - TMG301m
+
+### Assignment 1
+- Weight: 15.0%
+- Completion Criteria: >0
+- CLO: CLO1, CLO2
+- Question Type: Group presentation for the selected article
+- Note: Instructor has resposibility to review the presentation for students after graded.
+
+### Assignment 2
+- Weight: 15.0%
+- Completion Criteria: >0
+- CLO: CLO1, CLO2, CLO3, CLO4, CLO5
+- Question Type: Group presentation for the selected article
+- Note: Instructor has resposibility to review the presentation for students after graded.
+
+### Progress test 1
+- Weight: 15.0%
+- Completion Criteria: >0
+- CLO: CLO1, CLO2, CLO3, CLO4, CLO5
+- Question Type: Multiple choices
+Marked by Computer or a suitable format
+- Note: Instruction and shedules for Progress tests must be presented in the Course Implementation Plan approved by director of the campus.
+
+Progress test must be taken right after the last lectures of required material.
+
+Instructor has resposibility to review the test for students after graded.
+
+### Progress test 2
+- Weight: 15.0%
+- Completion Criteria: >0
+- CLO: CLO1, CLO2, CLO3, CLO4, CLO5
+- Question Type: Multiple choicesMarked by Computer or a suitable format
+- Note: Instruction and shedules for Progress tests must be presented in the Course Implementation Plan approved by director of the campus.
+
+Progress test must be taken right after the last lectures of required material.
+
+Instructor has resposibility to review the test for students after graded.
+
+### Final exam
+- Weight: 40.0%
+- Completion Criteria: 4
+- CLO: CLO1, CLO2, CLO3, CLO4, CLO5
+- Question Type: Multiple choices
+Marked by Computer
+- Note: The exam questions must be updated or different at least 70% to the previous ones.
+
+
+## Schedule - TMG301m
+
+Total sessions: 60
+
+**Session 1**: Course introduction: - Introduce the materials of the courses and how to asses these materials - Introduce the assignments and how to pass the course
+  CLO: CLO1 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 2**: 1. Regular expressions, text normalization, sdit distance 1.1 regular expressions, words, corpora
+  CLO: CLO1 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 3**: 1. Regular expressions, text normalization, sdit distance 1.2 Text normalization, minimum edit distance
+  CLO: CLO1 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 4**: 2. N-gram language models 2.1 N-Grams, evaluating language models,
+  CLO: CLO1 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 5**: 2. N-gram language models 2.2 sampling sentences from a language model, generalization and zeros, Smoothing
+  CLO: CLO1 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 6**: 2. N-gram language models 2.3 Knerser-Ney smoothing, perplexity's relation to entropy - Assignment 1 introduction
+  CLO: CLO1 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 7**: 3. Naïve Bayes, Text classification, and Sentiment 3.1 Naïve Bayes classifiers, Training the Naive Bayes Classifier
+  CLO: CLO1, CLO2 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 8**: 3. Naïve Bayes, Text classification, and Sentiment 3.2 Optimizing for sentiment analysis, Naive Bayes for other text classification tasks,
+  CLO: CLO1, CLO2 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 9**: 3. Naïve Bayes, Text classification, and Sentiment 3.3 Naïve Bayes as a language model, Evaluation: Precision, Recall, F-measure,
+  CLO: CLO1, CLO2 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 10**: 3. Naïve Bayes, Text classification, and Sentiment 3.4 test sets and cross-validation, statistical significance testing
+  CLO: CLO1, CLO2 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 11**: Assignment 1 support
+  CLO: CLO1, CLO2 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 12**: 4. Logistic regression 4.1 Review of logistic regression (Sigmoid function, classification with logistic regression) 4.2 Multinomial logistic regression
+  CLO: CLO1, CLO2 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 13**: 4. Logistic regression 4.3 Learning in Logistic Regression , The cross-entropy loss function, Gradient Descent, Regularization
+  CLO: CLO1, CLO2 | Tasks: Read Slides and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 14**: 4. Logistic regression 4.4 Interpreting models, deriving the gradient equation
+  CLO: CLO1, CLO2 | Tasks: Assignment 1 | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 15**: 5. Vector semantics and embeddings 5.1 Lexical semantics, vector semantics,
+  CLO: CLO1, CLO4 | Tasks: Review Assignment 1 | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 16**: 5. Vector semantics and embeddings 5.2 words and vectors, cosine for measuring similarity
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 17**: 5. Vector semantics and embeddings 5.3 TF-IDF: weighting terms in the vector, pointwise mutual information
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 18**: 5. Vector semantics and embeddings 5.4 Word2vec
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 19**: 5. Vector semantics and embeddings 5.5 Visualizing Embeddings, Semantic properties of embeddings, Bias and Embeddings, Evaluating Vector Models
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 20**: Assignment 1 support
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 21**: 6. Clustering for Text Similarity 6.1 Unsupervised Learning on Text 6.2 Clustering by Document Similarity
+  CLO: CLO1, CLO3 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 22**: 6. Clustering for Text Similarity 6.3 Modeling Document Topics
+  CLO: CLO1, CLO3 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 23**: 7. RNNs and LSTMs 7.1 Recurrent neural networks, RNNs as Language models, RNNs for other NL tasks
+  CLO: CLO1, CLO2 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 24**: 7. RNNs and LSTMs 7.2 The LSTM, common RNN NL architectures, attention
+  CLO: CLO1, CLO2 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 25**: 8. Transformers and pretrained language models 8.1 self-attention networks: transformers, transformers as language models, sampling, beam search
+  CLO: CLO1, CLO2 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 26**: 8. Transformers and pretrained language models 8.2 pretraining large language models, language models for zero- shot learning, potential harms from language models
+  CLO: CLO1, CLO2 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 27**: 9. Fine-tuning and masked language models 9.1 Bidirectional transformer encoders, training bidirectional encoders
+  CLO: CLO1, CLO2 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 28**: 9. Fine-tuning and masked language models 9.2 Transfer learning through fine-tuning, training corpora
+  CLO: CLO1, CLO2 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 29**: Assignment 1 evaluation
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Tasks: Read Slides and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 30**: Progress test 1 Assignment 2 introduction
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Tasks: Test 1 | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 31**: 10. Machine translation 10.1 Leanguage divergeneces and typology, machine translation using encoder-decoder, details of the encoder-decoder model
+  CLO: CLO1, CLO5 | Tasks: Review Test 1 | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 32**: 10. Machine translation 10.2 Translating in low-resource situations, machine traslation evaluation, bias and ethical issues
+  CLO: CLO1, CLO5 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 33**: 11. Chatbot and Dialogue systems 11.1 Properties of human conversation, chatbots
+  CLO: CLO1, CLO5 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 34**: 11. Chatbot and Dialogue systems 11.2 GUS: simple frame-based diaglogue systems, The dialogue-state architecture,
+  CLO: CLO1, CLO5 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 35**: 11. Chatbot and Dialogue systems 11.3 Evaluating dialogue systems, dialogue system design
+  CLO: CLO1, CLO5 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 36**: Assignment 2 support
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 37**: 12. Context-free grammars and constituency parsing 12.1 Constituency, context-free grammars, treebanks, grammar equivalence and normal form
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 38**: 12. Context-free grammars and constituency parsing 12.2 Ambiguity, a dynamic programming approach
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 39**: 12. Context-free grammars and constituency parsing 12.3 Span-based neural constituency parsing, evaluating parsers
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 40**: 13. Dependency parsing 13.1 Dependency relations, transition-based dependency parsing
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 41**: 13. Dependency parsing 13.2 Graph-based dependency parsing, evaluation Exercise
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 42**: Assignment 2 support
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Tasks: Assignment 2 | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 43**: 14. Logical representations of sentence meaning 14.1 Model-Theoretic semantics, first-order logic 14.2 event and state representations, description logics
+  CLO: CLO1, CLO4 | Tasks: Review Assignment 2 | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 44**: 15. Relation and Event extraction 15.1 Relation extraction Algorithms,
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 45**: 15. Relation and Event extraction 15.2 Extracting events, template filling
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 46**: 16. Time and temporal reasoning 16.1 Representing time, representing aspect
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 47**: 16. Time and temporal reasoning 16.2 Temporally annotated datasets: time bank, automatic temporal analysis
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 48**: Assignment 2 support
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 49**: 17. Word senses and WordNet 17.1 Word senses, relations between senses, WordNet: a database of lexical relations
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 50**: 17. Word senses and WordNet 17.2 Word sense Disambguation, Alternate WSD algorithms and tasks
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 51**: 17. Word senses and WordNet 17.3 Using thesauruses to improve embeddings, word sense induction
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 52**: 18. Lexicons for sentiment, affect, and connotation 18.1 Defining emotion, available sentiment and affect lexicons, creating affect lexicons by human labeling
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 53**: 18. Lexicons for sentiment, affect, and connotation 18.2 Semi-supervised induction of affect lexicons
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 54**: Assignment 2 support
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 55**: 18. Lexicons for sentiment, affect, and connotation 18.3 supervised learning of word sentiment
+  CLO: CLO1, CLO4 | Tasks: Read Slide and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 56**: 18. Lexicons for sentiment, affect, and connotation 18.4 using lexicons for sentiment recognition, using lexicons for affect recognition
+  CLO: CLO1, CLO4 | Tasks: Read Slides and and Seft-Review | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 57**: 18. Lexicons for sentiment, affect, and connotation 18.5 Lexicon-based methods for Entity-Centric Affect, Connotation Frames
+  CLO: CLO1, CLO4 | Tasks: Review Test 2 | Materials: Course Implementation
+- Syllabus TMG301m
+- Slides
+**Session 58**: Progress Test 2 - Review Progress Test 2
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Tasks: Review Test 2 | Materials: Content 16-28
+Progress Test 2
+**Session 59**: Assignment 2 evaluation
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Tasks: Assignment 3 | Materials: Contents 23-28
+**Session 60**: Summary All Slides, Tests, and Assignments
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Tasks: Review and Group discussion | Materials: All Contents

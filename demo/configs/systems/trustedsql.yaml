@@ -1,0 +1,6 @@
+systems:
+  full_trustedsql:
+    enabled: true
+    label: Full TrustedSQL
+    runtime_kind: trustedsql
+    modules: [C0, M1, M2, M3, M4, M5, M6, M7, X1]

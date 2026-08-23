@@ -1,0 +1,119 @@
+/* DiagramResource Styles */
+
+.diagram-resource {
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.diagram-resource__background {
+  fill: #ffffff;
+  transition: fill 0.3s ease;
+}
+
+.diagram-resource__border {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-dasharray: 3 2;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.diagram-resource__icon {
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.diagram-resource__label {
+  font-weight: 500;
+  user-select: none;
+  pointer-events: none;
+  transition: fill 0.3s ease;
+}
+
+/* State-based styling */
+
+.diagram-resource--inactive .diagram-resource__border {
+  stroke-width: 1.5;
+  opacity: 0.6;
+}
+
+.diagram-resource--inactive .diagram-resource__label {
+  fill: #999999;
+}
+
+.diagram-resource--active .diagram-resource__background {
+  fill: #f9f9f9;
+}
+
+.diagram-resource--active .diagram-resource__border {
+  stroke-width: 2;
+  opacity: 1;
+}
+
+.diagram-resource--active .diagram-resource__icon {
+  opacity: 1;
+}
+
+.diagram-resource--active .diagram-resource__label {
+  fill: #333333;
+  font-weight: 600;
+}
+
+/* Completed state */
+
+.diagram-resource--completed .diagram-resource__background {
+  fill: #ffffff;
+}
+
+.diagram-resource--completed .diagram-resource__border {
+  stroke-width: 3;
+  opacity: 1;
+}
+
+.diagram-resource--completed .diagram-resource__icon {
+  opacity: 0.9;
+}
+
+.diagram-resource--completed .diagram-resource__label {
+  fill: #333333;
+  font-weight: 600;
+}
+
+/* Active glow effect */
+
+.diagram-resource__glow {
+  fill: none;
+  stroke-width: 2;
+  opacity: 0.4;
+  animation: resource-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes resource-glow {
+  0%, 100% {
+    opacity: 0.4;
+    stroke-width: 2;
+  }
+  50% {
+    opacity: 0.2;
+    stroke-width: 3;
+  }
+}
+
+/* Type-specific styling - removed, using unified colors */
+
+/* Reduced motion support */
+
+@media (prefers-reduced-motion: reduce) {
+  .diagram-resource,
+  .diagram-resource__background,
+  .diagram-resource__border,
+  .diagram-resource__label {
+    transition: none;
+  }
+  
+  .diagram-resource__glow {
+    animation: none;
+    opacity: 0.4;
+  }
+}

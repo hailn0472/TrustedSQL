@@ -1,0 +1,48 @@
+/* WorkflowDiagram Styles */
+
+.workflow-diagram {
+  width: 100%;
+  min-height: 680px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.workflow-diagram__svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+}
+
+/* Resource connection lines */
+
+.workflow-diagram__resource-line {
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+  opacity: 0.5;
+}
+
+.workflow-diagram__resource-line--active {
+  opacity: 1;
+  stroke-width: 2;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 768px) {
+  .workflow-diagram {
+    height: 350px;
+    padding: 12px;
+  }
+}
+
+/* Reduced motion support */
+
+@media (prefers-reduced-motion: reduce) {
+  .workflow-diagram__resource-line {
+    transition: none;
+  }
+}

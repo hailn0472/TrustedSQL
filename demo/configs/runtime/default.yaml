@@ -1,0 +1,39 @@
+run:
+  run_id: null
+
+paths:
+  policy_path: resources/policy/policy_index.json
+  role_access_matrix_path: resources/policy/role_access_matrix.json
+  ddl_path: resources/schema/ddl.md
+  output_dir: demo/runs
+
+schema:
+  compact_schema_path: artifacts/schema/compact/v1/compact_schema.txt
+
+database:
+  # Populated by trustedsql.config from TRUSTEDSQL_DATABASE_URL or DATABASE_URL.
+  url: ""
+
+vertex:
+  project_id: ""
+  location: global
+  temperature: 0.0
+  top_p: 1.0
+  max_output_tokens: 2048
+  max_retries: 2
+
+execution:
+  statement_timeout_ms: 3000
+  max_result_rows: 200
+  connect_timeout_s: 10
+  enforce_select_assertion: true
+
+runtime:
+  api_429_retry:
+    enabled: true
+    max_sequence_attempts: 3
+    backoff_seconds:
+      - 30
+      - 90
+  parallel:
+    max_workers: 1

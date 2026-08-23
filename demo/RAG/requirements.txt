@@ -1,0 +1,3 @@
+# Compatibility entrypoint for RAG-only setup commands.
+# All RAG dependencies now belong to the main TrustedSQL environment.
+-r ../../requirements.txt

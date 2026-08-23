@@ -208,6 +208,35 @@ def _graph_debug_summary(graph: IntentGraph) -> dict:
         "scope_candidates": scope_candidates,
         "target_candidates": target_candidates,
         "reference_expressions": reference_expressions,
+        # Keep the exact runtime input graph available to trusted consumers.
+        # Browser delivery is still handled by demo/backend/app/contracts.py,
+        # which removes turn text and only exposes a bounded node/edge view.
+        "nodes": [
+            {
+                "node_id": node.node_id,
+                "node_type": node.node_type,
+                "label": node.label,
+                "turn_id": node.turn_id,
+                "attrs": {
+                    key: value
+                    for key, value in node.attrs.items()
+                    if key in {"current", "confidence", "concept", "distance"}
+                },
+            }
+            for node in graph.nodes
+        ],
+        "edges": [
+            {
+                "source": edge.source,
+                "target": edge.target,
+                "edge_type": edge.edge_type,
+                "attrs": {
+                    key: value
+                    for key, value in edge.attrs.items()
+                    if key in {"confidence", "distance"}
+                },
+            }
+            for edge in graph.edges
+        ],
         "metadata": graph.metadata,
     }
-

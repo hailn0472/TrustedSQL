@@ -1,0 +1,320 @@
+{
+  "CurriculumCode": "BCT_MC_K20A",
+  "Name": "Bachelor Program of Communication Technology, Multimedia Communication Major (Chương trình cử nhân ngành Công nghệ Truyền thông, chuyên ngành Truyền thông đa phương tiện )",
+  "English Name": "Bachelor Program of Communication Technology, Multimedia Communication Major",
+  "Description": "1. Training Objectives\nGeneral objective:\nThe objective of the Bachelor of Communication Technology program (BCT) is to train students become experts in the fields of Multimedia Communications in digital era. Students will be equipped with necessary skills and knowledge so that they are able to identify goals, well develop and manage communication plans. Especially, students will study how to use tools/software/AI in data analysis as well as in the process of media production which is compatible with different media platforms. With management knowledge and leadership skill, students will be courageous communicators who have large influence and capability to contribute to Communication Industry in Vietnam; to create a foundation for continuously studying and researching in a higher level in communication field. The program includes two majors: Multimedia Communications and Public Relations.\nBCT_MC program trains students to become specialists in planning, implementing, and evaluating multimedia, multi-platforms communication campaigns which effectively serve communication goals of businesses/organizations. Students will be equipped from basic to in-depth knowledge and skills in communication. They also learn how to operate tools/software/AI in data analysis as well as in media production process which is compatible with different media platforms in order to effectively optimize communication plans. Capstone projects of BCT_MC students will be practical projects from businesses/organizations.\n2. Job positions after graduation:\nGraduates of the Multimedia communications have various job opportunities such as:\n- Specilist/Director of Content Creation;\n- Specialist/Director of Communications;\n- Specialist of Advertising and Digital Marketing;\n- Reporters, editors for television, radio, print newspapers, magazines;\n- Multimedia Communications Researcher;\n- Being in charge of media startups/agency, media product production;\n- Startup CEO in the field of multimedia communications.\n- Researcher/ Lecturer: can implement research tasks at research centers, institutes that do research in Multimedia Communications.",
+  "DecisionNo MM/dd/yyyy": "229/QĐ-ĐHFPT dated 03/07/2025",
+  "PLOs": [
+    {
+      "Code": "1",
+      "Name": "PLO1",
+      "Description": "Have basic knowledge of social sciences, political law, national security and defense, contributing to the formation of worldview and scientific methodology."
+    },
+    {
+      "Code": "2",
+      "Name": "PLO2",
+      "Description": "Possess a thorough understanding of knowledge ranging from foundational to advanced in multimedia communication, as well as knowledge of culture, psychology, and human behavior."
+    },
+    {
+      "Code": "3",
+      "Name": "PLO3",
+      "Description": "Have expertise in researching, planning, implementing, managing, and evaluating communication plans, as well as plans for producing media publications."
+    },
+    {
+      "Code": "4",
+      "Name": "PLO4",
+      "Description": "Acquire knowledge in applying and utilizing tools, software, and artificial intelligence for data analysis and media production to support communication plans."
+    },
+    {
+      "Code": "5",
+      "Name": "PLO5",
+      "Description": "Proficient in English for communication and learning (equivalent to level 4 of the six-level Vietnamese foreign language proficiency framework), with the ability to engage in simple conversations in Chinese."
+    },
+    {
+      "Code": "6",
+      "Name": "PLO6",
+      "Description": "Possess creative thinking and problem-solving skills for complex situations, along with the capability to lead entrepreneurial ventures to create jobs for oneself and others."
+    },
+    {
+      "Code": "7",
+      "Name": "PLO7",
+      "Description": "Have the ability to research, plan, implement, manage, and evaluate communication plans, media production plans, and work quality."
+    },
+    {
+      "Code": "8",
+      "Name": "PLO8",
+      "Description": "Capable of persuading target audiences and negotiating with stakeholders using scientifically grounded arguments and creative ideas aligned with communication plans."
+    },
+    {
+      "Code": "9",
+      "Name": "PLO9",
+      "Description": "Work independently and collaboratively in both academic and practical environments; possess strong mental and physical resilience, demonstrate national identity, confidently integrate into the global community, and consistently exhibit ethical behavior, social responsibility, and a spirit of community service in all situations."
+    },
+    {
+      "Code": "10",
+      "Name": "PLO10",
+      "Description": "Have a self-learning mindset to adapt to technological and societal changes, along with the ability to self-direct, draw professional conclusions, defend personal viewpoints, plan, guide, manage implementation, and evaluate the effectiveness of plans."
+    }
+  ],
+  "Subjects": [
+    {
+      "SubjectCode": "OTP101",
+      "Subject Name": "Orientation and General Training Program_Định hướng và Rèn luyện tập trung",
+      "Semester": "0",
+      "NoCredit": "0",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "DTG111",
+      "Subject Name": "Visual Design Tools 1_Công cụ thiết kế trực quan 1",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "ISM201",
+      "Subject Name": "Introduction to strategic communication_Giới thiệu về truyền thông chiến lược",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "MMK101",
+      "Subject Name": "Management and Marketing_Nhập môn Quản trị và Marketing",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SSL101c",
+      "Subject Name": "Academic Skills for University Success_Kỹ năng học tập đại học",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "VNC104",
+      "Subject Name": "Vietnamese Culture_Cơ sở văn hóa Việt Nam",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "ADA201c",
+      "Subject Name": "AI in data analysis_Công nghệ AI trong phân tích dữ liệu",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "CHN113",
+      "Subject Name": "Elementary Chinese 1_Hán ngữ sơ cấp 1",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "Không"
+    },
+    {
+      "SubjectCode": "LAE101",
+      "Subject Name": "Law and Ethics in Media and Communication_Luật pháp và đạo đức trong lĩnh vực truyền thông",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "MMP201",
+      "Subject Name": "Media Psychology_Tâm lý học truyền thông",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SDP201",
+      "Subject Name": "Sound Production_Sản xuất âm thanh",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "CCO201",
+      "Subject Name": "Corporate Communication_Truyền thông doanh nghiệp",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "CHN123",
+      "Subject Name": "Elementary Chinese 2_Hán ngữ sơ cấp 2",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "CHN113"
+    },
+    {
+      "SubjectCode": "DET101c",
+      "Subject Name": "Design Thinking_Tư duy thiết kế",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "IMC301",
+      "Subject Name": "Intergrated Marketing Communication in Digital World_Chiến lược truyền thông marketing tích hợp",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "CSP201m",
+      "Subject Name": "Xây dựng chiến lược nội dung_Content Strategy for Professionals",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "MKT304 or IMC301c"
+    },
+    {
+      "SubjectCode": "GPM201c",
+      "Subject Name": "Quản trị dự án_Professional Project Management",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "MPL201",
+      "Subject Name": "Media Planning _ Lập kế hoạch truyền thông",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "MKT101"
+    },
+    {
+      "SubjectCode": "SSG104",
+      "Subject Name": "Communication and In-Group Working Skills_Kỹ năng giao tiếp và cộng tác",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "VDP301",
+      "Subject Name": "Video Production_Sản xuất Video",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "DPS201c",
+      "Subject Name": "Dynamic Public Speaking_Nghệ thuật Diễn thuyết trước công chúng",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "EVN301",
+      "Subject Name": "Event Management_Quản trị sự kiện",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "MCO302",
+      "Subject Name": "Intercultural Communication -Truyền thông liên văn hóa",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "WMC201",
+      "Subject Name": "Media Writing_Viết cho truyền thông đa phương tiện",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "MSM201c",
+      "Subject Name": "Meta social media marketing Management_Quản trị chiến dịch tiếp thị truyền thông xã hội toàn diện",
+      "Semester": "6",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "OCT202",
+      "Subject Name": "On-the-job training_Đào tạo trong môi trường thực tế",
+      "Semester": "6",
+      "NoCredit": "10",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "BRA201",
+      "Subject Name": "Introduction to Brand Management_Giới thiệu về quản trị thương hiệu",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "EXE101",
+      "Subject Name": "Experiential Entrepreneurship 1_Trải nghiệm khởi nghiệp 1",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "PRE203",
+      "Subject Name": "Introduction to Public Relations_Giới thiệu về quan hệ công chúng",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "CCM301",
+      "Subject Name": "Crisis Communications Management_Quản trị truyền thông khủng hoảng",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "CCO201 or MKT304 or IMC301c"
+    },
+    {
+      "SubjectCode": "EXE201",
+      "Subject Name": "Experiential Entrepreneurship 2_Trải nghiệm khởi nghiệp 2",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "EXE101"
+    },
+    {
+      "SubjectCode": "MEP301",
+      "Subject Name": "Multimedia Production Project_Dự án sản xuất sản phẩm TTĐPT",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "MED201, (VDP201 or VDP301), (SDP201 or ADP201)"
+    },
+    {
+      "SubjectCode": "MLN111",
+      "Subject Name": "Philosophy of Marxism – Leninism_Triết học Mác - Lê-nin",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "MLN122",
+      "Subject Name": "Political economics of Marxism – Leninism_Kinh tế chính trị Mác - Lê-nin",
+      "Semester": "8",
+      "NoCredit": "2",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "HCM202",
+      "Subject Name": "HCM Ideology_Tư tưởng Hồ Chí Minh",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    },
+    {
+      "SubjectCode": "MLN131",
+      "Subject Name": "Scientific socialism_Chủ nghĩa xã hội khoa học",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    },
+    {
+      "SubjectCode": "VNR202",
+      "Subject Name": "History of CPV_Lịch sử Đảng Cộng sản Việt Nam",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    }
+  ]
+}

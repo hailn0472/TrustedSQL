@@ -1,0 +1,275 @@
+# IoT102t - Internet of Things_Internet vạn vật
+
+
+## Course Information - IoT102t
+
+- **Credits**: 3
+- **Degree Level**: Bachelor
+- **Time Allocation**: Study hour (150h) = 33h contact hours + 18h online hours + 99h self-study
+- **Pre-Requisite**: Familiarity with C programming
+- **Min Avg Mark To Pass**: 5
+- **Scoring Scale**: 10
+
+### Description - IoT102t
+This is a 3-credit course. This course has two parts online and offline. The content includes basic concepts and applications of IoT, practical exercises on the learning KIT. Students are taught how to learn online, and practice some parts at home. Q & A sessions, the Guidance for important issues, as well as performance assessments, will be conducted in the classroom.
+
+### Student Tasks - IoT102t
+- Students must attend at least 80% of contact sessions in order to be accepted to the final examination. - Student is responsible to learn all VIDEOs (theory) online given by instructor on Syllabus at home. - Student is responsible to do all LABs given by instructor on Syllabus at home. - Constantly follow https://flm.fpt.edu.vn/ for up-to-date course information.
+
+## Course Learning Outcomes (CLOs) - IoT102t
+
+- **CLO1**: Understand the concept of IoT and applications.
+- **CLO2**: Concept planning, Draw and Install simple IoT circuits
+- **CLO3**: Understand the Arduino UNO and Atmega328 microcontroller architecture.
+- **CLO4**: Know how to use the Simulation Software.
+- **CLO5**: Understand the interrupts on Arduino UNO.
+- **CLO6**: Understand the concept of things in IoT.
+- **CLO7**: Understand the Networking in IoT.
+- **CLO8**: Understand the Securing in IoT.
+- **CLO9**: Select and calculate the electronics components, IoT Programming.
+- **CLO10**: Program IN/OUT Digital with Arduino UNO.
+- **CLO11**: Program Analog Input/Output with Arduino UNO.
+- **CLO12**: Program Sensors/Actuators with Arduino UNO.
+- **CLO13**: Program Communication with Arduino UNO.
+
+## Materials - IoT102t
+
+### Main Materials
+- **Course from Edx**
+- **Course from Edx**
+- **Electronics component list**
+- **Project topics**
+
+### Reference Materials
+- **Free Hardware and IoT Ebooks_ OReilly Media**
+- **Introduction to Arduino: A piece of cake! by Alan G. Smith, September 30, 2011**
+- **Arduino documents**
+- **20 Unbelievable Arduino Projects**
+
+## Assessment - IoT102t
+
+### Active learning
+- Weight: 10.0%
+- Completion Criteria: >0
+- CLO: LO11, LO12, LO13
+- Question Type: Private
+
+### Final Project Evaluation
+- Weight: 20.0%
+- Completion Criteria: 4
+- CLO: LO05, LO06, LO07, LO08, LO09, LO10, LO12
+- Question Type: Oral
+- Note: Based on Rubric
+
+### On-Going Project Assessment
+- Weight: 30.0%
+- Completion Criteria: >0
+- CLO: LO05, LO06, LO07, LO08, LO09, LO10, LO12
+- Question Type: Follow lecturer's proposal
+
+### Presentation
+- Weight: 10.0%
+- Completion Criteria: >0
+- CLO: LO01, LO05
+- Question Type: Option 1: N/A. Option 2 (For Constructivism Approach only): Follow lecturer's proposal
+
+### Progress test (Check Practice at home, Exercises, Quiz)
+- Weight: 10.0%
+- Completion Criteria: >0
+- CLO: LO01, LO13
+- Question Type: Option 1: Private. Option 2 (For Constructivism Approach only): Follow lecturer's proposal
+
+### Final exam
+- Weight: 20.0%
+- Completion Criteria: 4
+- CLO: LO01, LO13
+- Question Type: Computer gradable
+
+
+## Schedule - IoT102t
+
+Total sessions: 68
+
+**Session 1**: Introduction of IoT course What in the world is the Internet of Things?
+  CLO: LO01 | Tasks: Borrow theLearning KIT at the library. Enroll course: https://learning.edx.org/course/course-v1:CurtinX+IOT1x+2T2018/home | Materials: Slide
+Video
+GUIDE Of Create an Account_Explore Courses_Quiz on edX.pdf
+**Session 2**: Arduino (ATmega328p) Architecture
+  CLO: LO01 | Tasks: Borrow theLearning KIT at the library. Enroll course: https://learning.edx.org/course/course-v1:CurtinX+IOT1x+2T2018/home | Materials: Slide
+Video
+GUIDE Of Create an Account_Explore Courses_Quiz on edX.pdf
+**Session 3**: Lab: - Getting Started with Arduino and Genuino UNO - Fritzing_building_circuit
+  CLO: LO10, LO12 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 4**: The ‘things’ of the Internet of Things?
+  CLO: LO02 | Tasks: Enroll course: https://learning.edx.org/course/course-v1:CurtinX+IOT1x+2T2018/home Follow the lessons online | Materials: Slide
+Video
+**Session 5**: Networking IoT
+  CLO: LO03 | Tasks: Enroll course: https://learning.edx.org/course/course-v1:CurtinX+IOT1x+2T2018/home Follow the lessons online | Materials: Slide
+Video
+**Session 6**: Networking IoT (cnt)
+  CLO: LO03 | Tasks: Enroll course: https://learning.edx.org/course/course-v1:CurtinX+IOT1x+2T2018/home Follow the lessons online | Materials: Slide
+Video
+**Session 7**: Lab: - Tinkercad arduino simulator tutorial
+  CLO: LO10, LO12 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 8**: Lab: - Blink an LED - Digital Write - Analog Input - Analog Read
+  CLO: LO06, LO07 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 9**: Lab: - Fading - Analog Write Project Topic Introduction
+  CLO: LO06, LO07 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 10**: Programming IoT
+  CLO: LO01 | Tasks: Enroll course: https://learning.edx.org/course/course-v1:CurtinX+IOT1x+2T2018/home Follow the lessons online | Materials: Slide
+Video
+**Session 11**: Programming IoT (cnt)
+  CLO: LO01 | Tasks: Enroll course: https://learning.edx.org/course/course-v1:CurtinX+IOT1x+2T2018/home Follow the lessons online | Materials: Slide
+Video
+**Session 12**: Lab: Practice at home by the tutorial: Led array effect.
+  CLO: LO06 | Tasks: Follow the practice guide | Materials: Tutorial
+Learning KIT
+**Session 13**: Practice at home Evaluation Lab: - Buttton - Digital Read
+  CLO: LO06, LO09 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 14**: Practice at home Evaluation Lab: - Input Pullup - Serial - State Change Detection for push buttons
+  CLO: LO06, LO09 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 15**: Lab: - Analog In, Out Serial - Photoresistor - Analog Input Project Topic Resgistration
+  CLO: LO05, LO06, LO08, LO09 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 16**: Securing IoT
+  CLO: LO04 | Tasks: Enroll course: https://learning.edx.org/course/course-v1:CurtinX+IOT1x+2T2018/home Follow the lessons online | Materials: Slide
+Video
+**Session 17**: Electrical circuits and electronics
+  CLO: LO05 | Tasks: Enroll course: https://learning.edx.org/course/course-v1:CurtinX+IOT2x+2T2018/home Follow the lessons online | Materials: Slide
+Video
+**Session 18**: Electrical circuits and electronics (cnt)
+  CLO: LO05 | Tasks: Enroll course: https://learning.edx.org/course/course-v1:CurtinX+IOT2x+2T2018/home Follow the lessons online | Materials: Slide
+Video
+**Session 19**: Lab: - Photoresistor - while loop interation
+  CLO: LO05, LO06, LO08, LO09 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 20**: Lab: - Ping Ultrasonic Range Finder
+  CLO: LO05, LO06, LO08, LO09 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 21**: Lab: - Servo Motor - Sweep - Servo Motor - Knob
+  CLO: LO06, LO07, LO08 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 22**: Project concept planning
+  CLO: LO05, LO10 | Tasks: Enroll course: https://learning.edx.org/course/course-v1:CurtinX+IOT2x+2T2018/home Follow the lesson online | Materials: Slide
+Video
+**Session 23**: Project concept planning (cnt)
+  CLO: LO05, LO10 | Tasks: Enroll course: https://learning.edx.org/course/course-v1:CurtinX+IOT2x+2T2018/home Follow the lesson online | Materials: Slide
+Video
+**Session 24**: Lab: - Practice at home by the tutorial: Photoresistor - States of lights
+  CLO: LO05, LO06, LO09 | Tasks: Follow the practice guide | Materials: Tutorial
+Learning KIT
+**Session 25**: Practice at home Evaluation Lab: - IR Remote
+  CLO: LO06, LO07, LO08 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 26**: Practice at home Evaluation Lab: - Led-7-segment-display
+  CLO: LO05, LO06 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 27**: Progress test 1
+  CLO: LO05, LO06, LO07, LO08, LO09
+**Session 28**: Lab: - Practice at home by the tutorial: Digital Read - Out Serial
+  CLO: LO05, LO06, LO09 | Tasks: Follow the practice guide | Materials: Tutorial
+Learning KIT
+**Session 29**: Lab: - Practice at home by the tutorial: RGB LED Color Mixing (use tinkercad simulator)
+  CLO: LO06, LO07, LO09 | Tasks: Follow the practice guide | Materials: Tutorial
+Learning KIT
+**Session 30**: Presentation
+  CLO: LO01, LO02, LO03, LO04, LO05, LO10 | Tasks: Presentation about Final Project Planning
+**Session 31**: Presentation
+  CLO: LO01, LO02, LO03, LO04, LO05, LO10 | Tasks: Presentation about Final Project Planning
+**Session 32**: Presentation
+  CLO: LO01, LO02, LO03, LO04, LO05, LO10 | Tasks: Presentation about Final Project Planning
+**Session 33**: Lab: - Practice at home by the tutorial: Read ASCII String (use RGB led to indicator)
+  CLO: LO06, LO07, LO09 | Tasks: Follow the practice guide | Materials: Tutorial
+Learning KIT
+**Session 34**: Lab: - Practice at home by the tutorial: Smoothing Graph: Send data to the computer and graph it in Processing.
+  CLO: LO07, LO09, LO12 | Tasks: Follow the practice guide | Materials: Tutorial
+Learning KIT
+**Session 35**: Practice at home Evaluation Lab: - Temperature sensor LM35
+  CLO: LO05, LO07, LO08, LO09 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 36**: Practice at home Evaluation Lab: - LCD Display 1602
+  CLO: LO05, LO07, LO08, LO09 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 37**: Practice at home Evaluation Lab: - SerialEvent
+  CLO: LO13 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 38**: Lab: Practice at home by the tutorial: Blink Without Delay
+  CLO: LO06 | Tasks: Follow the practice guide | Materials: Tutorial
+Learning KIT
+**Session 39**: Lab: Practice at home by the tutorial: ASCII Table
+  CLO: LO09 | Tasks: Follow the practice guide | Materials: Tutorial
+Learning KIT
+**Session 40**: On-going project assessment 1
+  CLO: LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Draw block diagram
+**Session 41**: On-going project assessment 1 (cnt)
+  CLO: LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Create circuit schematic/Hardware inferace/wiring diagram
+**Session 42**: On-going project assessment 1 (cnt)
+  CLO: LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Develop programming flowchart
+**Session 43**: Practice at home Evaluation Lab: - External Interrupts
+  CLO: LO13 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 44**: Practice at home Evaluation Lab: - Timer Interrupts
+  CLO: LO13 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 45**: Practice at home Evaluation Lab: - Keypad 4x4
+  CLO: LO06, LO09, LO11 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 46**: Lab: Practice at home by the tutorial: Serial Input
+  CLO: LO09 | Tasks: Follow the practice guide | Materials: Tutorial
+Learning KIT
+**Session 47**: Lab: Practice at home by the tutorial: Debounce
+  CLO: LO06 | Tasks: Follow the practice guide | Materials: Tutorial
+Learning KIT
+**Session 48**: Practice at home Evaluation Lab: - EEPROM read / write
+  CLO: LO06, LO09, LO11 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 49**: Practice at home Evaluation Lab: - 8x8 LED Matrix
+  CLO: LO06, LO07 | Tasks: Discuss with your instructor the lessons learned online and the new lesson. | Materials: Tutorial
+Learning KIT
+**Session 50**: Progress test 2
+  CLO: LO01-13
+**Session 51**: All labs Self review: Practice at home by the tutorial: Team work prepares for the final project
+  Tasks: Follow the practice guide | Materials: Tutorial
+Learning KIT
+**Session 52**: All labs Self review: (cnt) Practice at home by the tutorial: Team work prepares for the final project
+  Tasks: Follow the practice guide | Materials: Tutorial
+Learning KIT
+**Session 53**: All labs Self review: Practice at home by the tutorial: Team work prepares for the final project
+  Tasks: Follow the practice guide | Materials: Tutorial
+Learning KIT
+**Session 54**: On-going project assessment 2
+  CLO: LO1, LO10 | Tasks: Prepare for final project presentation
+**Session 55**: On-going project assessment 2 (cnt)
+  CLO: LO1, LO10 | Tasks: Prepare for final project presentation
+**Session 56**: On-going project assessment 2 (cnt)
+  CLO: LO1, LO10 | Tasks: Prepare for final project presentation
+**Session 57**: Final Project Evaluation
+  CLO: LO01, LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Present, demo the final project and Q&A
+**Session 58**: Final Project Evaluation (cnt)
+  CLO: LO01, LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Present, demo the final project and Q&A
+**Session 59**: Final Project Evaluation (cnt)
+  CLO: LO01, LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Present, demo the final project and Q&A
+**Session 60**: Final Project Evaluation (cnt)
+  CLO: LO01, LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Present, demo the final project and Q&A
+**Session 61**: Final Project Evaluation (cnt)
+  CLO: LO01, LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Present, demo the final project and Q&A
+**Session 62**: Final Project Evaluation (cnt)
+  CLO: LO01, LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Present, demo the final project and Q&A
+**Session 63**: Final Project Evaluation (cnt)
+  CLO: LO01, LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Present, demo the final project and Q&A
+**Session 64**: Final Project Evaluation (cnt)
+  CLO: LO01, LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Present, demo the final project and Q&A
+**Session 65**: Final Project Evaluation (cnt)
+  CLO: LO01, LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Present, demo the final project and Q&A
+**Session 66**: Final Project Evaluation (cnt)
+  CLO: LO01, LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Present, demo the final project and Q&A
+**Session 67**: Final Project Evaluation (cnt)
+  CLO: LO01, LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Present, demo the final project and Q&A
+**Session 68**: Final Project Evaluation (cnt)
+  CLO: LO01, LO05, LO06, LO07, LO08, LO09, LO10, LO12 | Tasks: Present, demo the final project and Q&A

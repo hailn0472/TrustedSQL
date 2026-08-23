@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-purple-dark: #4A3F71;
+  --color-purple-light: #5E507F;
+  --color-beige-lightest: #FCFCF8;
+  --color-beige-light: #F9F9F5;
+  --color-beige: #F3F3EE;
+}
+
+@layer base {
+  :root {
+    font-family: 'Inter', 'Gilroy', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html, body, #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent the whole page from scrolling */
+    position: fixed; /* Ensure the root container does not move */
+  }
+}

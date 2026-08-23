@@ -1,5 +1,7 @@
-﻿google-genai>=1.0.0
+﻿google-genai>=2.4.0
 google-auth>=2.0.0
+google-cloud-aiplatform>=1.156.0
+google-cloud-storage>=2.19.0
 pydantic>=2.12.5
 PyYAML>=6.0.0
 SQLAlchemy>=2.0.0
@@ -9,3 +11,4 @@ torch>=2.0.0
 sentence-transformers>=3.0.0
 huggingface-hub>=0.20.0
 numpy>=1.26.0
+pandas>=2.2.0

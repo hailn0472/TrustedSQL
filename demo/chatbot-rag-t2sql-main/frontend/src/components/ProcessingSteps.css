@@ -1,0 +1,170 @@
+/* ProcessingSteps Component Styles - Perplexity-inspired */
+
+.processing-steps {
+  margin-bottom: 16px;
+  margin-top: 4px;
+  padding-left: 16px;
+}
+
+.processing-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.processing-step-item {
+  display: flex;
+  gap: 12px;
+  position: relative;
+}
+
+/* Timeline marker (dot and line) */
+.timeline-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #14b8a6;
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.2);
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.timeline-dot.active {
+  background: #14b8a6;
+  box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.3);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.timeline-dot.completed {
+  background: #14b8a6;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(20, 184, 166, 0.4);
+  }
+}
+
+.timeline-line {
+  width: 2px;
+  flex: 1;
+  min-height: 24px;
+  background: linear-gradient(to bottom, #14b8a6 0%, rgba(20, 184, 166, 0.3) 100%);
+  margin-top: 4px;
+}
+
+/* Step content */
+.step-content {
+  flex: 1;
+  padding-bottom: 4px;
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.step-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.step-description {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+/* Loading indicator (three dots) */
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 4px;
+}
+
+.loading-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #9ca3af;
+  animation: loading-bounce 1.4s ease-in-out infinite;
+}
+
+.loading-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loading-bounce {
+  0%, 80%, 100% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .processing-steps {
+    padding-left: 8px;
+  }
+
+  .step-label {
+    font-size: 13px;
+  }
+
+  .step-description {
+    font-size: 11px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .step-label {
+    color: #e5e7eb;
+  }
+
+  .step-description {
+    color: #9ca3af;
+  }
+
+  .timeline-dot {
+    background: #14b8a6;
+    box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.3);
+  }
+
+  .timeline-dot.active {
+    box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.4);
+  }
+
+  .loading-dot {
+    background: #d1d5db;
+  }
+}

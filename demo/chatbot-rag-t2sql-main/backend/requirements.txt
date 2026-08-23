@@ -1,0 +1,37 @@
+# Web Framework
+flask
+flask-cors
+python-dotenv
+
+# LangChain Core & Agents
+langchain
+langchain-core
+langchain-google-genai
+langgraph
+langchain-community
+
+# Google Generative AI
+google-genai>=1.43.0
+
+# Data & Services
+sqlalchemy
+pyodbc
+
+# Document Loaders
+pypdf
+python-docx
+unstructured
+markdown
+
+# Testing
+pytest
+pytest-cov
+hypothesis
+
+# Authentication
+bcrypt
+PyJWT
+
+# Additional
+langgraph.checkpoint.sqlite
+app.config

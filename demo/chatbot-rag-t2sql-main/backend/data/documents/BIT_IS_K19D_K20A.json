@@ -1,0 +1,342 @@
+{
+  "CurriculumCode": "BIT_IS_K19D_K20A",
+  "Name": "The Bachelor Program of Information Technology, Information System Major (Chương trình cử nhân ngành CNTT, chuyên ngành Hệ thống thông tin)",
+  "English Name": "The Bachelor Program of Information Technology, Information System Major",
+  "Description": "1. Mục tiêu đào tạo\n1.1 Mục tiêu chung:\nĐào tạo cử nhân ngành Công nghệ thông tin (CNTT) chuyên ngành Hệ thống thông tin (HTTT) có nhân cách và năng lực đáp ứng nhu cầu thực tế của xã hội; nắm vững kiến thức chuyên môn và thực hành, có khả năng tổ chức, thực hiện và phát huy sáng tạo trong các công việc liên quan đến các chuyên ngành HTTT được đào tạo; có khả năng theo đuổi việc học tập, nghiên cứu ở bậc học cao hơn. Chương trình đào tạo chuyên ngành HTTT có định hướng ứng dụng.\nChương trình đào tạo nhằm:\na) Trang bị cho sinh viên kiến thức cơ bản của ngành CNTT cùng các phương pháp luận, công nghệ nền tảng và chuyên sâu của chuyên ngành;\nb) Rèn luyện cho sinh viên những đức tính, kỹ năng cần thiết qua môi trường làm việc chuyên nghiệp, biết vận dụng các kiến thức ngành CNTT và các kiến thức chuyên ngành vào công việc thực tế;\nc) Cung cấp cho sinh viên một nền tảng vững chắc về ngoại ngữ, khoa học, văn hóa, xã hội, phát huy tính chủ động, sáng tạo trong học tập, công việc và cuộc sống.\n1.2 Mục tiêu cụ thể:\n1.3 Vị trí việc làm sau khi tốt nghiệp:\nSinh viên tốt nghiệp chuyên ngành Hệ thống thông tin có thể lựa chọn cho mình những công việc như:\n+ Quản trị viên các hệ cơ sở dữ liệu;\n+ Chuyên viên phân tích, tư vấn, thiết kế hệ thống thông tin;\n+ Chuyên viên phát triển ứng dụng cho hệ thống thông tin;\n+ Chuyên viên triển khai, vận hành các hệ thống ERP, CRM;\n+ Quản trị hệ thống thông tin và tri thức.\n2. Chuẩn đầu ra chuyên ngành Hệ thống thông tin\n3. Khối lượng kiến thức toàn khóa: 145 tín chỉ, chưa kể Tiếng Anh chuẩn bị, Giáo dục Quốc phòng, các hoạt động rèn luyện bắt buộc và tự chọn.\n4. Đối tượng tuyển sinh\n- Theo quy chế tuyển sinh đại học, cao đẳng hệ chính quy của Bộ Giáo dục và Đào tạo.\n- Theo quy chế tuyển sinh của trường Đại học FPT.\n5. Quy trình đào tạo, điều kiện tốt nghiệp\nQuy trình đào tạo và điều kiện tốt nghiệp được quy định theo “Quy chế đào tạo hệ đại học chính quy theo hệ thống tín chỉ” hiện hành của Đại học FPT.\n6. Cách thức đánh giá\nCách thức đánh giá được quy định theo “Quy chế đào tạo hệ đại học chính quy theo hệ thống tín chỉ” hiện hành của Đại học FPT.\n------------------\n1. Training objectives\n1.1 General objectives:\nTo train bachelors in Information Technology, specializing in Information Systems, with personality and capacity to meet the practical needs of society; to master professional and practical knowledge, to be able to organize, implement and promote creativity in jobs related to the specializations of Information Systems being trained; to be able to pursue studies and research at higher levels. The training program in Information Systems is application-oriented.\nThe training program aims to:\na) Equip students with basic knowledge of the information technology industry and the methodologies, fundamental and specialized technologies of the specialization;\nb) Train students with necessary qualities and skills through a professional working environment, knowing how to apply knowledge of the information technology industry and specialized knowledge to practical work;\nc) Provide students with a solid foundation in foreign languages, science, culture, society, promoting initiative and creativity in study, work and life.\n1.2 Specific objectives:\n1.3 Job positions after graduation:\nStudents who graduate from the Information Systems specialization can choose jobs such as:\n+ Database system administrator;\n+ Information system analyst, consultant, designer;\n+ Application developer for information systems;\n+ ERP, CRM system deployment and operation specialist;\n+ Information and knowledge system management.\n2. Learning Outcomes for the Information Systems specialization\n3. Total knowledge volume of the entire course: 145 credits, not including preparatory English, National Defense Education, compulsory and elective training activities.\n4. Admission subjects\n- According to the admission regulations for regular universities and colleges of the Ministry of Education and Training.\n- According to the admission regulations of FPT University.\n5. Training process, graduation conditions\nThe training process and graduation conditions are regulated according to the current \" Ungraduate Accademic Regulations\" of FPT University.\n6. Assessment method\nThe assessment method is regulated according to the current \"Ungraduate Accademic Regulations\" of FPT University.",
+  "DecisionNo MM/dd/yyyy": "553/QĐ-ĐHFPT dated 05/15/2025",
+  "PLOs": [
+    {
+      "Code": "1",
+      "Name": "PLO1",
+      "Description": "Understand basic knowledge of social sciences, political law, national security and defense, contributing to the formation of a scientific worldview and methodology."
+    },
+    {
+      "Code": "2",
+      "Name": "PLO2",
+      "Description": "Apply solid scientific foundation knowledge in the field of information technology in general and information systems in particular to understand the professional context and acquire in-depth specialized knowledge of information systems."
+    },
+    {
+      "Code": "3",
+      "Name": "PLO3",
+      "Description": "Apply in-depth specialized knowledge, new technologies in the field of information systems, or expanded knowledge (in fields close to information systems) to work and propose solutions to meet diverse needs from reality."
+    },
+    {
+      "Code": "4",
+      "Name": "PLO4",
+      "Description": "Have basic knowledge of planning and operating, implementing, and supervising the implementation of plans for specialized work in the field of information systems."
+    },
+    {
+      "Code": "5",
+      "Name": "PLO5",
+      "Description": "Have a mindset about startups and apply startup knowledge and skills to implement a startup project; have creative thinking, research skills, critical thinking and problem solving."
+    },
+    {
+      "Code": "6",
+      "Name": "PLO6",
+      "Description": "Have intermediate English proficiency equivalent to level 4 according to the 6-level foreign language proficiency framework for Vietnam, and be able to communicate simply in Japanese."
+    },
+    {
+      "Code": "7",
+      "Name": "PLO7",
+      "Description": "Have the ability to communicate and present to clearly state the problem to be solved and convey knowledge and skills when performing specific/complex professional tasks related to information systems."
+    },
+    {
+      "Code": "8",
+      "Name": "PLO8",
+      "Description": "Have the ability to program and use tools to design, build, and manage information systems."
+    },
+    {
+      "Code": "9",
+      "Name": "PLO9",
+      "Description": "Have the ability to update and exploit advanced tools and techniques in the field of information systems in particular and information technology in general."
+    },
+    {
+      "Code": "10",
+      "Name": "PLO10",
+      "Description": "Develop the ability to work independently as well as work effectively in a team in an academic and practical environment; take personal responsibility and responsibility for the team when performing a professional job. Have the spirit of self-study, lifelong learning, adapt to the continuous changes of technology and society."
+    },
+    {
+      "Code": "11",
+      "Name": "PLO11",
+      "Description": "Behave professionally, ethically, have social responsibility and a spirit of serving the community; be professionally responsible and have integrity in work."
+    },
+    {
+      "Code": "12",
+      "Name": "PLO12",
+      "Description": "Strong in spirit and physical strength, demonstrate national identity, confident in international integration."
+    },
+    {
+      "Code": "13",
+      "Name": "PLO13",
+      "Description": "Be able to plan, coordinate, and manage resources related to information systems projects; guide and supervise the implementation of project tasks and at the same time, be able to evaluate the effectiveness of the project and propose feasible and effective solutions for improvement."
+    }
+  ],
+  "Subjects": [
+    {
+      "SubjectCode": "OTP101",
+      "Subject Name": "Orientation and General Training Program_Định hướng và Rèn luyện tập trung",
+      "Semester": "0",
+      "NoCredit": "0",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "CEA201",
+      "Subject Name": "Computer Organization and Architecture_Tổ chức và Kiến trúc máy tính",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "CSI106",
+      "Subject Name": "Introduction to Computer Science_Nhập môn khoa học máy tính",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "MAE101",
+      "Subject Name": "Mathematics for Engineering_Toán cho ngành kỹ thuật",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "PRF192",
+      "Subject Name": "Programming Fundamentals_Cơ sở lập trình",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SSL101c",
+      "Subject Name": "Academic Skills for University Success_Kỹ năng học tập đại học",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "JPD113",
+      "Subject Name": "Elementary Japanese 1- A1.1_Tiếng Nhật sơ cấp 1-A1.1",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "Không"
+    },
+    {
+      "SubjectCode": "MAD101",
+      "Subject Name": "Discrete mathematics_Toán rời rạc",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "NWC204",
+      "Subject Name": "Computer Networking_Mạng máy tính",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "OSG202",
+      "Subject Name": "Operating Systems_Hệ điều hành",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "PRO192",
+      "Subject Name": "Object-Oriented Programming_Lập trình hướng đối tượng",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "Pass PRF192"
+    },
+    {
+      "SubjectCode": "CSD201",
+      "Subject Name": "Data Structures and Algorithms_Cấu trúc dữ liệu và giải thuật",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "PRO192"
+    },
+    {
+      "SubjectCode": "DBI202",
+      "Subject Name": "Introduction to Databases_Các hệ cơ sở dữ liệu",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "ITA203c",
+      "Subject Name": "Information System Overview/Nhập môn hệ thống thông tin",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "JPD123",
+      "Subject Name": "Elementary Japanese 1-A1.2_Tiếng Nhật sơ cấp 1-A1.2",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "JPD113"
+    },
+    {
+      "SubjectCode": "LAB211",
+      "Subject Name": "OOP with Java Lab_Thực hành OOP với Java",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "PRO192"
+    },
+    {
+      "SubjectCode": "MAS291",
+      "Subject Name": "Statistics & Probability_Xác suất thống kê",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "MAE101 or MAC101"
+    },
+    {
+      "SubjectCode": "PRC392c",
+      "Subject Name": "Cloud Computing_Điện toán đám mây",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "PRJ302",
+      "Subject Name": "Java Web Application Development_Phát triển ứng dụng Java web",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "DBI202, PRO192"
+    },
+    {
+      "SubjectCode": "SSG104",
+      "Subject Name": "Communication and In-Group Working Skills_Kỹ năng giao tiếp và cộng tác",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SWE201c",
+      "Subject Name": "Introduction to Software Engineering_Nhập môn kĩ thuật phần mềm",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "PRO192 (not applied to the BIT_AI17 and BA programs)"
+    },
+    {
+      "SubjectCode": "ISM302",
+      "Subject Name": "Enterprise Resource Planning (ERP)_Lập kế hoạch nguồn lực doanh nghiệp",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "ISP392",
+      "Subject Name": "Information System Programming Project_Dự án lập trình HTTT",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "PRJ302, SWE201c"
+    },
+    {
+      "SubjectCode": "ITA301",
+      "Subject Name": "Information System Design & Analysis_Phân tích thiết kế HTTT",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "ITA203c, DBI202"
+    },
+    {
+      "SubjectCode": "ITE302c",
+      "Subject Name": "Ethics in IT_Đạo đức trong CNTT",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "ENW493c",
+      "Subject Name": "Research Methods & Academic Writing Skills_Phương pháp nghiên cứu & Kỹ năng viết học thuật",
+      "Semester": "6",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "OJT202",
+      "Subject Name": "On-The-Job Training_Đào tạo trong môi trường thực tế",
+      "Semester": "6",
+      "NoCredit": "10",
+      "PreRequisite": "Students attained 90% of the total credits prior to the OJT term (excluding Physical Education and OTP Programs) Students choosing JS combo (Japanese Bridge Engineer) have to pass JPD133"
+    },
+    {
+      "SubjectCode": "EXE101",
+      "Subject Name": "Experiential Entrepreneurship 1_Trải nghiệm khởi nghiệp 1",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "ISC301",
+      "Subject Name": "e-Commerce_Thương mại điện tử",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": ""
+    },
+    {
+      "SubjectCode": "ITB302c",
+      "Subject Name": "Business Intelligence (BI)_Kinh doanh thông minh",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": "DBI202"
+    },
+    {
+      "SubjectCode": "DTA301",
+      "Subject Name": "Data Analysis_Phân tích dữ liệu",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "PRO192, CSD201, DBI202, MAS291"
+    },
+    {
+      "SubjectCode": "EXE201",
+      "Subject Name": "Experiential Entrepreneurship 2_Trải nghiệm khởi nghiệp 2",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "EXE101"
+    },
+    {
+      "SubjectCode": "MLN111",
+      "Subject Name": "Philosophy of Marxism – Leninism_Triết học Mác - Lê-nin",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "MLN122",
+      "Subject Name": "Political economics of Marxism – Leninism_Kinh tế chính trị Mác - Lê-nin",
+      "Semester": "8",
+      "NoCredit": "2",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "PMG201c",
+      "Subject Name": "Project Management",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "HCM202",
+      "Subject Name": "HCM Ideology_Tư tưởng Hồ Chí Minh",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    },
+    {
+      "SubjectCode": "MLN131",
+      "Subject Name": "Scientific socialism_Chủ nghĩa xã hội khoa học",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    },
+    {
+      "SubjectCode": "VNR202",
+      "Subject Name": "History of CPV_Lịch sử Đảng Cộng sản Việt Nam",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    }
+  ]
+}

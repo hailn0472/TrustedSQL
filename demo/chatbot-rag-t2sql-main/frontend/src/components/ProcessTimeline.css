@@ -1,0 +1,21 @@
+/* ProcessTimeline Styles */
+
+.process-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.process-timeline__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 768px) {
+  .process-timeline {
+    gap: 0;
+  }
+}

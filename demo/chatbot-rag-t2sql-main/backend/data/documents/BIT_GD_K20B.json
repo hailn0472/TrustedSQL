@@ -1,0 +1,313 @@
+{
+  "CurriculumCode": "BIT_GD_K20B",
+  "Name": "Bachelor Program of Information Technology, Digital Art & Design Major (Chương trình cử nhân ngành CNTT, chuyên ngành Thiết kế Mỹ thuật số)",
+  "English Name": "Bachelor Program of Information Technology, Digital Art & Design Major",
+  "Description": "Mục tiêu chung: Đào tạo cử nhân ngành Công nghệ thông tin (CNTT), chuyên ngành Thiết kế mỹ thuật số có đạo đức nghề nghiệp và năng lực đáp ứng nhu cầu thực tế của xã hội, nắm vững kiến thức chuyên môn và thực hành, có khả năng tổ chức, thực hiện và phát huy sáng tạo trong các công việc liên quan đến chuyên ngành được đào tạo, làm việc được trong môi trường quốc tế, tạo tiền đề cho việc học tập, nghiên cứu ở bậc học cao hơn về chuyên ngành Thiết kế mỹ thuật số (TKMTS). Đây là chương trình đạo tạo có định hướng ứng dụng.\nMục tiêu cụ thể:\nPO1: Giúp người học phát triển về thể chất, tinh thần, trí tuệ, nhân sinh quan, lòng tự hào dân tộc thông qua trang bị cho người học những kiến thức tổng quát về lý luận chính trị, pháp luật, kinh tế, xã hội, giáo dục thể chất, âm nhạc, giáo dục quốc phòng.\nPO2: Cung cấp cho người học những kiến thức nền tảng, phương pháp luận về văn hóa, nghệ thuật, thiết kế, các phần mềm ứng dụng đồ họa chuyên sâu của chuyên ngành Thiết kế mỹ thuật số, đồng thời có kiến thức về việc lập kế hoạch, tổ chức, giám sát và quản lý công việc chuyên môn.\nPO3: Giúp người học sử dụng thành thạo tiếng Anh và một ngoại ngữ hai ở mức cơ bản.\nPO4: Giúp người học có khả năng khởi nghiệp, có kỹ năng giao tiếp, truyền đạt, phản biện, nghiên cứu, lập kế hoạch, quản lý và đưa ra giải pháp phù hợp.\nPO5: Giúp người học sử dụng thành thạo các thiết bị, công nghệ, phần mềm đồ họa, Đồng thời, vận dụng linh hoạt kiến thức, kỹ năng về nghệ thuật, thiết kế để sáng tạo, phát triển và quản lý dự án thiết kế mỹ thuật số một cách hiệu quả.\nPO6: Hướng người học có thái độ và đạo đức nghề nghiệp đúng đắn, có khả năng tư duy sáng tạo, làm việc nhóm, làm việc độc lập, có khả năng tự học suốt đời để phát triển bản thân và công việc.\nVị trí việc làm sau khi tốt nghiệp:\nSinh viên tốt nghiệp chuyên ngành Thiết kế Mỹ thuật số có thể đảm nhiệm một số công việc sau:\n- Họa sĩ thiết kế concept phim, game, quảng cáo, truyền hình…\n- Chuyên viên/Trưởng nhóm thiết kế hoạt hình, đồ họa chuyển động, thiết kế tương tác, thiết kế truyền thông.\n- Quản lý dự án thiết kế mỹ thuật số, quản lý thương hiệu số.\n- Giám đốc sáng tạo.\n- Nghiên cứu viên/ Giảng viên/ học Sau đại học: Có thể thực hiện nhiệm vụ nghiên cứu tại các trung tâm, đơn vị có nghiên cứu về lĩnh vực TKMTS…",
+  "DecisionNo MM/dd/yyyy": "1486/QĐ-ĐHFPT dated 12/31/2024",
+  "PLOs": [
+    {
+      "Code": "1",
+      "Name": "PLO1",
+      "Description": "Have basic knowledge of social sciences, political law, national security and defense, contributing to the formation of worldview and scientific methodology."
+    },
+    {
+      "Code": "2",
+      "Name": "PLO2",
+      "Description": "Master basic to advanced knowledge of culture, art, IT, digital design to apply and solve practical problems."
+    },
+    {
+      "Code": "3",
+      "Name": "PLO3",
+      "Description": "Have knowledge of planning, organizing, supervising and managing professional work."
+    },
+    {
+      "Code": "4",
+      "Name": "PLO4",
+      "Description": "Have intermediate English proficiency (equivalent to level 4) and elementary Japanese proficiency (equivalent to level 1) according to the 6-level foreign language proficiency framework for Vietnam."
+    },
+    {
+      "Code": "5",
+      "Name": "PLO5",
+      "Description": "Have communication skills, problem solving skills, critical thinking skills, research skills and problem solving skills."
+    },
+    {
+      "Code": "6",
+      "Name": "PLO6",
+      "Description": "Have entrepreneurial mindset, know how to apply entrepreneurial knowledge and skills to carry out startup projects."
+    },
+    {
+      "Code": "7",
+      "Name": "PLO7",
+      "Description": "Create and develop visual ideas that fit specific design requirements or situations."
+    },
+    {
+      "Code": "8",
+      "Name": "PLO8",
+      "Description": "Plan, execute, monitor and evaluate digital art design projects effectively on a suitable IT platform."
+    },
+    {
+      "Code": "9",
+      "Name": "PLO9",
+      "Description": "Develop the ability to work independently, work in a team, be self-directed, draw professional conclusions and defend personal views, be able to plan, guide, manage implementation and evaluate work performance. Have the spirit of self-study, lifelong learning, adapt to the constant changes of technology and society."
+    },
+    {
+      "Code": "10",
+      "Name": "PLO10",
+      "Description": "Have a professional attitude and working style, be responsible, ethical in work and in society, have a spirit of serving the community, and be strong in spirit and physical strength, demonstrate national identity, and confidently integrate internationally."
+    }
+  ],
+  "Subjects": [
+    {
+      "SubjectCode": "OTP101",
+      "Subject Name": "Orientation and General Training Program_Định hướng và Rèn luyện tập trung",
+      "Semester": "0",
+      "NoCredit": "0",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "DRP101",
+      "Subject Name": "Drawing plaster stature - portrait_Hình họa - Vẽ đầu tượng, chân dung",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "DRS10x"
+    },
+    {
+      "SubjectCode": "DRS102",
+      "Subject Name": "Drawing - Form, Still-life_Hình họa - Vẽ khối, tĩnh vật",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "DTG102",
+      "Subject Name": "Visual Design Tools_Công cụ thiết kế trực quan",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SSL101c",
+      "Subject Name": "Academic Skills for University Success_Kỹ năng học tập đại học",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "VCM202",
+      "Subject Name": "Visual Communication_Nguyên lý thị giác",
+      "Semester": "1",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "HOA102",
+      "Subject Name": "Art History_Lịch sử mỹ thuật VN &TG",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "PFD201",
+      "Subject Name": "Photography for Designer_Nhiếp ảnh",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "PST202",
+      "Subject Name": "Perspective_Phối cảnh",
+      "Semester": "2",
+      "NoCredit": "3",
+      "PreRequisite": "None."
+    },
+    {
+      "SubjectCode": "ANS201",
+      "Subject Name": "Idea & Script Development _Phát triển ý tưởng và kịch bản",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "DGP201",
+      "Subject Name": "Digital painting _Vẽ kỹ thuật số",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "DRP101"
+    },
+    {
+      "SubjectCode": "JPD113",
+      "Subject Name": "Elementary Japanese 1- A1.1_Tiếng Nhật sơ cấp 1-A1.1",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "Không"
+    },
+    {
+      "SubjectCode": "RMD301",
+      "Subject Name": "Reseach Methods For Designers_Phương pháp nghiên cứu cho nhà thiết kế",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "TPG203",
+      "Subject Name": "Basic typography & Layout_Đồ họa chữ và bố cục cơ bản",
+      "Semester": "3",
+      "NoCredit": "3",
+      "PreRequisite": "GDF101 or GDF201"
+    },
+    {
+      "SubjectCode": "ANC302",
+      "Subject Name": "Character Design_Thiết kế nhân vật",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "DRP101"
+    },
+    {
+      "SubjectCode": "DTG303",
+      "Subject Name": "Principles of Animation_Nguyên lý chuyển động",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "JPD123",
+      "Subject Name": "Elementary Japanese 1-A1.2_Tiếng Nhật sơ cấp 1-A1.2",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "JPD113"
+    },
+    {
+      "SubjectCode": "TPG302",
+      "Subject Name": "Typography & E-publication Design_Đồ họa chữ và thiết kế ấn bản điện tử",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "TPG203"
+    },
+    {
+      "SubjectCode": "WDU202c",
+      "Subject Name": "UI/UX Design",
+      "Semester": "4",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "CAA201",
+      "Subject Name": "Communications and advertising_Nguyên lý truyền thông và quảng cáo",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "DTG304",
+      "Subject Name": "Principles of Compositing _Thiết kế hình ảnh và âm thanh",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SSG104",
+      "Subject Name": "Communication and In-Group Working Skills_Kỹ năng giao tiếp và cộng tác",
+      "Semester": "5",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "ENW492c",
+      "Subject Name": "Academic Writing Skills_Kỹ năng viết học thuật",
+      "Semester": "6",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "OJT202",
+      "Subject Name": "On-The-Job Training_Đào tạo trong môi trường thực tế",
+      "Semester": "6",
+      "NoCredit": "10",
+      "PreRequisite": "Students attained 90% of the total credits prior to the OJT term (excluding Physical Education and OTP Programs) Students choosing JS combo (Japanese Bridge Engineer) have to pass JPD133"
+    },
+    {
+      "SubjectCode": "EXE101",
+      "Subject Name": "Experiential Entrepreneurship 1_Trải nghiệm khởi nghiệp 1",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "SDP201",
+      "Subject Name": "Sound Production_Sản xuất âm thanh",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "VNC104",
+      "Subject Name": "Vietnamese Culture_Cơ sở văn hóa Việt Nam",
+      "Semester": "7",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "AET102c",
+      "Subject Name": "Aesthetic_Mỹ học đại cương",
+      "Semester": "8",
+      "NoCredit": "2",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "EXE201",
+      "Subject Name": "Experiential Entrepreneurship 2_Trải nghiệm khởi nghiệp 2",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "EXE101"
+    },
+    {
+      "SubjectCode": "HOD102",
+      "Subject Name": "Design History_Lịch sử thiết kế",
+      "Semester": "8",
+      "NoCredit": "2",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "IPR102",
+      "Subject Name": "Intellectual Property Rights_Luật sở hữu trí tuệ",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "MLN111",
+      "Subject Name": "Philosophy of Marxism – Leninism_Triết học Mác - Lê-nin",
+      "Semester": "8",
+      "NoCredit": "3",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "MLN122",
+      "Subject Name": "Political economics of Marxism – Leninism_Kinh tế chính trị Mác - Lê-nin",
+      "Semester": "8",
+      "NoCredit": "2",
+      "PreRequisite": "None"
+    },
+    {
+      "SubjectCode": "HCM202",
+      "Subject Name": "HCM Ideology_Tư tưởng Hồ Chí Minh",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    },
+    {
+      "SubjectCode": "MLN131",
+      "Subject Name": "Scientific socialism_Chủ nghĩa xã hội khoa học",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    },
+    {
+      "SubjectCode": "VNR202",
+      "Subject Name": "History of CPV_Lịch sử Đảng Cộng sản Việt Nam",
+      "Semester": "9",
+      "NoCredit": "2",
+      "PreRequisite": "MLN111, MLN122"
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+/* DiagramNode Styles */
+
+.diagram-node {
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.diagram-node__background {
+  transition: fill 0.3s ease;
+}
+
+.diagram-node__border {
+  fill: none;
+  stroke-width: 2;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.diagram-node__label {
+  font-size: 11px;
+  font-weight: 600;
+  user-select: none;
+  pointer-events: none;
+  transition: fill 0.3s ease;
+  dominant-baseline: middle;
+}
+
+/* State-based styling */
+
+.diagram-node--inactive .diagram-node__background {
+  fill: #ffffff;
+}
+
+.diagram-node--inactive .diagram-node__border {
+  stroke: #d0d0d0;
+  stroke-width: 2;
+}
+
+.diagram-node--inactive .diagram-node__label {
+  fill: #666666;
+}
+
+.diagram-node--in-path .diagram-node__border {
+  stroke-width: 2;
+}
+
+.diagram-node--active .diagram-node__background {
+  filter: brightness(1.1);
+}
+
+.diagram-node--active .diagram-node__border {
+  stroke-width: 3;
+}
+
+.diagram-node--completed .diagram-node__background {
+  fill: #ffffff;
+}
+
+.diagram-node--completed .diagram-node__border {
+  stroke-width: 3;
+}
+
+/* Active indicator animation */
+
+.diagram-node__active-ring {
+  fill: none;
+  stroke-width: 2;
+  opacity: 0.6;
+  animation: pulse-ring 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% {
+    opacity: 0.6;
+    stroke-width: 2;
+  }
+  50% {
+    opacity: 0.3;
+    stroke-width: 3;
+  }
+}
+
+/* Checkmark animation */
+
+.diagram-node__checkmark {
+  animation: checkmark-appear 0.3s ease-out;
+}
+
+@keyframes checkmark-appear {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Type-specific styling */
+
+.diagram-node--entry .diagram-node__border {
+  stroke-dasharray: none;
+}
+
+.diagram-node--agent .diagram-node__border {
+  stroke-dasharray: none;
+}
+
+.diagram-node--tool .diagram-node__border {
+  stroke-dasharray: 4 2;
+}
+
+.diagram-node--final .diagram-node__border {
+  stroke-width: 2.5;
+}
+
+/* Hover effects (optional) */
+
+.diagram-node:hover .diagram-node__border {
+  stroke-width: 2.5;
+}
+
+/* Reduced motion support */
+
+@media (prefers-reduced-motion: reduce) {
+  .diagram-node,
+  .diagram-node__background,
+  .diagram-node__border,
+  .diagram-node__label {
+    transition: none;
+  }
+  
+  .diagram-node__active-ring {
+    animation: none;
+    opacity: 0.6;
+  }
+  
+  .diagram-node__checkmark {
+    animation: none;
+  }
+}

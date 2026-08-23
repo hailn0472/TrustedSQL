@@ -1,0 +1,194 @@
+# GDQP - Mobile Programming_Lập trình di động
+
+
+## Course Information - GDQP
+
+- **Credits**: 3
+- **Time Allocation**: Study hour (150h) = 45h contact hours + 1h final exam + 1.5h practical exam + 102.5h self-study
+- **Pre-Requisite**: PRO192
+- **Min Avg Mark To Pass**: 5
+- **Scoring Scale**: 10
+
+### Description - GDQP
+Upon completion of this course students should: 1. understand basic knowledge of mobile programming 2. get some experienced with all common controls of Android 3. have knowledge about some advanced Android components 4. have knowledge about data storage
+
+### Student Tasks - GDQP
+- Students must attend more than 80% of contact sessions in order to be accepted to the final examination. - Student is responsible to do all assigned exercises given by instructor in class or at home and submit on time - Use laptop in class only for lear
+
+### Tools - GDQP
+- Android Studio (newest version), link: https://developer.android.com/studio - Virtual device attached android studio (or other virtual device), android mobile (only for learning, not for exam - optional) - Laptop: 16GB RAM, 25GB free space before studio
+
+## Course Learning Outcomes (CLOs) - GDQP
+
+- **CLO1**: Describe Android operating system, Android programming
+- **CLO2**: Describe the way to build GUI android application, to handle events on android GUI
+- **CLO3**: Explain necessary android components
+- **CLO4**: Demonstrate how to save data to android device, access to the database
+- **CLO5**: Demonstrate Android architecture
+
+## Materials - GDQP
+
+
+### Reference Materials
+- **Android Developer Fundamentals (Version 2) — Concepts** | Author: Google | Publisher: Google | URL: (https://google-developer-training.github.io/android-developer-fundamentals-course-concepts-v2/)
+- **Google Android developer reference site** | Author: Google | Publisher: Google | URL: (http://developer.android.com/resources/tutorials/hello-world.html)
+- **Android Studio 4.2 Development Essentials - Java Edition: Developing Android Apps Using Android Studio 4.2, Java and Android Jetpack** | Author: Neil Smyth | Publisher: Payload media inc. | ISBN: 978-1951442316
+
+## Assessment - GDQP
+
+### Practical Exam
+- Weight: 15.0%
+- Completion Criteria: 4
+- CLO: All CLOs
+- Question Type: Option 1: Write a program
+- Note: 1 x 15% =15% of total progress mark (each student write a small program)
+
+### Progress Test
+- Weight: 15.0%
+- Completion Criteria: >0
+- CLO: PT1: CLO1, CLO2, CLO3
+PT2: CLO3, CLO4
+PT3: CLO3, CLO4, CLO5
+- Question Type: Option 1: Multi-choice; Option 2 (For Constructivism Approach only): Follow lecturer's proposal
+- Note: 3 x 5% = 15% of total progress mark
+
+### Project
+- Weight: 30.0%
+- Completion Criteria: >0
+- CLO: All CLOs
+- Question Type: Option 1: N/A; Option 2 (For Constructivism Approach only): Follow lecturer's proposal
+- Note: (20% product, 10% presentation); each student chooses project by himself
+
+### Final exam
+- Weight: 40.0%
+- Completion Criteria: 4
+- CLO: All CLOs
+- Question Type: Multi-Choice
+
+
+## Schedule - GDQP
+
+Total sessions: 60
+
+**Session 1**: Mobile Development Overview Android Introduction
+  CLO: CLO1 | Tasks: eBook, slides | Materials: eBook: Lesson 1, part 1.0
+**Session 2**: Android Studio
+  CLO: CLO1 | Tasks: eBook, slides | Materials: eBook: Lesson 1, part 1.1
+**Session 3**: Android Application Structure
+  CLO: CLO1 | Tasks: eBook, slides | Materials: eBook: Lesson 1, part 1.1
+**Session 4**: Build the first application
+  CLO: CLO1 | Tasks: eBook, slides | Materials: eBook: Lesson 1, part 1.2
+**Session 5**: Simple UI Widgets
+  CLO: CLO2 | Tasks: eBook, slides | Materials: eBook: Lesson 1, part 1.2
+**Session 6**: Using UI in application
+  CLO: CLO2 | Tasks: eBook, slides | Materials: eBook: Lesson 1, part 1.2
+**Session 7**: Layout manager (LinearLayout, ConstraintLayout (4 constraint attributes, how to create by design screen), using chain, bias, guideline, flow, barrier…)
+  CLO: CLO2 | Tasks: eBook, slides | Materials: eBook: Lesson 1, part 1.2
+**Session 8**: Layout manager (cont'd)
+  CLO: CLO2 | Tasks: eBook, slides | Materials: eBook: Lesson 1, part 1.3
+**Session 9**: Styles
+  CLO: CLO2 | Tasks: eBook, slides | Materials: https://developer.android.com/guide/topics/ui/look-and-feel/themes
+**Session 10**: Themes
+  CLO: CLO2 | Tasks: eBook, slides | Materials: https://developer.android.com/guide/topics/ui/look-and-feel/themes
+**Session 11**: Binding Views
+  CLO: CLO2 | Tasks: eBook, slides | Materials: eBook: Lesson 1 (1.2)
+**Session 12**: Handling actions on Views
+  CLO: CLO2 | Tasks: eBook, slides | Materials: eBook: Lesson 1 (1.2)
+**Session 13**: Activity
+  CLO: CLO3 | Tasks: eBook, slides | Materials: eBook: Lesson 2 (2.1, 2.2)
+**Session 14**: Android application Lifecyle
+  CLO: CLO3 | Tasks: eBook, slides | Materials: eBook: Lesson 2 (2.1, 2.2)
+**Session 15**: Intents
+  CLO: CLO3 | Tasks: eBook, slides | Materials: eBook: Lesson 2 (2.3)
+**Session 16**: Linking Activities Using Intents
+  CLO: CLO3 | Tasks: eBook, slides | Materials: eBook: Lesson 2 (2.3)
+**Session 17**: Students introduce their project overview + Start Project
+  CLO: CLO1, CLO2, CLO3 | Materials: Assignment's requirement
+**Session 18**: Students introduce their project overview + Start Project (cont'd)
+  CLO: CLO1, CLO2, CLO3 | Materials: Assignment's requirement
+**Session 19**: RecyclerView
+  CLO: CLO2 | Tasks: eBook, slides | Materials: eBook: Lesson 4 (4.5)
+**Session 20**: Implementing RecyclerView
+  CLO: CLO2 | Tasks: eBook, slides | Materials: eBook: Lesson 4 (4.5)
+**Session 21**: Guide Exercises + practice RecyclerView
+  CLO: CLO2 | Tasks: eBook, slides | Materials: eBook: Lesson 4 (4.5)
+**Session 22**: Guide Exercises + practice RecyclerView (cont'd)
+  CLO: CLO2 | Tasks: eBook, slides | Materials: eBook: Lesson 4 (4.5)
+**Session 23**: Display pictures on UI
+  CLO: CLO2 | Tasks: eBook, slides | Materials: eBook: Lesson 4 (4.3)
+**Session 24**: Android Menu
+  CLO: CLO2 | Tasks: eBook, slides | Materials: eBook: Lesson 4 (4.3)
+**Session 25**: Android Permission
+  CLO: CLO3 | Tasks: eBook, slides | Materials: https://developer.android.com/guide/topics/permissions/overview
+**Session 26**: Handle Permision in Android application
+  CLO: CLO3 | Tasks: eBook, slides | Materials: https://developer.android.com/guide/topics/permissions/overview
+**Session 27**: Android Notification
+  CLO: CLO3 | Tasks: eBook, slides | Materials: eBook: Lesson 8 (8.1)
+**Session 28**: Practice with Android notification
+  CLO: CLO3 | Tasks: eBook, slides | Materials: eBook: Lesson 8 (8.1)
+**Session 29**: Data storage (Shared Preferences)
+  CLO: CLO4 | Tasks: eBook, slides | Materials: eBook: Lesson 9 (9.0, 9.1)
+**Session 30**: Data storage (Internal/External storage)
+  CLO: CLO4 | Tasks: eBook, slides | Materials: eBook: Lesson 9 (9.0, 9.1)
+**Session 31**: Sqlite
+  CLO: CLO4 | Tasks: eBook, slides | Materials: eBook: Lesson 10
+**Session 32**: Room database
+  CLO: CLO4 | Tasks: eBook, slides | Materials: eBook: Lesson 11
+**Session 33**: Content provider
+  CLO: CLO3 | Tasks: eBook, slides | Materials: https://developer.android.com/guide/topics/providers/content-providers
+**Session 34**: Practive with Content provider
+  CLO: CLO3 | Tasks: eBook, slides | Materials: https://developer.android.com/guide/topics/providers/content-providers
+**Session 35**: Project Assistant
+  CLO: CLO1, CLO2, CLO3, CLO4 | Materials: Prepare project source code
+**Session 36**: Project Assistant (Cont'd)
+  CLO: CLO1, CLO2, CLO3, CLO4 | Materials: Prepare project source code
+**Session 37**: Android Services
+  CLO: CLO3 | Tasks: eBook, slides | Materials: eBook: Lesson 7 (7.4)
+**Session 38**: Multithread programming
+  CLO: CLO3 | Tasks: eBook, slides | Materials: eBook: Lesson 7 (7.4)
+**Session 39**: Using Executor/ExecutorService
+  CLO: CLO3 | Tasks: eBook, slides | Materials: eBook: Lesson 7 (7.1)
+**Session 40**: Practice with multiplethread
+  CLO: CLO3 | Tasks: eBook, slides | Materials: eBook: Lesson 7 (7.1)
+**Session 41**: Android Fragment
+  CLO: CLO3 | Tasks: eBook, slides | Materials: https://developer.android.com/guide/fragments
+**Session 42**: Interact between Fragment and Activity
+  CLO: CLO3 | Tasks: eBook, slides | Materials: https://developer.android.com/guide/fragments
+**Session 43**: Google Maps
+  CLO: CLO3 | Tasks: eBook, slides | Materials: https://developers.google.com/maps/documentation/android-sdk/start
+**Session 44**: Access phone's position
+  CLO: CLO3 | Tasks: eBook, slides | Materials: https://developers.google.com/maps/documentation/android-sdk/start
+**Session 45**: Web Services Retrofit
+  CLO: CLO4 | Tasks: eBook, slides | Materials: https://www.javatpoint.com/android-web-service
+https://square.github.io/retrofit/
+**Session 46**: Connect API by Retrofit
+  CLO: CLO4 | Tasks: eBook, slides | Materials: https://www.javatpoint.com/android-web-service
+https://square.github.io/retrofit/
+**Session 47**: Guide Exercises + practice with Retrofit
+  CLO: CLO4 | Tasks: eBook, slides
+**Session 48**: Guide Exercises + practice with Retrofit (cont'd)
+  CLO: CLO4 | Tasks: eBook, slides
+**Session 49**: Android socket programming
+  CLO: CLO4 | Tasks: eBook, slides | Materials: https://socket.io/blog/native-socket-io-and-android/
+**Session 50**: Practice with socket
+  CLO: CLO4 | Tasks: eBook, slides | Materials: https://socket.io/blog/native-socket-io-and-android/
+**Session 51**: Broadcast receiver
+  CLO: CLO3 | Tasks: eBook, slides | Materials: eBook: Lesson 7 (7.3)
+**Session 52**: Practice with Broadcast receiver
+  CLO: CLO3 | Tasks: eBook, slides
+**Session 53**: Android architecture (MVC/MVP)
+  CLO: CLO5 | Tasks: eBook, slides | Materials: https://guides.codepath.com/android/Architecture-of-Android-Apps
+**Session 54**: Android architecture (MVVM)
+  CLO: CLO5 | Tasks: eBook, slides | Materials: https://guides.codepath.com/android/Architecture-of-Android-Apps
+**Session 55**: Project Presentation
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Materials: Assignment's questions
+**Session 56**: Project Presentation
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Materials: Assignment's questions
+**Session 57**: Review
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Materials: Slides, classworks
+**Session 58**: Review
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Materials: Slides, classworks
+**Session 59**: Review
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Materials: Slides, classworks
+**Session 60**: Review
+  CLO: CLO1, CLO2, CLO3, CLO4, CLO5 | Materials: Slides, classworks

@@ -43,7 +43,8 @@ python tools/preprocessing/fetch_text_encoder.py
 The text encoder is pinned by model ID, revision, and SHA-256 in `artifacts/models/intent_gnn/v1/encoder_manifest.json`. Its verified local files are stored under the Git-ignored `artifacts/text_encoder/` directory; this is a required model dependency, not a runtime result cache.
 
 `requirements.txt` and `pyproject.toml` keep lower bounds for normal
-installation. `requirements-lock.txt` records the direct package versions used
+installation, including the Vertex AI RAG demo and corpus-ingestion dependencies.
+`requirements-lock.txt` records the direct package versions used
 for the public source-release smoke tests. For archival reproduction, regenerate
 a fully transitive lock file in the target environment and store it with the
 experiment artifacts.

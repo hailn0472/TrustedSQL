@@ -1,0 +1,139 @@
+/* ThinkingSidebar Styles */
+
+.thinking-sidebar {
+  width: 380px;
+  height: 100%;
+  background: #f8f9fa;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.thinking-sidebar--hidden {
+  transform: translateX(-20px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.thinking-sidebar--visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.thinking-sidebar__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.thinking-sidebar__section {
+  flex-shrink: 0;
+}
+
+/* Diagram section */
+
+.thinking-sidebar__diagram-header {
+  padding: 0 20px 12px 20px;
+  background: #ffffff;
+  border-radius: 12px 12px 0 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.thinking-sidebar__diagram-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333333;
+  margin: 20px 0 0 0;
+}
+
+/* Empty state */
+
+.thinking-sidebar__empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.thinking-sidebar__empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.thinking-sidebar__empty-text {
+  font-size: 14px;
+  color: #999999;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Scrollbar styling */
+
+.thinking-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.thinking-sidebar::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+
+.thinking-sidebar::-webkit-scrollbar-thumb {
+  background: #d0d0d0;
+  border-radius: 3px;
+}
+
+.thinking-sidebar::-webkit-scrollbar-thumb:hover {
+  background: #b0b0b0;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 1200px) {
+  .thinking-sidebar {
+    width: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .thinking-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-height: 50vh;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+    z-index: 100;
+  }
+  
+  .thinking-sidebar--hidden {
+    transform: translateY(-100%);
+  }
+  
+  .thinking-sidebar--visible {
+    transform: translateY(0);
+  }
+  
+  .thinking-sidebar__content {
+    padding: 16px;
+    gap: 16px;
+  }
+}
+
+/* Reduced motion support */
+
+@media (prefers-reduced-motion: reduce) {
+  .thinking-sidebar {
+    transition: none;
+  }
+}
