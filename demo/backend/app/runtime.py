@@ -180,6 +180,15 @@ class TrustedSqlRuntimeAdapter:
                 raise RuntimeAdapterError("TrustedSQL demo config could not be loaded") from exc
         return self._config_cache
 
+    @staticmethod
+    def _close_runner_database(runner: Any) -> None:
+        """Release a per-run engine before post-runtime evaluation opens its connection."""
+
+        database = getattr(runner, "db", None)
+        close = getattr(database, "close", None)
+        if callable(close):
+            close()
+
     def _validate_run_id(self, run_id: str) -> None:
         if not isinstance(run_id, str) or not _SAFE_RUN_ID.fullmatch(run_id):
             raise RuntimeAdapterError("run_id must be a safe single path segment")
@@ -552,6 +561,8 @@ class TrustedSqlRuntimeAdapter:
                 except Exception:
                     if primary_error is None:
                         primary_error = RuntimeAdapterError("runtime error summary could not be persisted")
+                finally:
+                    self._close_runner_database(runner)
         if primary_error is not None:
             raise primary_error
 
@@ -641,6 +652,8 @@ class TrustedSqlRuntimeAdapter:
                         primary_error = RuntimeAdapterError(
                             "runtime error summary could not be persisted"
                         )
+                finally:
+                    self._close_runner_database(runner)
         if primary_error is not None:
             raise primary_error
 
@@ -893,6 +906,8 @@ class TrustedSqlRuntimeAdapter:
                         primary_error = RuntimeAdapterError(
                             "runtime error summary could not be persisted"
                         )
+                finally:
+                    self._close_runner_database(runner)
         if primary_error is not None:
             raise primary_error
 

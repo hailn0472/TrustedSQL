@@ -41,6 +41,13 @@ class DatabaseExecutor:
     def available(self) -> bool:
         return self._engine is not None
 
+    def close(self) -> None:
+        """Release pooled database connections owned by this executor."""
+
+        if self._engine is not None:
+            self._engine.dispose()
+            self._engine = None
+
     def execute_read_only(self, sql: str | None) -> QueryResult:
         started = time.perf_counter()
         if not sql:
@@ -93,4 +100,3 @@ def _assert_select_only(sql: str) -> tuple[bool, dict[str, Any]]:
         and not (set(analysis.risks) & dangerous)
     )
     return ok, signature
-

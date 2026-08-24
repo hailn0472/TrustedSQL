@@ -1,12 +1,11 @@
-import React, { useCallback, useEffect, useReducer, useRef, useState } from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { ExecutionMode, ScenarioMetadata, ScenarioRoleFilter, ScenarioTurn, SessionIdentity, ToolReadiness } from './types';
+import { ExecutionMode, ScenarioMetadata, ScenarioTurn, SessionIdentity, ToolReadiness } from './types';
 import { ScenarioRail } from '../components/ScenarioRail';
 import { ChatStage } from '../components/ChatStage';
 import { OperationsRail } from '../components/OperationsRail';
-import { RotateCcw, Shield, ShieldOff, User } from 'lucide-react';
+import { RotateCcw, Shield, ShieldOff } from 'lucide-react';
 import { ApiClient, createApiClient, safeFinalError, validateFinalResultDto, validateRunStatusEvent } from '../api/client';
-import { StreamStatus } from '../components/TelemetryStream';
 import { demoReducer, initialDemoState } from '../state/demoReducer';
 import '../styles/cockpit.css';
 
@@ -30,11 +29,9 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
   const activeRunIdRef = useRef<string | null>(null);
   const conversationIdRef = useRef<string | null>(null);
   const runStateRef = useRef(initialDemoState.runState);
-  const [streamStatus, setStreamStatus] = useState<StreamStatus>('idle');
-  const [streamError, setStreamError] = useState<string | null>(null);
   const [draft, setDraft] = useState('');
   const [executionMode, setExecutionMode] = useState<ExecutionMode>('trustedsql');
-  const [armedReplacement, setArmedReplacement] = useState<{ scenarioKey: string; turnNumber: number } | null>(null);
+  const [editingTurnNumber, setEditingTurnNumber] = useState<number | null>(null);
   activeRunIdRef.current = state.activeRunId;
   runStateRef.current = state.runState;
 
@@ -70,7 +67,6 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
   const closeStream = () => {
     unsubscribeSseRef.current?.();
     unsubscribeSseRef.current = null;
-    setStreamStatus('closed');
   };
 
   const invalidateLifecycle = () => {
@@ -78,13 +74,10 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
     pendingCreateRef.current?.abort();
     pendingCreateRef.current = null;
     closeStream();
-    setStreamError(null);
   };
 
   const markTelemetryUnavailable = (runId: string, executionState: 'queued' | 'running' | 'unknown', message = 'Execution state unknown; telemetry unavailable') => {
     invalidateLifecycle();
-    setStreamStatus('unavailable');
-    setStreamError(message);
     dispatch({ type: 'TELEMETRY_UNAVAILABLE', payload: { runId, executionState, message } });
   };
 
@@ -92,7 +85,7 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
     invalidateLifecycle();
     conversationIdRef.current = null;
     setDraft('');
-    setArmedReplacement(null);
+    setEditingTurnNumber(null);
     dispatch({ type: 'RESET_STATE' });
   };
 
@@ -103,48 +96,45 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
 
   const handleSelectScenario = (scenarioKey: string) => {
     if (isActive || pendingCreateRef.current || !state.scenarios.some((scenario) => scenario.key === scenarioKey)) return;
-    if (scenarioKey !== state.selectedScenarioKey) setArmedReplacement(null);
     dispatch({ type: 'SELECT_SCENARIO', payload: { scenarioKey } });
-  };
-
-  const handleSearchPromptScenarios = useCallback(
-    (query: string, role: ScenarioRoleFilter) => clientRef.current.searchPromptScenarios(query, role),
-    [],
-  );
-
-  const handleImportScenario = async (scenarioId: string): Promise<ScenarioMetadata> => {
-    if (isActive || pendingCreateRef.current) throw new Error('Wait for the active run to finish');
-    const imported = await clientRef.current.fetchPromptScenario(scenarioId);
-    dispatch({ type: 'IMPORT_SCENARIOS', payload: { scenarios: [imported] } });
-    return imported;
   };
 
   const handleRemoveScenario = (scenarioKey: string) => {
     if (isActive || pendingCreateRef.current) return;
-    if (armedReplacement?.scenarioKey === scenarioKey) setArmedReplacement(null);
     dispatch({ type: 'REMOVE_SCENARIO', payload: { scenarioKey } });
   };
 
-  const handleCopyScenarioTurn = (scenarioKey: string, turn: ScenarioTurn) => {
-    if (turn.replacesTurn === turn.turnNumber) {
-      setArmedReplacement({ scenarioKey, turnNumber: turn.turnNumber });
-      return;
-    }
-    setArmedReplacement(null);
+  const handleCopyScenarioTurn = (_scenarioKey: string, turn: ScenarioTurn) => {
+    if (turn.replacesTurn !== turn.turnNumber) return;
+    const existing = state.chatTurns.find((chatTurn) => chatTurn.turnNumber === turn.turnNumber);
+    if (!existing || isActive || pendingCreateRef.current) return;
+    invalidateLifecycle();
+    setDraft(existing.nlq);
+    setEditingTurnNumber(turn.turnNumber);
+    dispatch({ type: 'BEGIN_EDIT_TURN', payload: { turnNumber: turn.turnNumber } });
+  };
+
+  const handleEditTurn = (turnNumber: number) => {
+    if (isActive || pendingCreateRef.current) return;
+    const turn = state.chatTurns.find((item) => item.turnNumber === turnNumber);
+    if (!turn) return;
+    invalidateLifecycle();
+    setDraft(turn.nlq);
+    setEditingTurnNumber(turnNumber);
+    dispatch({ type: 'BEGIN_EDIT_TURN', payload: { turnNumber } });
   };
 
   const handleSend = async () => {
     const requestedNlq = draft.trim();
     if (state.bootstrapState !== 'ready' || !requestedNlq || isActive || pendingCreateRef.current || state.chatTurns.length >= 20) return;
-    const replaceTurn = armedReplacement?.scenarioKey === state.selectedScenarioKey
-      && armedReplacement.turnNumber === state.chatTurns.length
-      ? armedReplacement.turnNumber
-      : undefined;
-    const requestedTurns = replaceTurn === undefined
-      ? [...state.chatTurns.map((turn) => turn.nlq), requestedNlq]
-      : [...state.chatTurns.slice(0, replaceTurn - 1).map((turn) => turn.nlq), requestedNlq];
-    const requestedTurn = replaceTurn ?? requestedTurns.length;
     const submittedConversationId = conversationIdRef.current;
+    if (editingTurnNumber !== null && (
+      submittedConversationId === null
+      || editingTurnNumber !== state.chatTurns.length + 1
+    )) return;
+    const replaceTurn = editingTurnNumber ?? undefined;
+    const requestedTurns = [...state.chatTurns.map((turn) => turn.nlq), requestedNlq];
+    const requestedTurn = replaceTurn ?? requestedTurns.length;
     const lifecycleToken = ++lifecycleTokenRef.current;
     const controller = new AbortController();
     pendingCreateRef.current = controller;
@@ -162,15 +152,13 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
         throw new Error('Create run response did not match the active conversation');
       }
       conversationIdRef.current = job.conversationId;
-      setArmedReplacement(null);
+      setEditingTurnNumber(null);
       dispatch({
         type: 'RUN_QUEUED',
         payload: { runId: job.runId, sampleId: job.sampleId, throughTurn: requestedTurn, turns: requestedTurns, mode: job.mode ?? executionMode },
       });
       setDraft('');
       closeStream();
-      setStreamError(null);
-      setStreamStatus('connecting');
       unsubscribeSseRef.current = clientRef.current.subscribeRunEvents(job.runId, 0, {
         onEvent: ({ eventType, data }) => {
           if (lifecycleToken !== lifecycleTokenRef.current) return;
@@ -212,15 +200,6 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
           if (lifecycleToken !== lifecycleTokenRef.current) return;
           markTelemetryUnavailable(runId === job.runId ? runId : job.runId, executionState, message);
         },
-        onOpen: () => {
-          if (lifecycleToken === lifecycleTokenRef.current) {
-            setStreamStatus('open');
-            setStreamError(null);
-          }
-        },
-        onClose: (reason) => {
-          if (lifecycleToken === lifecycleTokenRef.current && reason !== 'manual') setStreamStatus(reason === 'error' ? 'error' : reason === 'unavailable' ? 'unavailable' : 'closed');
-        },
         onError: () => {
           if (lifecycleToken !== lifecycleTokenRef.current) return;
           dispatch({ type: 'RUN_ERROR', payload: { runId: job.runId, error: 'Execution could not be completed' } });
@@ -258,13 +237,9 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
           <div className="brand-icon"><Shield size={18} /></div>
           <div>
             <h1 className="brand-title">TrustedSQL + Vertex RAG Cockpit <span className={`brand-badge ${executionMode === 'direct' ? 'direct' : ''}`}>{executionMode === 'trustedsql' ? 'TRUSTEDSQL ON' : 'SECURITY OFF'}</span></h1>
-            <div className="brand-sub">{executionMode === 'trustedsql' ? 'Documents → Vertex AI RAG · Data → TrustedSQL' : 'Documents → Vertex AI RAG · Data → Direct SQL'}</div>
-          </div>
-        </div>
-        <div className="header-center-info">
-          <div className="persona-chip"><User size={13} /><span>Session Identity: <strong>{sessionIdentity.role}</strong> (User ID: {sessionIdentity.userId})</span></div>
-          <div className={`status-indicator-pill ${state.bootstrapState}`} data-testid="readiness-indicator-pill">
-            <span className="pulse-dot" /><span>Readiness: {state.bootstrapState.toUpperCase()}</span>
+            <div className="brand-sub">{executionMode === 'trustedsql'
+              ? 'Chat → Orchestrator · Documents → Vertex AI RAG · Data → TrustedSQL'
+              : 'Chat → Orchestrator · Documents → Vertex AI RAG · Data → Direct SQL'}</div>
           </div>
         </div>
         <div className="header-actions">
@@ -293,12 +268,8 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
         <ScenarioRail
           scenarios={state.scenarios}
           selectedScenarioKey={state.selectedScenarioKey}
-          tools={state.tools}
-          mode={executionMode}
           disabled={isActive}
           onSelectScenario={handleSelectScenario}
-          onSearchScenarios={handleSearchPromptScenarios}
-          onImportScenario={handleImportScenario}
           onRemoveScenario={handleRemoveScenario}
           onCopyScenarioTurn={handleCopyScenarioTurn}
         />
@@ -309,15 +280,14 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
           chatTurns={state.chatTurns}
           draft={draft}
           onDraftChange={setDraft}
-          finalResult={state.finalResult}
           error={state.error}
           telemetryUnavailable={state.telemetryUnavailable}
           telemetryExecutionState={state.telemetryExecutionState}
           telemetryError={state.telemetryError}
           onSend={handleSend}
           onCancel={handleCancel}
-          onReplay={() => dispatch({ type: 'REPLAY_RUN' })}
-          editingTurnNumber={armedReplacement?.scenarioKey === state.selectedScenarioKey ? armedReplacement.turnNumber : null}
+          onEditTurn={handleEditTurn}
+          editingTurnNumber={editingTurnNumber}
           mode={executionMode}
           sessionIdentity={sessionIdentity}
         />
@@ -327,9 +297,7 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
           telemetryEvents={state.telemetryEvents}
           turnRuntimeSnapshots={state.turnRuntimeSnapshots}
           activeTurnNumber={state.activeThroughTurn ?? undefined}
-          streamStatus={streamStatus}
           executionState={state.telemetryExecutionState ?? state.runState}
-          telemetryError={streamError ?? state.telemetryError}
         />
       </main>
     </div>

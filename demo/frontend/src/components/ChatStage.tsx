@@ -1,14 +1,17 @@
 import React, { Fragment, useEffect, useRef } from 'react';
 import { ExecutionMode, ScenarioMetadata, ReadinessState, SessionIdentity } from '../app/types';
-import { FinalResultDto, safeFinalError } from '../api/client';
+import { safeFinalError } from '../api/client';
 import { ChatTurn, RunStatus } from '../state/demoReducer';
+import { ChatMessageContent } from './ChatMessageContent';
+import { ExecutionComparison } from './ExecutionComparison';
 import {
   AlertTriangle,
   BookOpen,
   Database,
   ExternalLink,
   FileText,
-  RotateCcw,
+  MessageCircle,
+  Pencil,
   SendHorizontal,
   Shield,
   ShieldAlert,
@@ -27,14 +30,13 @@ interface ChatStageProps {
   chatTurns: ChatTurn[];
   draft: string;
   onDraftChange: (value: string) => void;
-  finalResult: FinalResultDto | null;
   error: string | null;
   telemetryUnavailable?: boolean;
   telemetryExecutionState?: 'queued' | 'running' | 'unknown' | null;
   telemetryError?: string | null;
   onSend: () => void;
   onCancel: () => void;
-  onReplay: () => void;
+  onEditTurn: (turnNumber: number) => void;
   editingTurnNumber?: number | null;
   mode: ExecutionMode;
   sessionIdentity: SessionIdentity;
@@ -49,14 +51,13 @@ export const ChatStage: React.FC<ChatStageProps> = ({
   chatTurns,
   draft,
   onDraftChange,
-  finalResult,
   error,
   telemetryUnavailable = false,
   telemetryExecutionState = null,
   telemetryError = null,
   onSend,
   onCancel,
-  onReplay,
+  onEditTurn,
   editingTurnNumber = null,
   mode,
   sessionIdentity,
@@ -66,9 +67,9 @@ export const ChatStage: React.FC<ChatStageProps> = ({
   const isTerminal = ['complete', 'denied', 'error', 'cancelled'].includes(runState);
   const atTurnLimit = chatTurns.length >= 20;
   const sendDisabled = !isReady || isActive || telemetryUnavailable || !draft.trim() || atTurnLimit;
-  const replayDisabled = !finalResult || isActive || telemetryUnavailable;
   const terminalHeaderRef = useRef<HTMLHeadingElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const composerRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     const target = messagesEndRef.current;
@@ -80,6 +81,14 @@ export const ChatStage: React.FC<ChatStageProps> = ({
   useEffect(() => {
     if (isTerminal) terminalHeaderRef.current?.focus();
   }, [isTerminal]);
+
+  useEffect(() => {
+    if (editingTurnNumber === null) return;
+    const composer = composerRef.current;
+    if (!composer) return;
+    composer.focus();
+    composer.setSelectionRange(composer.value.length, composer.value.length);
+  }, [editingTurnNumber]);
 
   const submitOnEnter = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === 'Enter' && !event.shiftKey) {
@@ -94,6 +103,30 @@ export const ChatStage: React.FC<ChatStageProps> = ({
   const renderResult = (turn: ChatTurn) => {
     const result = turn.result;
     const isLatest = turn.turnNumber === chatTurns.length;
+    if (result?.decision === 'ALLOW' && result.resultType === 'chat') {
+      return (
+        <div className="chat-conversation-row bot-row" data-testid={testId('chat-response-row', turn.turnNumber)}>
+          <div className="avatar bot-avatar chat-avatar" aria-hidden="true"><MessageCircle size={16} /></div>
+          <div className="bot-bubble result-card orchestrator-answer" data-testid={testId('chat-result-card', turn.turnNumber)}>
+            <div className="card-header">
+              <h3
+                tabIndex={-1}
+                ref={isLatest ? terminalHeaderRef : undefined}
+                className="result-heading"
+                data-testid={testId('terminal-result-heading', turn.turnNumber)}
+              >
+                <MessageCircle size={16} /> Orchestrator response
+              </h3>
+              <span className="latency-badge">{result.latencyMs ?? 0}ms</span>
+            </div>
+            <ChatMessageContent className="rag-answer-text">{result.answer ?? ''}</ChatMessageContent>
+            <div className="chat-route-untouched">
+              <MessageCircle size={12} /> Conversation route · RAG, security modules, and Education DB bypassed
+            </div>
+          </div>
+        </div>
+      );
+    }
     if (result?.decision === 'ALLOW' && result.resultType === 'rag') {
       return (
         <div className="chat-conversation-row bot-row" data-testid={testId('rag-response-row', turn.turnNumber)}>
@@ -106,11 +139,11 @@ export const ChatStage: React.FC<ChatStageProps> = ({
                 className="result-heading"
                 data-testid={testId('terminal-result-heading', turn.turnNumber)}
               >
-                <BookOpen size={16} /> Answer grounded in university documents
+                <BookOpen size={16} /> Orchestrator response · grounded in documents
               </h3>
               <span className="latency-badge">{result.latencyMs ?? 0}ms</span>
             </div>
-            <div className="rag-answer-text">{result.answer}</div>
+            <ChatMessageContent className="rag-answer-text">{result.answer ?? ''}</ChatMessageContent>
             <div className="rag-sources" aria-label="Retrieved sources">
               <div className="rag-sources-title"><FileText size={14} /> Sources ({result.sources?.length ?? 0})</div>
               <ol className="rag-source-list">
@@ -172,28 +205,50 @@ export const ChatStage: React.FC<ChatStageProps> = ({
                 data-testid={testId('terminal-result-heading', turn.turnNumber)}
               >
                 {mode === 'trustedsql' ? <ShieldCheck size={16} /> : <ShieldOff size={16} />}
-                {mode === 'trustedsql' ? 'Query permitted and completed' : 'Direct SQL generated and executed'}
+                Orchestrator response
               </h3>
               <span className="latency-badge">{result.latencyMs ?? 0}ms</span>
             </div>
-            {result.sql && (
-              <div className="sql-box" data-testid={testId('sql-box', turn.turnNumber)}>
-                <div className="sql-box-header"><Terminal size={12} /> Executed SQL Query</div>
-                <code>{result.sql}</code>
-              </div>
-            )}
-            {result.rows && result.columns && (
-              <div className="result-table-container" data-testid={testId('result-table-container', turn.turnNumber)}>
-                <table className="result-table">
-                  <caption>Query Results ({result.rows.length} rows returned)</caption>
-                  <thead><tr>{result.columns.map((column) => <th key={column} scope="col">{column}</th>)}</tr></thead>
-                  <tbody>
-                    {result.rows.map((row, rowIndex) => (
-                      <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex}>{String(cell)}</td>)}</tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+            <ChatMessageContent className="sql-natural-answer">
+              {result.answer ?? 'The query completed successfully. Expand the technical evidence below to inspect the result.'}
+            </ChatMessageContent>
+            {(result.sql || (result.rows && result.columns)) && (
+              <details className="sql-evidence-details">
+                <summary>
+                  <span><Terminal size={12} /> View {mode === 'trustedsql' ? 'TrustedSQL' : 'Direct SQL'} evidence</span>
+                  {result.rows && <small>{result.rows.length} row{result.rows.length === 1 ? '' : 's'}</small>}
+                </summary>
+                <div className="sql-evidence-content">
+                  {result.executionComparison && <ExecutionComparison comparison={result.executionComparison} />}
+                  <details className="sql-raw-details" data-testid={testId('sql-raw-details', turn.turnNumber)}>
+                    <summary>
+                      <span><Terminal size={13} /> SQL query &amp; raw results</span>
+                      <small>Technical details</small>
+                    </summary>
+                    <div className="sql-raw-content">
+                      {result.sql && (
+                        <div className="sql-box" data-testid={testId('sql-box', turn.turnNumber)}>
+                          <div className="sql-box-header"><Terminal size={12} /> Executed SQL Query</div>
+                          <code>{result.sql}</code>
+                        </div>
+                      )}
+                      {result.rows && result.columns && (
+                        <div className="result-table-container" data-testid={testId('result-table-container', turn.turnNumber)}>
+                          <table className="result-table">
+                            <caption>Query Results ({result.rows.length} rows returned)</caption>
+                            <thead><tr>{result.columns.map((column) => <th key={column} scope="col">{column}</th>)}</tr></thead>
+                            <tbody>
+                              {result.rows.map((row, rowIndex) => (
+                                <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex}>{String(cell)}</td>)}</tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+                    </div>
+                  </details>
+                </div>
+              </details>
             )}
           </div>
         </div>
@@ -282,7 +337,19 @@ export const ChatStage: React.FC<ChatStageProps> = ({
           <Fragment key={turn.turnNumber}>
             <div className="chat-conversation-row user-row" data-testid={`user-prompt-row-${turn.turnNumber}`}>
               <div className="user-bubble" data-testid={testId('user-prompt-bubble', turn.turnNumber)}>
-                <div className="bubble-speaker">{sessionIdentity.role} (User ID: {sessionIdentity.userId}) · Turn {turn.turnNumber}</div>
+                <div className="bubble-speaker-row">
+                  <div className="bubble-speaker">{sessionIdentity.role} (User ID: {sessionIdentity.userId}) · Turn {turn.turnNumber}</div>
+                  <button
+                    type="button"
+                    className="btn-edit-turn"
+                    disabled={isActive || telemetryUnavailable}
+                    onClick={() => onEditTurn(turn.turnNumber)}
+                    aria-label={`Edit Turn ${turn.turnNumber}`}
+                    title={`Edit Turn ${turn.turnNumber}`}
+                  >
+                    <Pencil size={11} /> Edit
+                  </button>
+                </div>
                 <div className="bubble-content">{turn.nlq}</div>
               </div>
               <div className="avatar user-avatar" aria-hidden="true"><User size={16} /></div>
@@ -343,6 +410,7 @@ export const ChatStage: React.FC<ChatStageProps> = ({
       <div className="chat-stage-input-area">
         <div className="chat-composer">
           <textarea
+            ref={composerRef}
             className="chatbox-input"
             data-testid="chatbox-input"
             aria-label="Chat message"
@@ -366,13 +434,10 @@ export const ChatStage: React.FC<ChatStageProps> = ({
                 <StopCircle size={14} /> Cancel
               </button>
             ) : (
-              <button className="btn-execute" disabled={sendDisabled} onClick={onSend} aria-label="Send message" aria-describedby="send-reason">
-                <SendHorizontal size={14} /> Send
+              <button className="btn-execute" disabled={sendDisabled} onClick={onSend} aria-label={editingTurnNumber ? `Replace Turn ${editingTurnNumber}` : 'Send message'} aria-describedby="send-reason">
+                <SendHorizontal size={14} /> {editingTurnNumber ? 'Replace' : 'Send'}
               </button>
             )}
-            <button className="btn-replay" disabled={replayDisabled} onClick={onReplay} aria-label="Replay route" aria-describedby="replay-reason">
-              <RotateCcw size={14} /> Replay
-            </button>
           </div>
         </div>
         <div className="composer-meta">
@@ -386,7 +451,6 @@ export const ChatStage: React.FC<ChatStageProps> = ({
         <div className="sr-only" id="send-reason">
           {!isReady ? 'Backend is not ready' : isActive ? 'Execution in progress' : !draft.trim() ? 'Enter a message to send' : 'Ready to send'}
         </div>
-        <div className="sr-only" id="replay-reason">Replay the route animation for the latest result</div>
       </div>
     </section>
   );

@@ -17,7 +17,7 @@ import uuid
 from copy import deepcopy
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Callable, Mapping
+from typing import Any, Callable, Mapping, Sequence
 
 from .artifacts import ArtifactStream, ArtifactValidationError
 from .catalog import (
@@ -40,7 +40,9 @@ from .runtime import (
     TRUSTEDSQL_SETTING_ID,
     TrustedSqlRuntimeAdapter,
 )
-from .rag import DATABASE_ROUTE, DOCUMENT_ROUTE, KnowledgeQueryRouter, RagError, VertexRagService
+from .orchestrator import OrchestratorChatError, VertexOrchestratorChatService
+from .rag import CHAT_ROUTE, DATABASE_ROUTE, DOCUMENT_ROUTE, KnowledgeQueryRouter, RagError, VertexRagService
+from .result_evaluation import DatasetResultEvaluator
 from .sanitization import MAX_ID_LENGTH, MAX_LIST_ITEMS, MAX_STRING_LENGTH, redact_error, sanitize_json_value
 
 _SAFE_RUN_ID = re.compile(r"^run-[0-9a-f]{32}$")
@@ -63,6 +65,7 @@ RuntimeFactory = Callable[[], Any]
 ArtifactFactory = Callable[..., Any]
 ReadinessFactory = Callable[[], Any]
 RagFactory = Callable[[], VertexRagService]
+ChatFactory = Callable[[], VertexOrchestratorChatService]
 
 
 def _redact_payload(value: Any) -> Any:
@@ -154,6 +157,7 @@ class DemoJobManager:
         artifact_factory: ArtifactFactory = ArtifactStream,
         readiness: ReadinessFactory | None = None,
         rag_factory: RagFactory | None = None,
+        chat_factory: ChatFactory | None = None,
         catalog: Mapping[str, Mapping[str, Any]] | None = None,
         worker_count: int = 1,
         heartbeat_seconds: float = 0.25,
@@ -177,7 +181,9 @@ class DemoJobManager:
         self._runtime_factory = runtime_factory
         self._readiness_factory = readiness
         self._rag_service = rag_factory() if rag_factory is not None else VertexRagService()
+        self._chat_service = chat_factory() if chat_factory is not None else VertexOrchestratorChatService()
         self._query_router = KnowledgeQueryRouter()
+        self._result_evaluator = DatasetResultEvaluator(self.repo_root)
         self.worker_count = worker_count
         self.heartbeat_seconds = max(0.02, min(float(heartbeat_seconds), 2.0))
         self.max_queued_jobs = max_queued_jobs
@@ -288,8 +294,8 @@ class DemoJobManager:
                 if source_conversation.pending_run_id is not None:
                     raise ConversationConflict("conversation already has an active turn")
                 if replace_turn is not None:
-                    if replace_turn != len(source_conversation.history):
-                        raise ConversationConflict("only the latest completed turn can be replaced")
+                    if replace_turn > len(source_conversation.history):
+                        raise ConversationConflict("replacement turn does not exist in this conversation")
                     created_conversation = True
                     conversation_id = f"conversation-{uuid.uuid4().hex}"
                     conversation = _Conversation(
@@ -422,6 +428,10 @@ class DemoJobManager:
             blocked_at = None
         raw_sql = source.get("raw_sql")
         final_sql = source.get("final_sql")
+        answer = source.get("answer")
+        if not isinstance(answer, str) and isinstance(job.final_result, Mapping):
+            answer = job.final_result.get("answer")
+        route_type = job.route_type if job.route_type in {CHAT_ROUTE, DOCUMENT_ROUTE, DATABASE_ROUTE} else DATABASE_ROUTE
         conversation.history.append(
             {
                 "turn_id": job.through_turn,
@@ -432,7 +442,8 @@ class DemoJobManager:
                 "executed": bool(source.get("executed")) if decision == "ALLOW" else False,
                 "execution_result_json": source.get("execution_result_json"),
                 "blocked_at": blocked_at,
-                "route_type": DOCUMENT_ROUTE if source.get("resultType") == "rag" else DATABASE_ROUTE,
+                "route_type": route_type,
+                "answer": answer[:8_000] if isinstance(answer, str) else None,
             }
         )
         conversation.pending_run_id = None
@@ -487,11 +498,18 @@ class DemoJobManager:
         detail: str,
         trace_lines: list[str] | None = None,
     ) -> None:
-        """Publish router/RAG evidence through the same ordered SSE channel."""
+        """Publish Orchestrator/RAG evidence through the same ordered SSE channel."""
 
+        scenario_id = (
+            "vertex_rag_engine"
+            if module_id == "RAG"
+            else "orchestrator_chat"
+            if module_id == "ORCHESTRATOR"
+            else "query_router"
+        )
         event = {
             "runId": job.run_id,
-            "scenarioId": "vertex_rag_engine" if module_id == "RAG" else "query_router",
+            "scenarioId": scenario_id,
             "sampleId": job.sample_id,
             "turnId": job.through_turn,
             "moduleId": module_id,
@@ -585,6 +603,9 @@ class DemoJobManager:
         if route.branch == DOCUMENT_ROUTE:
             self._execute_rag(job)
             return
+        if route.branch == CHAT_ROUTE:
+            self._execute_chat(job)
+            return
 
         runtime_dir = run_path(self.repo_root, f"{job.run_id}/runtime")
         holder: dict[str, Any] = {}
@@ -638,6 +659,16 @@ class DemoJobManager:
                 self._changed.notify_all()
             return
         with self._changed:
+            should_synthesize_sql = (
+                "exception" not in holder
+                and isinstance(job.final_result, Mapping)
+                and job.final_result.get("decision") == "ALLOW"
+                and job.final_result.get("resultType") == "sql"
+            )
+        if should_synthesize_sql:
+            self._attach_execution_comparison(job)
+            self._synthesize_sql_answer(job)
+        with self._changed:
             if "exception" in holder:
                 self._set_error(job, "runtime_failed")
             elif job.final_result is None:
@@ -653,6 +684,183 @@ class DemoJobManager:
             else:
                 self._set_error(job, "final_decision_invalid")
             self._finish_conversation_locked(job, holder.get("result"))
+            self._prune_terminal_locked()
+            self._changed.notify_all()
+
+    def _attach_execution_comparison(self, job: _Job) -> None:
+        """Attach post-runtime EX evidence without exposing ground truth to runtime modules."""
+
+        with self._changed:
+            final = deepcopy(job.final_result) if isinstance(job.final_result, Mapping) else {}
+            history = tuple(deepcopy(job.history))
+        columns = final.get("columns") if isinstance(final.get("columns"), list) else []
+        rows = final.get("rows") if isinstance(final.get("rows"), list) else []
+        try:
+            comparison = self._result_evaluator.compare(
+                nlq=job.nlq,
+                history=history,
+                runtime_columns=columns,
+                runtime_rows=rows,
+            )
+        except BaseException:
+            comparison = None
+        if comparison is None:
+            return
+        with self._changed:
+            if isinstance(job.final_result, dict):
+                job.final_result["executionComparison"] = comparison
+                self._touch(job)
+
+    @staticmethod
+    def _fallback_sql_answer(query: str, columns: Sequence[Any], rows: Sequence[Any]) -> str:
+        """Produce a bounded answer if optional LLM synthesis is unavailable."""
+
+        vietnamese = bool(re.search(r"[ăâđêôơưáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ]", query.lower()))
+        column_names = [str(column)[:80] for column in list(columns)[:8]]
+        materialized = list(rows)
+        if not materialized:
+            return "Không tìm thấy dữ liệu phù hợp." if vietnamese else "No matching data was found."
+        previews: list[str] = []
+        for raw_row in materialized[:3]:
+            if isinstance(raw_row, Mapping):
+                values = [raw_row.get(column) for column in column_names]
+            elif isinstance(raw_row, Sequence) and not isinstance(raw_row, (str, bytes)):
+                values = list(raw_row)[: len(column_names)]
+            else:
+                continue
+            previews.append(", ".join(
+                f"{column}: {value}"
+                for column, value in zip(column_names, values)
+            ))
+        prefix = (
+            f"Tìm thấy {len(materialized)} kết quả. "
+            if vietnamese
+            else f"I found {len(materialized)} matching result{'s' if len(materialized) != 1 else ''}. "
+        )
+        suffix = "" if len(materialized) <= 3 else (" …" if vietnamese else " …")
+        return (prefix + "; ".join(previews) + suffix)[:8_000]
+
+    def _synthesize_sql_answer(self, job: _Job) -> None:
+        """Add the Orchestrator's natural-language answer to an ALLOW SQL result."""
+
+        with self._changed:
+            final = deepcopy(job.final_result) if isinstance(job.final_result, Mapping) else {}
+        columns = final.get("columns") if isinstance(final.get("columns"), list) else []
+        rows = final.get("rows") if isinstance(final.get("rows"), list) else []
+        started = time.perf_counter()
+        self._append_system_event(
+            job,
+            module_id="ORCHESTRATOR",
+            stage="orchestrator_response_synthesis",
+            decision="RUNNING",
+            detail="Converting trusted query results into a conversational answer",
+            trace_lines=[
+                f"bind executed result evidence -> {len(rows)} row(s), {len(columns)} column(s)",
+                "bound evidence supplied to response synthesizer",
+                "paraphrase result in the user's language without adding facts",
+                "retain SQL and table as collapsed technical evidence",
+            ],
+        )
+        fallback = False
+        try:
+            synthesizer = getattr(self._chat_service, "synthesize_sql")
+            answer = synthesizer(job.nlq, columns, rows)
+            if not isinstance(answer, str) or not answer.strip():
+                raise OrchestratorChatError("Orchestrator returned no SQL summary")
+            answer = answer.strip()[:8_000]
+        except BaseException:
+            fallback = True
+            answer = self._fallback_sql_answer(job.nlq, columns, rows)
+        synthesis_ms = round((time.perf_counter() - started) * 1000, 1)
+        with self._changed:
+            if isinstance(job.final_result, dict):
+                job.final_result["answer"] = answer
+                previous_latency = job.final_result.get("latencyMs")
+                if isinstance(previous_latency, (int, float)) and not isinstance(previous_latency, bool):
+                    job.final_result["latencyMs"] = round(float(previous_latency) + synthesis_ms, 1)
+                self._touch(job)
+        self._append_system_event(
+            job,
+            module_id="ORCHESTRATOR",
+            stage="orchestrator_response_synthesis",
+            decision="ALLOW",
+            detail=(
+                "Conversational answer completed from trusted query evidence"
+                if not fallback
+                else "Conversational fallback completed from trusted query evidence"
+            ),
+            trace_lines=[
+                "validate bounded answer against available result evidence",
+                "publish natural-language response before technical details",
+            ],
+        )
+
+    def _execute_chat(self, job: _Job) -> None:
+        """Let the Orchestrator answer ordinary conversation without tools."""
+
+        started = time.perf_counter()
+        self._append_system_event(
+            job,
+            module_id="ORCHESTRATOR",
+            stage="orchestrator_chat_generation",
+            decision="RUNNING",
+            detail="Generating a normal conversational response without RAG or SQL tools",
+            trace_lines=[
+                f"hydrate conversation memory -> {len(job.history)} prior turn(s)",
+                "confirm no document retrieval or structured-data intent",
+                "invoke Vertex AI conversational model without tools",
+                "prepare Orchestrator response; database remains untouched",
+            ],
+        )
+        try:
+            answer = self._chat_service.answer(job.nlq, job.history)
+        except OrchestratorChatError:
+            with self._changed:
+                self._set_error(job, "chat_failed", "The Orchestrator could not return a chat response")
+                self._finish_conversation_locked(job)
+                self._changed.notify_all()
+            return
+        except BaseException:
+            with self._changed:
+                self._set_error(job, "chat_failed", "The Orchestrator could not return a chat response")
+                self._finish_conversation_locked(job)
+                self._changed.notify_all()
+            return
+
+        latency_ms = round((time.perf_counter() - started) * 1000, 1)
+        self._append_system_event(
+            job,
+            module_id="ORCHESTRATOR",
+            stage="orchestrator_chat_generation",
+            decision="ALLOW",
+            detail="Conversational response completed · RAG, security modules, and database bypassed",
+            trace_lines=[
+                "validate non-empty bounded assistant response",
+                "commit response to server-owned conversation memory",
+                "publish conversation-route evidence",
+            ],
+        )
+        final = {
+            "runId": job.run_id,
+            "scenarioId": "orchestrator_chat",
+            "sampleId": job.sample_id,
+            "turnId": job.through_turn,
+            "decision": "ALLOW",
+            "executed": False,
+            "dbTouched": False,
+            "answer": answer,
+            "latencyMs": latency_ms,
+            "error": None,
+            "route": ["chat", "orchestrator", "context_memory"],
+            "mode": job.mode,
+            "resultType": "chat",
+        }
+        with self._changed:
+            job.final_result = final
+            job.state = "complete"
+            job.error = None
+            self._touch(job)
+            self._finish_conversation_locked(job)
             self._prune_terminal_locked()
             self._changed.notify_all()
 
@@ -701,6 +909,45 @@ class DemoJobManager:
                 "publish answer and citation list; database remains untouched",
             ],
         )
+        source_payload = [source.to_dict() for source in rag_answer.sources]
+        self._append_system_event(
+            job,
+            module_id="ORCHESTRATOR",
+            stage="orchestrator_response_synthesis",
+            decision="RUNNING",
+            detail="Paraphrasing grounded document evidence into the final chat response",
+            trace_lines=[
+                f"bind grounded answer and {len(source_payload)} attributable source(s)",
+                "preserve source numbering and restrict synthesis to retrieved evidence",
+                "paraphrase in the user's language",
+            ],
+        )
+        try:
+            synthesizer = getattr(self._chat_service, "synthesize_rag")
+            answer = synthesizer(job.nlq, rag_answer.answer, source_payload)
+            if not isinstance(answer, str) or not answer.strip():
+                raise OrchestratorChatError("Orchestrator returned no RAG summary")
+            answer = answer.strip()[:8_000]
+            synthesis_fallback = False
+        except BaseException:
+            answer = rag_answer.answer
+            synthesis_fallback = True
+        latency_ms = round((time.perf_counter() - started) * 1000, 1)
+        self._append_system_event(
+            job,
+            module_id="ORCHESTRATOR",
+            stage="orchestrator_response_synthesis",
+            decision="ALLOW",
+            detail=(
+                "Grounded conversational answer completed with source attribution"
+                if not synthesis_fallback
+                else "Original grounded answer retained with source attribution"
+            ),
+            trace_lines=[
+                "validate bounded grounded response",
+                "publish response with expandable source evidence",
+            ],
+        )
         final = {
             "runId": job.run_id,
             "scenarioId": "vertex_rag_engine",
@@ -709,8 +956,8 @@ class DemoJobManager:
             "decision": "ALLOW",
             "executed": False,
             "dbTouched": False,
-            "answer": rag_answer.answer,
-            "sources": [source.to_dict() for source in rag_answer.sources],
+            "answer": answer,
+            "sources": source_payload,
             "latencyMs": latency_ms,
             "error": None,
             "route": ["chat", "orchestrator", "context_memory", "rag"],
@@ -827,11 +1074,12 @@ class DemoJobManager:
             "readiness": readiness,
             "catalog": safe_catalog,
             "architecture": {
-                "label": "Document RAG router with TrustedSQL vs Direct SQL data paths",
+                "label": "Orchestrator chat with Document RAG and TrustedSQL vs Direct SQL data paths",
                 "modules": list(REQUIRED_MODULES),
                 "modes": [TRUSTEDSQL_MODE, DIRECT_MODE],
             },
             "rag": self._rag_service.readiness(),
+            "chat": self._chat_service.readiness(),
         }
 
     def search_prompt_library(

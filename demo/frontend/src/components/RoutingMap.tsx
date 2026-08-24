@@ -62,6 +62,7 @@ export interface RoutingMapProps {
 }
 
 function expectedRoute(evidence: RouteEvidence): RouteNodeId[] {
+  if (evidence.resultType === 'chat') return ['chat', 'orchestrator', 'context_memory'];
   if (evidence.resultType === 'rag') return ['chat', 'orchestrator', 'context_memory', 'rag'];
   if (evidence.mode === 'direct') {
     return evidence.decision === 'ALLOW' && evidence.executed
@@ -80,9 +81,9 @@ export function validateRouteEvidence(evidence?: RouteEvidence): { valid: boolea
   if (JSON.stringify(evidence.route) !== JSON.stringify(expectedRoute(evidence))) {
     return { valid: false, reason: 'Route does not match the selected execution branch' };
   }
-  if (evidence.resultType === 'rag') {
+  if (evidence.resultType === 'rag' || evidence.resultType === 'chat') {
     if (evidence.decision !== 'ALLOW' || evidence.executed || evidence.dbTouched) {
-      return { valid: false, reason: 'RAG branch must complete without database execution' };
+      return { valid: false, reason: `${evidence.resultType === 'chat' ? 'Chat' : 'RAG'} branch must complete without database execution` };
     }
     return { valid: true };
   }
@@ -141,6 +142,10 @@ function liveStates(mode: ExecutionMode, events: TelemetryItem[], runState?: Run
   states.orchestrator = runState === 'queued' ? 'active' : 'allow';
   const modules = activeModules(events);
   if (modules.has('ROUTER') || modules.has('C0')) states.context_memory = 'allow';
+  if (modules.has('ORCHESTRATOR')) {
+    states.orchestrator = modules.get('ORCHESTRATOR') === 'ALLOW' ? 'allow' : 'active';
+    return states;
+  }
   if (modules.has('RAG')) {
     states.rag = runState === 'error' ? 'error' : modules.get('RAG') === 'ALLOW' ? 'allow' : 'active';
     return states;
@@ -278,24 +283,6 @@ export const RoutingMap: React.FC<RoutingMapProps> = ({
   const states = evidence && validation.valid ? terminalStates(evidence) : liveStates(mode, events, runState);
   const currentNode = latestNode(states);
   const particle = currentNode ? NODE_COORDINATES[currentNode] : null;
-  const modules = activeModules(events);
-  const ragBranch = evidence?.resultType === 'rag' || modules.has('RAG');
-  const completed = Boolean(evidence && validation.valid);
-  const status = !validation.valid && evidence
-    ? `Evidence invalid: ${validation.reason}`
-    : evidence?.resultType === 'rag'
-      ? 'Document route completed: grounded answer returned with sources; DB untouched'
-      : evidence?.decision === 'DENY'
-        ? 'Data route enforced: DENY at TrustedSQL boundary'
-      : evidence?.decision === 'ALLOW'
-          ? `Data route completed through ${mode === 'direct' ? 'Direct SQL' : 'TrustedSQL'}`
-          : runState === 'error' && ragBranch
-            ? 'Document route failed before a grounded answer could be returned'
-          : ragBranch
-            ? 'Retrieving and grounding university documents...'
-            : runState === 'queued' || runState === 'running'
-              ? 'Classifying request, then selecting the document or data branch...'
-              : 'No runtime route evidence yet';
 
   const nodes: Array<{ id: RouteNodeId; x: number; y: number; w: number; text: string }> = [
     { id: 'chat', x: 8, y: 50, w: 100, text: 'Chat Interface' },
@@ -390,9 +377,9 @@ export const RoutingMap: React.FC<RoutingMapProps> = ({
           style={{ transform: `translate3d(${viewport.x}px, ${viewport.y}px, 0) scale(${viewport.scale})` }}
         >
         {viewMode === 'route' ? (
-        <svg viewBox="0 0 360 304" className="routing-svg" aria-label="Document and database query routing architecture" role="img">
-          <title>Document and database query routing architecture</title>
-          <desc>Chat enters the Orchestrator. The Orchestrator exchanges context bidirectionally with Conversation Memory, then selects Vertex AI RAG or the active SQL branch.</desc>
+        <svg viewBox="0 0 360 304" className="routing-svg" aria-label="Conversation, document, and database query routing architecture" role="img">
+          <title>Conversation, document, and database query routing architecture</title>
+          <desc>Chat enters the Orchestrator. The Orchestrator exchanges context bidirectionally with Conversation Memory, answers ordinary conversation itself, or selects Vertex AI RAG or the active SQL branch.</desc>
           <defs>
             <marker id="route-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
               <path d="M0,0 L7,3.5 L0,7 Z" className="route-arrow" />
@@ -430,11 +417,7 @@ export const RoutingMap: React.FC<RoutingMapProps> = ({
       {viewMode === 'route' && <div className="accessible-node-states-container sr-only">
         {nodes.map((node) => <span key={node.id}>{nodeLabel[node.id]} — {states[node.id]}</span>)}
       </div>}
-      {viewMode === 'route' ? <div className="db-touch-status-line">
-        <span className="db-status-label">
-          DB Execution State: {evidence?.dbTouched ? 'Dispatched & Executed' : ragBranch && (completed || runState === 'running') ? 'Untouched (document route)' : 'No query dispatched'}
-        </span>
-      </div> : (
+      {viewMode === 'gnn' && (
         <div className="gnn-output-strip" data-testid="gnn-output-strip">
           {gnnGraph ? (
             <>
@@ -444,15 +427,6 @@ export const RoutingMap: React.FC<RoutingMapProps> = ({
           ) : <span>M2 graph unavailable for this turn</span>}
         </div>
       )}
-      <div className={`routing-map-status ${viewMode === 'route' && evidence && !validation.valid ? 'error' : ''}`} data-testid="routing-map-status" role="status" aria-live="polite">
-        {viewMode === 'route'
-          ? status
-          : gnnGraph
-            ? `Showing canonical M2 graph relations and exact inference outputs for Turn ${selectedTurnNumber ?? gnnGraph.currentTurn ?? '?'}`
-            : mode === 'direct'
-              ? 'M2 is bypassed in Direct SQL mode, so this turn has no GNN graph'
-              : 'No M2 GNN evidence was emitted for this turn'}
-      </div>
     </div>
   );
 };

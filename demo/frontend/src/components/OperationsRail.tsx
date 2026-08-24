@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { ExecutionMode, RouteEvidence } from '../app/types';
 import { RoutingMap } from './RoutingMap';
-import { TelemetryStream, StreamStatus } from './TelemetryStream';
 import { TelemetryItem, RunStatus, TurnRuntimeSnapshot } from '../state/demoReducer';
 
 interface OperationsRailProps {
@@ -9,9 +8,7 @@ interface OperationsRailProps {
   telemetryEvents?: TelemetryItem[];
   turnRuntimeSnapshots?: Record<number, TurnRuntimeSnapshot>;
   activeTurnNumber?: number;
-  streamStatus?: StreamStatus;
   executionState?: RunStatus | 'unknown';
-  telemetryError?: string | null;
   mode: ExecutionMode;
 }
 
@@ -20,9 +17,7 @@ export const OperationsRail: React.FC<OperationsRailProps> = ({
   telemetryEvents = [],
   turnRuntimeSnapshots = {},
   activeTurnNumber,
-  streamStatus = 'idle',
   executionState = 'idle',
-  telemetryError = null,
   mode,
 }) => {
   const availableTurns = useMemo(
@@ -53,7 +48,7 @@ export const OperationsRail: React.FC<OperationsRailProps> = ({
     ?? (selectedTurnNumber === activeTurnNumber && executionState !== 'unknown' ? executionState : undefined);
 
   return (
-    <aside className="right-operations-rail" aria-label="Operations and Telemetry">
+    <aside className="right-operations-rail" aria-label="Routing visualizations">
       <RoutingMap
         mode={mapMode}
         evidence={mapEvidence}
@@ -62,13 +57,6 @@ export const OperationsRail: React.FC<OperationsRailProps> = ({
         turnOptions={availableTurns}
         selectedTurnNumber={selectedTurnNumber}
         onSelectTurn={setSelectedTurnNumber}
-      />
-      <TelemetryStream
-        mode={mode}
-        events={telemetryEvents}
-        streamStatus={streamStatus}
-        executionState={executionState}
-        error={telemetryError}
       />
     </aside>
   );

@@ -120,6 +120,7 @@ export type DemoAction =
   | { type: 'REMOVE_SCENARIO'; payload: { scenarioKey: string } }
   | { type: 'SELECT_SCENARIO'; payload: { scenarioKey: string } }
   | { type: 'SELECT_TURN'; payload: { turnNumber: number } }
+  | { type: 'BEGIN_EDIT_TURN'; payload: { turnNumber: number } }
   | { type: 'RUN_QUEUED'; payload: { runId: string; sampleId: string; throughTurn: number; turns: string[]; mode?: ExecutionMode } }
   | { type: 'RUN_RUNNING'; payload: { runId: string } }
   | { type: 'MODULE_EVENT'; payload: ModuleEventDto }
@@ -132,8 +133,7 @@ export type DemoAction =
   | { type: 'TELEMETRY_UNAVAILABLE'; payload: { runId: string; executionState: 'queued' | 'running' | 'unknown'; message: string } }
   | { type: 'RUN_REQUEST_ERROR'; payload: string }
   | { type: 'RUN_CANCELLED'; payload: { runId: string } }
-  | { type: 'RESET_STATE' }
-  | { type: 'REPLAY_RUN' };
+  | { type: 'RESET_STATE' };
 
 function buildEvidenceKey(runId: string, sampleId: string | undefined, turnNumber: number | undefined, module: string): string {
   return `${runId}:${sampleId || 'default'}:${turnNumber || 1}:${module}`;
@@ -293,6 +293,38 @@ export function demoReducer(state: DemoState, action: DemoAction): DemoState {
 
     case 'SELECT_TURN':
       return { ...state, selectedTurnNumber: action.payload.turnNumber };
+
+    case 'BEGIN_EDIT_TURN': {
+      const turnNumber = action.payload.turnNumber;
+      if (
+        state.runState === 'queued'
+        || state.runState === 'running'
+        || !state.chatTurns.some((turn) => turn.turnNumber === turnNumber)
+      ) return state;
+      const retainedSnapshots = Object.fromEntries(
+        Object.entries(state.turnRuntimeSnapshots).filter(([key]) => Number(key) < turnNumber),
+      );
+      return {
+        ...state,
+        selectedTurnNumber: Math.max(1, turnNumber - 1),
+        activeRunId: null,
+        lastStreamSequence: 0,
+        runState: 'idle',
+        acceptedNlq: null,
+        chatTurns: state.chatTurns.filter((turn) => turn.turnNumber < turnNumber),
+        moduleEvidenceMap: {},
+        telemetryEvents: [],
+        turnRuntimeSnapshots: retainedSnapshots,
+        finalResult: null,
+        activeSampleId: null,
+        activeThroughTurn: null,
+        routeEvidence: null,
+        error: null,
+        telemetryUnavailable: false,
+        telemetryExecutionState: null,
+        telemetryError: null,
+      };
+    }
 
     case 'RUN_QUEUED': {
       const { runId, sampleId, turns } = action.payload;
@@ -555,10 +587,6 @@ export function demoReducer(state: DemoState, action: DemoAction): DemoState {
 
     case 'RESET_STATE':
       return resetRunState(state, state.scenarios[0]?.key ?? '');
-
-    case 'REPLAY_RUN':
-      if (!state.routeEvidence || !state.finalResult || !isTerminal(state.runState) || state.runState === 'error' || state.runState === 'cancelled') return state;
-      return syncActiveSnapshot(state, { routeEvidence: { ...state.routeEvidence, version: Number(state.routeEvidence.version) + 1 } });
 
     default:
       return state;

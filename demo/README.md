@@ -1,9 +1,10 @@
 # Interactive TrustedSQL + Vertex AI RAG demo
 
-This directory contains an interactive document-and-database security demo.
-Document questions are handled by Vertex AI RAG Engine; structured-data
-questions use either the complete TrustedSQL pipeline or the Direct SQL
-comparison path selected in the UI.
+This directory contains an interactive conversation, document, and database
+security demo. Ordinary chat is answered by the Orchestrator itself, document
+questions are handled by Vertex AI RAG Engine, and structured-data questions
+use either the complete TrustedSQL pipeline or the Direct SQL comparison path
+selected in the UI.
 
 ## Architecture
 
@@ -12,6 +13,7 @@ available to every branch:
 
 ```text
 Chat -> Orchestrator <-> Conversation Memory
+               |-> normal conversational answer (no tools)
                |-> Vertex AI RAG -> grounded answer + sources
                |-> Policy Engine -> TrustedSQL -> Education DB
                `-> SQL Generator -> Education DB       (Direct SQL mode)
@@ -21,6 +23,20 @@ Direct SQL mode bypasses the policy and TrustedSQL modules, but it does not
 disable Conversation Memory. The routing map stores evidence separately for
 each chat turn and can switch between the routing view and the interactive M2
 Intent GNN graph.
+
+Successful RAG and SQL branches return bounded evidence to the Orchestrator for
+a final response-synthesis step. The user sees a natural-language answer in the
+chat. RAG sources remain expandable, while executed SQL and result rows are
+retained under a collapsed `View TrustedSQL evidence` section. Security DENY
+decisions are never paraphrased.
+
+For an exact Student/User 40 dataset prompt with executable `sql_gt`, that
+evidence section also performs a post-runtime result comparison. Ground-truth
+SQL runs only after the TrustedSQL/Direct runtime has completed and is never
+provided to runtime modules. The UI reports canonical EX (the equality rule
+used by ST-EX), partial value overlap, shared/missing/runtime-only columns, and
+matched/missing/unexpected canonical rows. Multi-turn turns are labeled
+`MT-Turn-EX` because they use the same EX primitive at turn scope.
 
 The demo provider sets `modules.M2.hard_deny: false`. M2 still performs intent
 inference, emits its GNN graph and forwards cautionary scope constraints, but it
@@ -74,6 +90,8 @@ runtime, Google credentials, and RAG corpus:
 TRUSTEDSQL_DATABASE_URL="postgresql+psycopg2://user:password@host:5432/database"
 TRUSTEDSQL_VERTEX_PROJECT_ID="your-gcp-project-id"
 TRUSTEDSQL_VERTEX_LOCATION="global"
+VERTEX_CHAT_MODEL="gemini-2.5-flash"
+VERTEX_CHAT_MAX_OUTPUT_TOKENS="1024"
 
 # Google authentication: use an absolute path when using a service account
 GOOGLE_APPLICATION_CREDENTIALS="/absolute/path/to/service-account.json"
@@ -175,11 +193,17 @@ After starting the backend, inspect the bootstrap endpoint:
 curl -s http://127.0.0.1:8000/api/bootstrap | python -m json.tool
 ```
 
-A fully configured demo reports both top-level readiness and RAG readiness:
+A fully configured demo reports top-level, Orchestrator chat, and RAG readiness:
 
 ```json
 {
   "ready": true,
+  "chat": {
+    "ready": true,
+    "provider": "vertex_ai_orchestrator_chat",
+    "location": "global",
+    "modelConfigured": true
+  },
   "rag": {
     "ready": true,
     "provider": "vertex_ai_rag_engine",
@@ -198,12 +222,16 @@ can remain ready even when the independent RAG branch is not configured.
 
 - Type or paste text into the center chat; prompt-library cards never execute
   automatically.
+- Greetings, small talk, and ordinary assistant questions remain in the
+  Orchestrator chat branch; RAG, TrustedSQL, and the database are not invoked.
 - Document questions such as syllabus, tuition, or policy questions route to
   Vertex AI RAG and return expandable sources.
 - Changing or identity-bound database questions route through the selected
   TrustedSQL or Direct SQL data mode.
-- The Prompt Library searches all benchmark datasets by scenario ID or source
-  filename and can filter Student/Lecturer scenarios.
+- Successful document and data results are paraphrased by the Orchestrator into
+  a normal chat response; sources and SQL/table evidence remain inspectable.
+- The Prompt Library shows the curated presentation scenarios loaded by the
+  backend catalog.
 - Use the Turn selector in Query Routing Map to inspect historical routing and
   M2 GNN evidence. Chat history is cleared only by Reset.
 
@@ -218,42 +246,34 @@ returned by the previous run (`null` starts a new conversation):
 {"message":"next user query","conversationId":"conversation-..."}
 ```
 
-For the editable `MT-MAL-001` comparison, the malicious option branches from
-the authoritative history through Turn 2 and replaces the latest Turn 3:
-
-```json
-{"message":"edited turn 3 query","conversationId":"conversation-...","replaceTurn":3}
-```
-
-The backend returns a new opaque conversation ID for this branch. It never
-accepts browser-supplied history and only permits replacement of the latest
-completed turn.
-
 The prompt library is sample content, not an automatic runner. Queries execute
 only after a user types or pastes text into the chat and presses Send. Prior
 turn results are held by the backend as trusted history; they are not accepted
 from the browser and are not executed again when a new turn arrives.
 
-The Prompt Library can search all five read-only benchmark datasets by scenario
-ID (for example `MT-MAL-120` or `ST-PI-042`) or dataset filename. Selecting a
-search result loads only that record's user-query text and adds it as an
-expandable library card. Only the `BENIGN`/`MALICIOUS` turn label is exposed for
-demo guidance; ground-truth SQL and attack metadata are not sent to the browser,
-and the runtime session identity remains Student/User 40.
+Each completed user turn has an Edit action. Editing removes that turn and all
+dependent turns from the visible conversation, preloads the selected text into
+the chatbox, and submits `replaceTurn` when the replacement is sent. The backend
+branches to a new opaque conversation ID containing only the authoritative
+history before the edited turn.
+
+The Prompt Library exposes only each scenario's user-query text and
+`BENIGN`/`MALICIOUS` labels for demo guidance. Ground-truth SQL and attack
+metadata are not sent to the browser, and the runtime session identity remains
+Student/User 40.
 
 The initial Student/User 40 library is a tested presentation set:
 
 - `RAG-DOC-001`: CEA201 syllabus and 2025-2026 tuition questions.
 - `ST-BENIGN-001`: simple own-profile lookup in Direct SQL mode.
 - `ST-RBAC-066`: restricted course approval field in Direct SQL mode.
-- `MT-MAL-001`: two enrollment turns plus two alternative prompts both labeled
-  Turn 3. Run the benign Turn 3 first, then use `Copy to edit` to replace that
-  same Turn 3 with the minimally changed cross-enrollment request.
+- `MT-MAL-150`: three compact aggregate lookups over public application types
+  and the student's own submissions, followed by a malicious Turn 4 request
+  for cross-student processing records and the staff accounts involved.
 - `ST-PI-127`: role-escalation prompt injection in TrustedSQL mode.
 
-Cards only copy text into the editable chat box. The `MT-MAL-001` malicious
-option arms an explicit Turn 3 replacement; after the user pastes or edits the
-text and presses Send, the UI replaces Turn 3 instead of appending Turn 4.
+Cards only copy text into the editable chat box. Prompts execute only after the
+user pastes or edits the text and presses Send.
 
 RAG citations are collapsed to a short source title by default. Expanding one
 source reveals only that source's retrieved passage and document reference.

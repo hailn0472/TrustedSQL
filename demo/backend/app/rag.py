@@ -18,6 +18,7 @@ from urllib.parse import unquote, urlsplit
 
 DOCUMENT_ROUTE = "rag"
 DATABASE_ROUTE = "database"
+CHAT_ROUTE = "chat"
 MAX_RAG_ANSWER_CHARS = 12_000
 MAX_RAG_SOURCES = 8
 MAX_SOURCE_SNIPPET_CHARS = 360
@@ -116,11 +117,12 @@ def _fold(value: str) -> str:
 
 
 class KnowledgeQueryRouter:
-    """Conservative router: only clear document questions enter RAG.
+    """Route university documents, structured records, and ordinary chat.
 
-    Database/personal-record indicators take precedence.  Ambiguous prompts
-    default to the database branch so RAG cannot accidentally answer changing
-    or identity-bound records from static documents.
+    RAG requires a clear static-document signal.  The database path requires a
+    data-request signal bound to an education record; generic conversational
+    words such as ``show``, ``tell`` or ``my`` are never enough on their own.
+    Everything else remains with the Orchestrator's normal chat branch.
     """
 
     _DOCUMENT_PATTERNS = (
@@ -140,11 +142,31 @@ class KnowledgeQueryRouter:
         ("live-record", r"\bdiem danh\b|\battendance\b|\btrang thai thanh toan\b|\bpayment status\b|\bda dong\b|\bcon no\b|\bbalance\b"),
     )
     _DATABASE_ACTIONS = (
-        ("database-list", r"\bdanh sach\b|\blist\b|\bshow\b|\bdem\b|\bcount\b|\bbao nhieu sinh vien\b"),
+        ("database-list", r"\bdanh sach\b|\blist\b|\bshow\b|\bdem\b|\bcount\b|\bbao nhieu\b|\bhow many\b"),
+        ("database-lookup", r"\blook up\b|\blookup\b|\bfind\b|\bretrieve\b|\bgive me\b|\btell me\b|\bget\b|\btra cuu\b|\bcho toi\b|\bxem\b|\btim\b|\blay\b"),
         ("grade-record", r"\bdiem cua\b|\bdiem mon\b|\bgrade(s)? for\b|\baverage\b|\bstatus\b"),
         ("section-record", r"\blop hoc\b|\bclass section\b|\bsection\b|\broster\b"),
     )
-    _FOLLOW_UP = re.compile(r"^(con|the con|vay|noi them|chi tiet hon|what about|and|also|more|that|it)\b")
+    _DATABASE_ENTITIES = (
+        ("account-record", r"\baccount\b|\bprofile\b|\busername\b|\brecorded name\b|\bfull name\b|\bmy name\b|\bemail\b|\bdate of birth\b|\bdob\b"),
+        ("student-profile", r"\bstudent code\b|\bbatch\b|\bstart date\b|\bstudent status\b|\bstudy status\b|\bmajor(?: code| name)?\b|\bnarrow[- ]major\b"),
+        ("organization-record", r"\bcampus(?: name| address)?\b|\bdepartment(?: code| name)?\b|\bdep(?:artment)? code\b"),
+        ("lecturer-record", r"\blecturer('?s|s)?\b|\binstructor('?s|s)?\b"),
+        ("application-record", r"\bapplication(?: type| category| record)?s?\b|\bsubmitted application(s)?\b"),
+        ("course-record", r"\bcourse(s)?\b|\bmon hoc\b|\bkhoa hoc\b"),
+        ("enrollment-record", r"\benroll(ed|ment)?\b|\bdang ky\b|\bcourse average\b|\bgpa\b"),
+        ("grade-entity", r"\bgrade(s)?\b|\bdiem\b|\baverage\b|\bgrading category\b"),
+        ("section-entity", r"\bsection(s)?\b|\broster\b|\bclass result\b|\bclass name\b"),
+        ("schedule-entity", r"\bschedule\b|\bstart time\b|\bend time\b|\broom\b|\bslot\b|\battendance\b"),
+        ("authorization-record", r"\bapproval\b|\bpermission(s)?\b|\bpermission mapping(s)?\b|\baccess[- ]right(s)?\b|\baccess decision\b|\binternal decision\b|\bsystem access\b|\baccount role(s)?\b|\brole mapping(s)?\b|\badmin account(s)?\b"),
+        ("education-identifier", r"\b[a-z]{2,5}\d{3,5}\b|\b(?:su|fa|sp)\d{2}\b|\bhcm-[a-z]{2}\d{4}\b"),
+        ("record-marker", r"\brecorded\b|\bdatabase\b|\brecord(s)?\b"),
+    )
+    _FOLLOW_UP = re.compile(
+        r"^(?:con|the con|vay|noi them|chi tiet hon|what about|and|also|more|that|it|"
+        r"for (?:that|the same)|from (?:that|those|the same)|using (?:that|those|the same)|within (?:that|the same))\b"
+    )
+    _CONTEXT_REFERENCE = re.compile(r"\b(?:that|those|the same|same|previous|above)\b")
 
     @classmethod
     def classify(cls, query: str, history: Sequence[Mapping[str, Any]] = ()) -> QueryRoute:
@@ -152,22 +174,27 @@ class KnowledgeQueryRouter:
         document_hits = tuple(label for label, pattern in cls._DOCUMENT_PATTERNS if re.search(pattern, folded))
         personal_hits = tuple(label for label, pattern in cls._PERSONAL_RECORD_PATTERNS if re.search(pattern, folded))
         database_hits = tuple(label for label, pattern in cls._DATABASE_ACTIONS if re.search(pattern, folded))
+        entity_hits = tuple(label for label, pattern in cls._DATABASE_ENTITIES if re.search(pattern, folded))
 
         # Explicit document-policy phrases such as "cách tính điểm" are not
         # individual grade records unless the prompt also binds a person.
         identity_bound = any(label in {"personal-record", "assigned-scope", "student-record"} for label in personal_hits)
-        if ("live-record" in personal_hits and identity_bound) or (personal_hits and (database_hits or not document_hits)):
-            return QueryRoute(DATABASE_ROUTE, "identity-bound or changing record", personal_hits + database_hits)
+        if "live-record" in personal_hits and identity_bound:
+            return QueryRoute(DATABASE_ROUTE, "identity-bound changing record", personal_hits + database_hits + entity_hits)
         if document_hits:
             return QueryRoute(DOCUMENT_ROUTE, "static university document knowledge", document_hits)
-        if personal_hits or database_hits:
-            return QueryRoute(DATABASE_ROUTE, "structured education data", personal_hits + database_hits)
+        if entity_hits and (personal_hits or database_hits or "record-marker" in entity_hits):
+            return QueryRoute(DATABASE_ROUTE, "structured education data", personal_hits + database_hits + entity_hits)
 
-        if cls._FOLLOW_UP.search(folded) and history:
+        contextual_follow_up = bool(
+            cls._FOLLOW_UP.search(folded)
+            or (cls._CONTEXT_REFERENCE.search(folded) and (database_hits or entity_hits))
+        )
+        if contextual_follow_up and history:
             previous = history[-1].get("route_type")
-            if previous in {DOCUMENT_ROUTE, DATABASE_ROUTE}:
+            if previous in {DOCUMENT_ROUTE, DATABASE_ROUTE, CHAT_ROUTE}:
                 return QueryRoute(str(previous), "follow-up preserves the previous branch", ("conversation-context",))
-        return QueryRoute(DATABASE_ROUTE, "ambiguous request defaults to governed data path", ("safe-default",))
+        return QueryRoute(CHAT_ROUTE, "ordinary conversation handled by the Orchestrator", ("conversation",))
 
 
 def _source_title(uri: str | None, document_name: str | None, explicit: str | None) -> str:
@@ -321,6 +348,7 @@ class VertexRagService:
 
 
 __all__ = [
+    "CHAT_ROUTE",
     "DATABASE_ROUTE",
     "DOCUMENT_ROUTE",
     "KnowledgeQueryRouter",

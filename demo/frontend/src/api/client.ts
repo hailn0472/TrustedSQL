@@ -2,7 +2,7 @@ import { ExecutionMode, GnnGraphSnapshot, PromptScenarioSearchItem, ScenarioMeta
 
 const REQUIRED_MODULES = ['C0', 'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'X1'] as const;
 const REQUIRED_MODULE_SET = new Set<string>(REQUIRED_MODULES);
-const EVENT_MODULE_SET = new Set<string>([...REQUIRED_MODULES, 'ROUTER', 'RAG']);
+const EVENT_MODULE_SET = new Set<string>([...REQUIRED_MODULES, 'ROUTER', 'ORCHESTRATOR', 'RAG']);
 const KNOWN_SCENARIO_KEYS = ['multiturn'] as const;
 const ROUTE_NODES = ['chat', 'orchestrator', 'context_memory', 'rag', 'policy_engine', 'trustedsql', 'sql_generator', 'education_db'] as const;
 const MAX_TEXT = 500;
@@ -44,6 +44,7 @@ export interface BootstrapResponseDto {
   catalog: BootstrapCatalogItem[];
   architecture: string[];
   ragReady: boolean;
+  chatReady: boolean;
 }
 
 export type TelemetryExecutionState = 'queued' | 'running' | 'unknown';
@@ -106,6 +107,36 @@ export interface RetractEventDto {
   reason?: string;
 }
 
+export type ComparisonCell = string | number | boolean | null | ComparisonCell[];
+
+export interface ExecutionComparisonDto {
+  available: boolean;
+  metric: 'ST-EX' | 'MT-Turn-EX';
+  datasetId: string;
+  datasetTurn: number;
+  rule: string;
+  reason?: string;
+  exactMatch?: boolean;
+  score?: number;
+  softF1?: number;
+  runtimeRowCount?: number;
+  expectedRowCount?: number;
+  canonicalRuntimeRowCount?: number;
+  canonicalExpectedRowCount?: number;
+  runtimeColumns?: string[];
+  expectedColumns?: string[];
+  matchedColumns?: string[];
+  missingColumns?: string[];
+  unexpectedColumns?: string[];
+  matchedRowCount?: number;
+  runtimePreviewRows?: ComparisonCell[][];
+  expectedPreviewRows?: ComparisonCell[][];
+  matchedRows?: ComparisonCell[][];
+  missingRows?: ComparisonCell[][];
+  unexpectedRows?: ComparisonCell[][];
+  differencesTruncated?: boolean;
+}
+
 export interface FinalResultDto {
   runId?: string;
   sampleId?: string;
@@ -122,9 +153,10 @@ export interface FinalResultDto {
   error?: string;
   route: RouteNodeId[];
   mode?: ExecutionMode;
-  resultType?: 'sql' | 'rag';
+  resultType?: 'sql' | 'rag' | 'chat';
   answer?: string;
   sources?: RagSourceDto[];
+  executionComparison?: ExecutionComparisonDto;
 }
 
 export interface RunStateDto extends RunJobDto {
@@ -173,8 +205,10 @@ const SAFE_STAGE_LABELS: Record<string, string> = {
   policy_aware_sql_generator: 'Generate policy-aware SQL',
   sql_conformance_validator: 'Validate generated SQL',
   readonly_sql_executor: 'Execute read-only SQL',
-  intent_router: 'Classify document or database request',
-  orchestrator: 'Orchestrate document or database route',
+  intent_router: 'Classify conversation, document, or database request',
+  orchestrator: 'Select conversation, document, or database route',
+  orchestrator_chat_generation: 'Generate normal Orchestrator response',
+  orchestrator_response_synthesis: 'Synthesize conversational answer from route evidence',
   direct_context_memory: 'Hydrate conversation memory',
   vertex_rag_retrieval: 'Retrieve from Vertex AI RAG Engine',
   vertex_rag_grounding: 'Validate grounding and citations',
@@ -300,6 +334,7 @@ export function validateBootstrapResponse(data: unknown): BootstrapResponseDto |
   if (!isRecord(data.readiness) || typeof data.readiness.ready !== 'boolean' || data.readiness.ready !== data.ready) return null;
   const readiness = data.readiness.ready ? 'ready' : 'not-ready';
   const ragReady = isRecord(data.rag) && typeof data.rag.ready === 'boolean' ? data.rag.ready : false;
+  const chatReady = isRecord(data.chat) && typeof data.chat.ready === 'boolean' ? data.chat.ready : false;
   const rawCatalog = Array.isArray(data.catalog)
     ? data.catalog.map((item) => ({ item, key: undefined }))
     : isRecord(data.catalog)
@@ -317,6 +352,7 @@ export function validateBootstrapResponse(data: unknown): BootstrapResponseDto |
     catalog: normalizedCatalog,
     architecture,
     ragReady,
+    chatReady,
   };
 }
 
@@ -534,7 +570,8 @@ export function validateRetractEventDto(data: unknown): RetractEventDto | null {
   };
 }
 
-function expectedRoute(decision: RouteDecision, executed: boolean, mode: ExecutionMode, resultType: 'sql' | 'rag'): RouteNodeId[] {
+function expectedRoute(decision: RouteDecision, executed: boolean, mode: ExecutionMode, resultType: 'sql' | 'rag' | 'chat'): RouteNodeId[] {
+  if (resultType === 'chat') return ['chat', 'orchestrator', 'context_memory'];
   if (resultType === 'rag') return ['chat', 'orchestrator', 'context_memory', 'rag'];
   if (mode === 'direct') {
     return decision === 'ALLOW' && executed
@@ -575,6 +612,94 @@ function validRows(columns: unknown, rows: unknown): { columns?: string[]; rows?
   return { columns: normalizedColumns, rows: normalizedRows };
 }
 
+function validComparisonCell(value: unknown, depth = 0): value is ComparisonCell {
+  if (value === null || typeof value === 'string' || typeof value === 'boolean' || isFiniteNumber(value)) return true;
+  return depth < 3 && Array.isArray(value) && value.length <= MAX_COLUMNS
+    && value.every((item) => validComparisonCell(item, depth + 1));
+}
+
+function comparisonRows(value: unknown): ComparisonCell[][] | null {
+  if (!Array.isArray(value) || value.length > 5) return null;
+  const rows: ComparisonCell[][] = [];
+  for (const row of value) {
+    if (!Array.isArray(row) || row.length > MAX_COLUMNS || !row.every((cell) => validComparisonCell(cell))) return null;
+    rows.push(row as ComparisonCell[]);
+  }
+  return rows;
+}
+
+function comparisonColumns(value: unknown): string[] | null {
+  if (!Array.isArray(value) || value.length > MAX_COLUMNS) return null;
+  const columns = value.map((column) => boundedText(column, 120));
+  return columns.every((column): column is string => column !== undefined) ? columns : null;
+}
+
+function validateExecutionComparison(value: unknown): ExecutionComparisonDto | null {
+  if (!isRecord(value) || typeof value.available !== 'boolean') return null;
+  if (!['ST-EX', 'MT-Turn-EX'].includes(value.metric as string)) return null;
+  if (typeof value.datasetId !== 'string' || !DATASET_SCENARIO_ID.test(value.datasetId)) return null;
+  if (!isPositiveInteger(value.datasetTurn)) return null;
+  const rule = boundedRequiredText(value.rule, 240);
+  if (!rule) return null;
+  const base = {
+    available: value.available,
+    metric: value.metric as ExecutionComparisonDto['metric'],
+    datasetId: value.datasetId,
+    datasetTurn: value.datasetTurn,
+    rule,
+  };
+  if (!value.available) {
+    const reason = boundedRequiredText(value.reason, 300);
+    return reason ? { ...base, reason } : null;
+  }
+  if (typeof value.exactMatch !== 'boolean' || (value.score !== 0 && value.score !== 1)) return null;
+  if (!isFiniteNumber(value.softF1) || value.softF1 < 0 || value.softF1 > 1) return null;
+  const countKeys = ['runtimeRowCount', 'expectedRowCount', 'canonicalRuntimeRowCount', 'canonicalExpectedRowCount', 'matchedRowCount'] as const;
+  if (countKeys.some((key) => !Number.isInteger(value[key]) || (value[key] as number) < 0 || (value[key] as number) > MAX_ROWS)) return null;
+  const runtimeColumns = comparisonColumns(value.runtimeColumns);
+  const expectedColumns = comparisonColumns(value.expectedColumns);
+  const matchedColumns = comparisonColumns(value.matchedColumns);
+  const missingColumns = comparisonColumns(value.missingColumns);
+  const unexpectedColumns = comparisonColumns(value.unexpectedColumns);
+  const matchedRows = comparisonRows(value.matchedRows);
+  const missingRows = comparisonRows(value.missingRows);
+  const unexpectedRows = comparisonRows(value.unexpectedRows);
+  if (!runtimeColumns || !expectedColumns || !matchedColumns || !missingColumns || !unexpectedColumns || !matchedRows || !missingRows || !unexpectedRows) return null;
+  // Older running demo backends do not emit the explicit previews yet. Build
+  // equivalent canonical previews from the existing row diagnostics so HMR
+  // does not invalidate an otherwise valid completed turn.
+  const runtimePreviewRows = value.runtimePreviewRows === undefined
+    ? [...matchedRows, ...unexpectedRows].slice(0, 5)
+    : comparisonRows(value.runtimePreviewRows);
+  const expectedPreviewRows = value.expectedPreviewRows === undefined
+    ? [...matchedRows, ...missingRows].slice(0, 5)
+    : comparisonRows(value.expectedPreviewRows);
+  if (!runtimePreviewRows || !expectedPreviewRows) return null;
+  if (typeof value.differencesTruncated !== 'boolean') return null;
+  return {
+    ...base,
+    exactMatch: value.exactMatch,
+    score: value.score,
+    softF1: value.softF1,
+    runtimeRowCount: value.runtimeRowCount as number,
+    expectedRowCount: value.expectedRowCount as number,
+    canonicalRuntimeRowCount: value.canonicalRuntimeRowCount as number,
+    canonicalExpectedRowCount: value.canonicalExpectedRowCount as number,
+    runtimeColumns,
+    expectedColumns,
+    matchedColumns,
+    missingColumns,
+    unexpectedColumns,
+    matchedRowCount: value.matchedRowCount as number,
+    runtimePreviewRows,
+    expectedPreviewRows,
+    matchedRows,
+    missingRows,
+    unexpectedRows,
+    differencesTruncated: value.differencesTruncated,
+  };
+}
+
 export function validateFinalResultDto(data: unknown, expected?: RunCorrelationContext): FinalResultDto | null {
   if (!isRecord(data) || !['ALLOW', 'DENY', 'ERROR'].includes(data.decision as string)) return null;
   const runId = boundedText(data.runId);
@@ -593,14 +718,16 @@ export function validateFinalResultDto(data: unknown, expected?: RunCorrelationC
       ? 'direct'
       : null;
   if (!mode || (expected?.mode && mode !== expected.mode)) return null;
-  const resultType = data.resultType === 'rag'
-    ? 'rag'
+  const resultType = data.resultType === 'chat'
+    ? 'chat'
+    : data.resultType === 'rag'
+      ? 'rag'
     : data.resultType === undefined || data.resultType === 'sql'
       ? 'sql'
       : null;
   if (!resultType) return null;
   if (typeof data.executed !== 'boolean' || typeof data.dbTouched !== 'boolean') return null;
-  if (resultType === 'rag') {
+  if (resultType === 'rag' || resultType === 'chat') {
     if (decision !== 'ALLOW' || data.executed || data.dbTouched) return null;
   } else {
     if (decision === 'ALLOW' && (!data.executed || !data.dbTouched)) return null;
@@ -641,7 +768,14 @@ export function validateFinalResultDto(data: unknown, expected?: RunCorrelationC
     sources = parsed;
   }
   if (resultType === 'rag' && (!answer || !sources?.length || sql || table.columns || table.rows)) return null;
-  if (resultType === 'sql' && (answer !== undefined || sources !== undefined)) return null;
+  if (resultType === 'chat' && (!answer || sources !== undefined || sql || table.columns || table.rows)) return null;
+  if (resultType === 'sql' && sources !== undefined) return null;
+  let executionComparison: ExecutionComparisonDto | undefined;
+  if (data.executionComparison !== undefined && data.executionComparison !== null) {
+    const parsedComparison = validateExecutionComparison(data.executionComparison);
+    if (!parsedComparison || resultType !== 'sql') return null;
+    executionComparison = parsedComparison;
+  }
   return {
     runId,
     sampleId,
@@ -661,6 +795,7 @@ export function validateFinalResultDto(data: unknown, expected?: RunCorrelationC
     resultType,
     answer,
     sources,
+    executionComparison,
   };
 }
 
@@ -816,6 +951,7 @@ export function createApiClient(baseUrl = '/api'): ApiClient {
       if (!validated) throw safeError('Invalid or non-conforming architecture/bootstrap response');
       const tools: ToolReadiness[] = [
         { id: 'context_memory', name: 'Conversation Memory', ready: validated.ready },
+        { id: 'orchestrator_chat', name: 'Orchestrator Chat', ready: validated.chatReady },
         { id: 'rag_context', name: 'Vertex AI RAG Engine', ready: validated.ragReady },
         { id: 'policy_engine', name: 'Policy Engine', ready: validated.ready },
         { id: 'trustedsql', name: 'TrustedSQL Engine', ready: validated.ready },

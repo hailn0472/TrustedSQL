@@ -66,7 +66,7 @@ export type RouteNodeState = 'idle' | 'active' | 'allow' | 'deny' | 'error' | 'u
 export interface RouteEvidence {
   version: number | string;
   mode?: ExecutionMode;
-  resultType?: 'sql' | 'rag';
+  resultType?: 'sql' | 'rag' | 'chat';
   decision: RouteDecision;
   executed: boolean;
   dbTouched: boolean;
