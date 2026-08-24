@@ -11,6 +11,8 @@ export interface ToolReadiness {
 
 export interface ScenarioTurn {
   turnNumber: number;
+  optionId?: string;
+  replacesTurn?: number;
   label: string;
   classification: 'BENIGN' | 'MALICIOUS';
   description: string;

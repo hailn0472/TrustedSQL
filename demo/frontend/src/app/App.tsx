@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { ExecutionMode, ScenarioMetadata, ScenarioRoleFilter, SessionIdentity, ToolReadiness } from './types';
+import { ExecutionMode, ScenarioMetadata, ScenarioRoleFilter, ScenarioTurn, SessionIdentity, ToolReadiness } from './types';
 import { ScenarioRail } from '../components/ScenarioRail';
 import { ChatStage } from '../components/ChatStage';
 import { OperationsRail } from '../components/OperationsRail';
@@ -10,7 +10,7 @@ import { StreamStatus } from '../components/TelemetryStream';
 import { demoReducer, initialDemoState } from '../state/demoReducer';
 import '../styles/cockpit.css';
 
-const DEFAULT_IDENTITY: SessionIdentity = { role: 'Lecturer', userId: 1, username: 'Lecturer User 1' };
+const DEFAULT_IDENTITY: SessionIdentity = { role: 'Student', userId: 40, username: 'Student User 40' };
 
 interface AppProps {
   /** Kept for compatibility with the shell contract; production state comes only from bootstrap. */
@@ -34,6 +34,7 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
   const [streamError, setStreamError] = useState<string | null>(null);
   const [draft, setDraft] = useState('');
   const [executionMode, setExecutionMode] = useState<ExecutionMode>('trustedsql');
+  const [armedReplacement, setArmedReplacement] = useState<{ scenarioKey: string; turnNumber: number } | null>(null);
   activeRunIdRef.current = state.activeRunId;
   runStateRef.current = state.runState;
 
@@ -91,6 +92,7 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
     invalidateLifecycle();
     conversationIdRef.current = null;
     setDraft('');
+    setArmedReplacement(null);
     dispatch({ type: 'RESET_STATE' });
   };
 
@@ -101,6 +103,7 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
 
   const handleSelectScenario = (scenarioKey: string) => {
     if (isActive || pendingCreateRef.current || !state.scenarios.some((scenario) => scenario.key === scenarioKey)) return;
+    if (scenarioKey !== state.selectedScenarioKey) setArmedReplacement(null);
     dispatch({ type: 'SELECT_SCENARIO', payload: { scenarioKey } });
   };
 
@@ -118,31 +121,48 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
 
   const handleRemoveScenario = (scenarioKey: string) => {
     if (isActive || pendingCreateRef.current) return;
+    if (armedReplacement?.scenarioKey === scenarioKey) setArmedReplacement(null);
     dispatch({ type: 'REMOVE_SCENARIO', payload: { scenarioKey } });
+  };
+
+  const handleCopyScenarioTurn = (scenarioKey: string, turn: ScenarioTurn) => {
+    if (turn.replacesTurn === turn.turnNumber) {
+      setArmedReplacement({ scenarioKey, turnNumber: turn.turnNumber });
+      return;
+    }
+    setArmedReplacement(null);
   };
 
   const handleSend = async () => {
     const requestedNlq = draft.trim();
     if (state.bootstrapState !== 'ready' || !requestedNlq || isActive || pendingCreateRef.current || state.chatTurns.length >= 20) return;
-    const requestedTurns = [...state.chatTurns.map((turn) => turn.nlq), requestedNlq];
-    const requestedTurn = requestedTurns.length;
+    const replaceTurn = armedReplacement?.scenarioKey === state.selectedScenarioKey
+      && armedReplacement.turnNumber === state.chatTurns.length
+      ? armedReplacement.turnNumber
+      : undefined;
+    const requestedTurns = replaceTurn === undefined
+      ? [...state.chatTurns.map((turn) => turn.nlq), requestedNlq]
+      : [...state.chatTurns.slice(0, replaceTurn - 1).map((turn) => turn.nlq), requestedNlq];
+    const requestedTurn = replaceTurn ?? requestedTurns.length;
     const submittedConversationId = conversationIdRef.current;
     const lifecycleToken = ++lifecycleTokenRef.current;
     const controller = new AbortController();
     pendingCreateRef.current = controller;
     try {
-      const job = await clientRef.current.createRun(requestedNlq, submittedConversationId, controller.signal, executionMode);
+      const job = await clientRef.current.createRun(requestedNlq, submittedConversationId, controller.signal, executionMode, replaceTurn);
       if (controller.signal.aborted || lifecycleToken !== lifecycleTokenRef.current) return;
       if (
         job.scenarioKey !== 'multiturn'
         || job.turnType !== 'multi'
         || (job.mode ?? 'trustedsql') !== executionMode
         || job.throughTurn !== requestedTurn
-        || (submittedConversationId !== null && job.conversationId !== submittedConversationId)
+        || (replaceTurn === undefined && submittedConversationId !== null && job.conversationId !== submittedConversationId)
+        || (replaceTurn !== undefined && job.conversationId === submittedConversationId)
       ) {
         throw new Error('Create run response did not match the active conversation');
       }
       conversationIdRef.current = job.conversationId;
+      setArmedReplacement(null);
       dispatch({
         type: 'RUN_QUEUED',
         payload: { runId: job.runId, sampleId: job.sampleId, throughTurn: requestedTurn, turns: requestedTurns, mode: job.mode ?? executionMode },
@@ -280,6 +300,7 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
           onSearchScenarios={handleSearchPromptScenarios}
           onImportScenario={handleImportScenario}
           onRemoveScenario={handleRemoveScenario}
+          onCopyScenarioTurn={handleCopyScenarioTurn}
         />
         <ChatStage
           scenario={currentScenario}
@@ -296,7 +317,9 @@ export const App: React.FC<AppProps> = ({ sessionIdentity = DEFAULT_IDENTITY, ap
           onSend={handleSend}
           onCancel={handleCancel}
           onReplay={() => dispatch({ type: 'REPLAY_RUN' })}
+          editingTurnNumber={armedReplacement?.scenarioKey === state.selectedScenarioKey ? armedReplacement.turnNumber : null}
           mode={executionMode}
+          sessionIdentity={sessionIdentity}
         />
         <OperationsRail
           mode={executionMode}

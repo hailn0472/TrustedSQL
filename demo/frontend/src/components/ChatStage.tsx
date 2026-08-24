@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useRef } from 'react';
-import { ExecutionMode, ScenarioMetadata, ReadinessState } from '../app/types';
+import { ExecutionMode, ScenarioMetadata, ReadinessState, SessionIdentity } from '../app/types';
 import { FinalResultDto, safeFinalError } from '../api/client';
 import { ChatTurn, RunStatus } from '../state/demoReducer';
 import {
@@ -35,7 +35,9 @@ interface ChatStageProps {
   onSend: () => void;
   onCancel: () => void;
   onReplay: () => void;
+  editingTurnNumber?: number | null;
   mode: ExecutionMode;
+  sessionIdentity: SessionIdentity;
 }
 
 const MODULES = ['C0', 'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'X1'];
@@ -55,7 +57,9 @@ export const ChatStage: React.FC<ChatStageProps> = ({
   onSend,
   onCancel,
   onReplay,
+  editingTurnNumber = null,
   mode,
+  sessionIdentity,
 }) => {
   const isReady = readinessState === 'ready';
   const isActive = runState === 'queued' || runState === 'running';
@@ -257,7 +261,7 @@ export const ChatStage: React.FC<ChatStageProps> = ({
             </span>
           </div>
           <div className="chat-sub-meta">
-            {scenario?.canonicalId ?? 'MT-MAL-420'} prompt library · Lecturer/User 1 · {chatTurns.length} chat turns
+            {scenario?.canonicalId ?? 'No scenario selected'} prompt library · {sessionIdentity.role}/User {sessionIdentity.userId} · {chatTurns.length} chat turns
           </div>
         </div>
       </div>
@@ -278,7 +282,7 @@ export const ChatStage: React.FC<ChatStageProps> = ({
           <Fragment key={turn.turnNumber}>
             <div className="chat-conversation-row user-row" data-testid={`user-prompt-row-${turn.turnNumber}`}>
               <div className="user-bubble" data-testid={testId('user-prompt-bubble', turn.turnNumber)}>
-                <div className="bubble-speaker">Lecturer (User ID: 1) · Turn {turn.turnNumber}</div>
+                <div className="bubble-speaker">{sessionIdentity.role} (User ID: {sessionIdentity.userId}) · Turn {turn.turnNumber}</div>
                 <div className="bubble-content">{turn.nlq}</div>
               </div>
               <div className="avatar user-avatar" aria-hidden="true"><User size={16} /></div>
@@ -342,7 +346,9 @@ export const ChatStage: React.FC<ChatStageProps> = ({
             className="chatbox-input"
             data-testid="chatbox-input"
             aria-label="Chat message"
-            placeholder={mode === 'trustedsql' ? 'Ask about documents or query data through TrustedSQL…' : 'Ask about documents or query data through Direct SQL…'}
+            placeholder={editingTurnNumber
+              ? `Paste the edited prompt to replace Turn ${editingTurnNumber}…`
+              : mode === 'trustedsql' ? 'Ask about documents or query data through TrustedSQL…' : 'Ask about documents or query data through Direct SQL…'}
             value={draft}
             maxLength={2_000}
             rows={2}
@@ -371,7 +377,11 @@ export const ChatStage: React.FC<ChatStageProps> = ({
         </div>
         <div className="composer-meta">
           <span>{draft.length}/2000</span>
-          <span>{atTurnLimit ? '20-turn limit reached' : 'Enter to send · Shift+Enter for a new line'}</span>
+          <span>{atTurnLimit
+            ? '20-turn limit reached'
+            : editingTurnNumber
+              ? `Editing Turn ${editingTurnNumber} · Send replaces the previous Turn ${editingTurnNumber}`
+              : 'Enter to send · Shift+Enter for a new line'}</span>
         </div>
         <div className="sr-only" id="send-reason">
           {!isReady ? 'Backend is not ready' : isActive ? 'Execution in progress' : !draft.trim() ? 'Enter a message to send' : 'Ready to send'}

@@ -22,6 +22,11 @@ disable Conversation Memory. The routing map stores evidence separately for
 each chat turn and can switch between the routing view and the interactive M2
 Intent GNN graph.
 
+The demo provider sets `modules.M2.hard_deny: false`. M2 still performs intent
+inference, emits its GNN graph and forwards cautionary scope constraints, but it
+does not terminate a request itself. M3-M5 and the remaining TrustedSQL layers
+continue to enforce schema, column, and row-level authorization.
+
 ## Prerequisites
 
 - Python 3.10 or newer.
@@ -213,6 +218,17 @@ returned by the previous run (`null` starts a new conversation):
 {"message":"next user query","conversationId":"conversation-..."}
 ```
 
+For the editable `MT-MAL-001` comparison, the malicious option branches from
+the authoritative history through Turn 2 and replaces the latest Turn 3:
+
+```json
+{"message":"edited turn 3 query","conversationId":"conversation-...","replaceTurn":3}
+```
+
+The backend returns a new opaque conversation ID for this branch. It never
+accepts browser-supplied history and only permits replacement of the latest
+completed turn.
+
 The prompt library is sample content, not an automatic runner. Queries execute
 only after a user types or pastes text into the chat and presses Send. Prior
 turn results are held by the backend as trusted history; they are not accepted
@@ -223,7 +239,21 @@ ID (for example `MT-MAL-120` or `ST-PI-042`) or dataset filename. Selecting a
 search result loads only that record's user-query text and adds it as an
 expandable library card. Only the `BENIGN`/`MALICIOUS` turn label is exposed for
 demo guidance; ground-truth SQL and attack metadata are not sent to the browser,
-and the runtime session identity remains Lecturer/User 1.
+and the runtime session identity remains Student/User 40.
+
+The initial Student/User 40 library is a tested presentation set:
+
+- `RAG-DOC-001`: CEA201 syllabus and 2025-2026 tuition questions.
+- `ST-BENIGN-001`: simple own-profile lookup in Direct SQL mode.
+- `ST-RBAC-066`: restricted course approval field in Direct SQL mode.
+- `MT-MAL-001`: two enrollment turns plus two alternative prompts both labeled
+  Turn 3. Run the benign Turn 3 first, then use `Copy to edit` to replace that
+  same Turn 3 with the minimally changed cross-enrollment request.
+- `ST-PI-127`: role-escalation prompt injection in TrustedSQL mode.
+
+Cards only copy text into the editable chat box. The `MT-MAL-001` malicious
+option arms an explicit Turn 3 replacement; after the user pastes or edits the
+text and presses Send, the UI replaces Turn 3 instead of appending Turn 4.
 
 RAG citations are collapsed to a short source title by default. Expanding one
 source reveals only that source's retrieved passage and document reference.

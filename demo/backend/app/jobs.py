@@ -247,6 +247,7 @@ class DemoJobManager:
         message: str,
         conversation_id: str | None = None,
         mode: str = TRUSTEDSQL_MODE,
+        replace_turn: int | None = None,
     ) -> dict[str, Any]:
         readiness = self._readiness()
         if not readiness["ready"]:
@@ -254,6 +255,8 @@ class DemoJobManager:
         nlq = self._chat_message(message)
         if mode not in _EXECUTION_MODES:
             raise ScenarioCatalogError("mode must be trustedsql or direct")
+        if replace_turn is not None and (type(replace_turn) is not int or replace_turn < 1):
+            raise ScenarioCatalogError("replace_turn must be a positive integer")
         if conversation_id is not None and (
             not isinstance(conversation_id, str)
             or not _SAFE_CONVERSATION_ID.fullmatch(conversation_id)
@@ -268,20 +271,40 @@ class DemoJobManager:
             active_count = sum(item.state not in _TERMINAL for item in self._jobs.values())
             if active_count >= self.worker_count + self.max_queued_jobs:
                 raise JobCapacityError("demo job capacity is temporarily full")
-            created_conversation = conversation_id is None
-            if created_conversation:
+            created_conversation = False
+            if conversation_id is None:
+                if replace_turn is not None:
+                    raise ConversationConflict("a replacement requires an existing conversation")
+                created_conversation = True
                 conversation_id = f"conversation-{uuid.uuid4().hex}"
                 conversation = _Conversation(conversation_id, mode=mode)
                 self._conversations[conversation_id] = conversation
             else:
-                conversation = self._conversations.get(conversation_id)
-                if conversation is None:
+                source_conversation = self._conversations.get(conversation_id)
+                if source_conversation is None:
                     raise ConversationNotFound("conversation not found")
-                if conversation.mode != mode:
+                if source_conversation.mode != mode:
                     raise ConversationConflict("conversation execution mode cannot change")
+                if source_conversation.pending_run_id is not None:
+                    raise ConversationConflict("conversation already has an active turn")
+                if replace_turn is not None:
+                    if replace_turn != len(source_conversation.history):
+                        raise ConversationConflict("only the latest completed turn can be replaced")
+                    created_conversation = True
+                    conversation_id = f"conversation-{uuid.uuid4().hex}"
+                    conversation = _Conversation(
+                        conversation_id,
+                        mode=mode,
+                        history=deepcopy(source_conversation.history[: replace_turn - 1]),
+                    )
+                    self._conversations[conversation_id] = conversation
+                else:
+                    conversation = source_conversation
             if conversation.pending_run_id is not None:
                 raise ConversationConflict("conversation already has an active turn")
             through_turn = len(conversation.history) + 1
+            if replace_turn is not None and through_turn != replace_turn:
+                raise ConversationConflict("replacement turn identity is invalid")
             if through_turn > MAX_CHAT_TURNS:
                 raise ConversationConflict("conversation reached the maximum turn count")
             job = _Job(
@@ -786,7 +809,7 @@ class DemoJobManager:
     def bootstrap(self) -> dict[str, Any]:
         readiness = self._readiness()
         safe_catalog = {}
-        allowed_scenario = {"key", "canonical_id", "title", "description", "role", "user_id", "turn_type", "turns"}
+        allowed_scenario = {"key", "canonical_id", "title", "description", "source_file", "role", "user_id", "turn_type", "turn_count", "turns"}
         for key, scenario in self.catalog.items():
             if not isinstance(scenario, Mapping):
                 continue
@@ -794,7 +817,7 @@ class DemoJobManager:
             turns = safe.get("turns")
             if isinstance(turns, list):
                 safe["turns"] = [
-                    {field: item[field] for field in ("turn_id", "nlq", "turn_label") if field in item}
+                    {field: item[field] for field in ("turn_id", "nlq", "turn_label", "option_id", "replace_turn") if field in item}
                     for item in turns[:MAX_LIST_ITEMS]
                     if isinstance(item, Mapping)
                 ]

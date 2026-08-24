@@ -86,7 +86,12 @@ class M2IntentGuard:
         try:
             m2_result = self._run_phase(context)
             compact = compact_m2_output(m2_result)
-            policy = evaluate_m2_policy(compact, mode=self.mode)
+            hard_deny_enabled = module_config.get("hard_deny", True) is not False
+            policy = evaluate_m2_policy(
+                compact,
+                mode=self.mode,
+                hard_deny=hard_deny_enabled,
+            )
             decision = policy["decision"]
             downstream_hint = build_downstream_hint(compact, policy, context.nlq)
             return ModuleResult(
@@ -115,6 +120,8 @@ class M2IntentGuard:
                     "strong_signals": policy["strong_signals"],
                     "aggregate_review_signals": policy["aggregate_review_signals"],
                     "aggregate_escalated": policy["aggregate_escalated"],
+                    "hard_deny_enabled": hard_deny_enabled,
+                    "hard_deny_would_trigger": policy.get("hard_deny_would_trigger", False),
                     "waived_hard_deny_reasons": policy.get("waived_hard_deny_reasons", {}),
                 },
                 latency_ms=(time.perf_counter() - started) * 1000,
@@ -234,7 +241,12 @@ def compact_m2_output(result: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def evaluate_m2_policy(compact: dict[str, Any], *, mode: str = "calibrated") -> dict[str, Any]:
+def evaluate_m2_policy(
+    compact: dict[str, Any],
+    *,
+    mode: str = "calibrated",
+    hard_deny: bool = True,
+) -> dict[str, Any]:
     signals = set(compact.get("security_signals") or [])
     strong = sorted(signals & STRONG_DENY_SIGNALS)
     aggregate = sorted(signals & AGGREGATE_REVIEW_SIGNALS)
@@ -245,13 +257,30 @@ def evaluate_m2_policy(compact: dict[str, Any], *, mode: str = "calibrated") -> 
         strong = [signal for signal in strong if signal not in waived]
         if waived_reasons.get("aggregate_escalation"):
             aggregate_escalation = False
-    if mode == "strict" and compact.get("deny_or_restrict_recommended"):
+    strict_recommendation = bool(mode == "strict" and compact.get("deny_or_restrict_recommended"))
+    hard_deny_would_trigger = bool(strict_recommendation or strong or aggregate_escalation)
+    if not hard_deny:
+        return {
+            "decision": "ALLOW",
+            "reason_code": "M2_HARD_DENY_DISABLED" if hard_deny_would_trigger else (
+                "M2_ALLOW_OR_AGGREGATE_REVIEW_ONLY" if aggregate else "M2_ALLOW"
+            ),
+            "strong_signals": strong,
+            "aggregate_review_signals": aggregate,
+            "aggregate_escalated": bool(aggregate_escalation),
+            "hard_deny_enabled": False,
+            "hard_deny_would_trigger": hard_deny_would_trigger,
+            "waived_hard_deny_reasons": waived_reasons,
+        }
+    if strict_recommendation:
         return {
             "decision": "DENY",
             "reason_code": "M2_STRICT_RECOMMENDATION",
             "strong_signals": strong,
             "aggregate_review_signals": aggregate,
             "aggregate_escalated": False,
+            "hard_deny_enabled": True,
+            "hard_deny_would_trigger": True,
         }
     if strong or aggregate_escalation:
         return {
@@ -260,6 +289,8 @@ def evaluate_m2_policy(compact: dict[str, Any], *, mode: str = "calibrated") -> 
             "strong_signals": strong,
             "aggregate_review_signals": aggregate,
             "aggregate_escalated": bool(aggregate_escalation),
+            "hard_deny_enabled": True,
+            "hard_deny_would_trigger": True,
         }
     return {
         "decision": "ALLOW",
@@ -267,6 +298,8 @@ def evaluate_m2_policy(compact: dict[str, Any], *, mode: str = "calibrated") -> 
         "strong_signals": strong,
         "aggregate_review_signals": aggregate,
         "aggregate_escalated": False,
+        "hard_deny_enabled": True,
+        "hard_deny_would_trigger": False,
         "waived_hard_deny_reasons": waived_reasons,
     }
 
@@ -276,6 +309,8 @@ def build_downstream_hint(compact: dict[str, Any], policy: dict[str, Any], nlq: 
     action = "allow"
     if policy.get("decision") == "DENY":
         action = "deny"
+    elif policy.get("hard_deny_would_trigger"):
+        action = "restrict_scope" if _has_private_field_request(compact, nlq) else "planner_caution"
     elif policy.get("aggregate_review_signals"):
         action = "restrict_scope" if _has_private_field_request(compact, nlq) else "planner_caution"
     constraints = {
@@ -450,4 +485,3 @@ def audit_from_compact(compact: dict[str, Any]) -> dict[str, Any]:
         "m2_target_concepts": compact.get("target_concepts") or [],
         "m2_uncertainty": compact.get("uncertainty") or {},
     }
-

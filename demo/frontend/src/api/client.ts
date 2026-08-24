@@ -13,6 +13,7 @@ const MAX_ROWS = 500;
 const MAX_COLUMNS = 100;
 const CONVERSATION_ID = /^conversation-[0-9a-f]{32}$/;
 const DATASET_SCENARIO_ID = /^(?:MT-(?:BEN|MAL)|ST-(?:BENIGN|PI|RBAC))-[0-9]{3}$/;
+const CATALOG_SCENARIO_KEY = /^[a-z0-9][a-z0-9-]{0,63}$/;
 
 type JsonRecord = Record<string, unknown>;
 
@@ -21,12 +22,15 @@ export interface BootstrapCatalogItem {
   canonical_id: string;
   title: string;
   description: string;
+  source_file?: string;
   turn_count: number;
-  turn_type: 'multi';
-  role: 'lecturer';
-  user_id: 1;
+  turn_type: 'single' | 'multi';
+  role: 'student' | 'lecturer';
+  user_id: number;
   turns: Array<{
     turn_number: number;
+    option_id: string;
+    replace_turn?: number;
     label: string;
     classification: 'BENIGN' | 'MALICIOUS';
     description: string;
@@ -145,7 +149,7 @@ export interface RunCorrelationContext {
 
 const isRecord = (value: unknown): value is JsonRecord => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 const boundedText = (value: unknown, max = MAX_TEXT): string | undefined =>
-  typeof value === 'string' && value.length <= max ? value : undefined;
+  typeof value === 'string' && Array.from(value).length <= max ? value : undefined;
 const boundedRequiredText = (value: unknown, max = MAX_TEXT): string | null => boundedText(value, max) ?? null;
 const SAFE_STAGE_LABELS: Record<string, string> = {
   queued: 'Job queued',
@@ -228,22 +232,37 @@ function normalizeCatalogItem(value: unknown, fallbackKey?: string): BootstrapCa
   const canonicalId = boundedRequiredText(value.canonical_id ?? value.canonicalId);
   const title = boundedRequiredText(value.title);
   const description = boundedRequiredText(value.description);
-  const turnType = value.turn_type === 'multi' || value.turnType === 'multi' ? 'multi' : null;
-  const role = value.role === 'lecturer' ? 'lecturer' : null;
-  const userId = value.user_id === 1 || value.userId === 1 ? 1 : null;
+  const sourceFile = boundedText(value.source_file ?? value.sourceFile, 240);
+  const turnType = value.turn_type === 'single' || value.turnType === 'single'
+    ? 'single'
+    : value.turn_type === 'multi' || value.turnType === 'multi'
+      ? 'multi'
+      : null;
+  const role = value.role === 'student' || value.role === 'lecturer' ? value.role : null;
+  const rawUserId = value.user_id ?? value.userId;
+  const userId = isPositiveInteger(rawUserId) ? rawUserId : null;
   const rawTurns = Array.isArray(value.turns) ? value.turns : null;
-  if (!key || !(KNOWN_SCENARIO_KEYS as readonly string[]).includes(key) || !canonicalId || !title || !description || !turnType || !role || userId === null || !rawTurns || rawTurns.length === 0) return null;
+  if (!key || !CATALOG_SCENARIO_KEY.test(key) || !canonicalId || !title || !description || !turnType || !role || userId === null || !rawTurns || rawTurns.length === 0) return null;
 
-  const turns = rawTurns.map((rawTurn): BootstrapCatalogItem['turns'][number] | null => {
+  const turns = rawTurns.map((rawTurn, index): BootstrapCatalogItem['turns'][number] | null => {
     if (!isRecord(rawTurn)) return null;
     const number = rawTurn.turn_id ?? rawTurn.turn_number ?? rawTurn.turnNumber;
     const nlq = boundedRequiredText(rawTurn.nlq, MAX_CHAT_QUERY);
     const classification = rawTurn.turn_label === 'BENIGN' || rawTurn.turn_label === 'MALICIOUS'
       ? rawTurn.turn_label
       : null;
-    if (!isPositiveInteger(number) || !nlq || !classification) return null;
+    const optionId = boundedRequiredText(rawTurn.option_id ?? `turn-${number}-option-${index + 1}`, 80);
+    const rawReplaceTurn = rawTurn.replace_turn ?? rawTurn.replaceTurn;
+    const replaceTurn = rawReplaceTurn === undefined
+      ? undefined
+      : isPositiveInteger(rawReplaceTurn) && rawReplaceTurn === number
+        ? rawReplaceTurn
+        : null;
+    if (!isPositiveInteger(number) || !nlq || !classification || !optionId || replaceTurn === null) return null;
     return {
       turn_number: number,
+      option_id: optionId,
+      replace_turn: replaceTurn,
       // The backend display label is deliberately ignored: only neutral demo-owned labels enter UI state.
       label: `Turn ${number}`,
       classification,
@@ -253,17 +272,20 @@ function normalizeCatalogItem(value: unknown, fallbackKey?: string): BootstrapCa
   });
   if (turns.some((turn): turn is null => turn === null)) return null;
   const normalizedTurns = turns as BootstrapCatalogItem['turns'];
-  if (normalizedTurns.some((turn, index) => turn.turn_number !== index + 1)) return null;
+  if (new Set(normalizedTurns.map((turn) => turn.option_id)).size !== normalizedTurns.length) return null;
+  if (normalizedTurns.some((turn, index) => index > 0 && turn.turn_number < normalizedTurns[index - 1].turn_number)) return null;
+  const logicalTurnCount = Math.max(...normalizedTurns.map((turn) => turn.turn_number));
+  const logicalTurnNumbers = [...new Set(normalizedTurns.map((turn) => turn.turn_number))];
+  if (logicalTurnNumbers.some((turnNumber, index) => turnNumber !== index + 1)) return null;
   const declaredTurnCount = value.turn_count ?? value.turnCount;
-  if (declaredTurnCount !== undefined && declaredTurnCount !== normalizedTurns.length) return null;
-  if (normalizedTurns.length < 2) return null;
-
+  if (declaredTurnCount !== undefined && declaredTurnCount !== logicalTurnCount) return null;
   return {
     key,
     canonical_id: canonicalId,
     title,
     description,
-    turn_count: normalizedTurns.length,
+    source_file: sourceFile,
+    turn_count: logicalTurnCount,
     turn_type: turnType,
     role,
     user_id: userId,
@@ -285,11 +307,14 @@ export function validateBootstrapResponse(data: unknown): BootstrapResponseDto |
       : null;
   if (!rawCatalog) return null;
   const catalog = rawCatalog.map(({ item, key }) => normalizeCatalogItem(item, key));
-  if (catalog.some((item): item is null => item === null) || catalog.length !== 1 || catalog[0]?.key !== 'multiturn') return null;
+  if (catalog.some((item): item is null => item === null) || catalog.length === 0 || catalog.length > 20) return null;
+  const normalizedCatalog = catalog as BootstrapCatalogItem[];
+  if (new Set(normalizedCatalog.map((item) => item.key)).size !== normalizedCatalog.length) return null;
+  if (new Set(normalizedCatalog.map((item) => item.canonical_id)).size !== normalizedCatalog.length) return null;
   return {
     ready: data.ready,
     readiness,
-    catalog: catalog as BootstrapCatalogItem[],
+    catalog: normalizedCatalog,
     architecture,
     ragReady,
   };
@@ -672,16 +697,12 @@ export function validateRunStatusEvent(data: unknown, expected?: RunCorrelationC
   return { runId: outerRunId, state: data.state, finalResult: parsedFinalResult, error };
 }
 
-export function mapCategoryBadge(_key: string): string {
-  return 'Multiturn_Malicious_records.json';
-}
-
 export function mapBootstrapToScenarios(catalog: BootstrapCatalogItem[]): ScenarioMetadata[] {
   return catalog.map((item) => ({
     key: item.key as ScenarioMetadata['key'],
     canonicalId: item.canonical_id,
     title: item.title,
-    categoryBadge: mapCategoryBadge(item.key),
+    categoryBadge: item.source_file ?? 'Curated student demo',
     turnCount: item.turn_count,
     turnType: item.turn_type,
     role: item.role,
@@ -689,6 +710,8 @@ export function mapBootstrapToScenarios(catalog: BootstrapCatalogItem[]): Scenar
     description: item.description,
     turns: item.turns.map((turn) => ({
       turnNumber: turn.turn_number,
+      optionId: turn.option_id,
+      replacesTurn: turn.replace_turn,
       label: `Turn ${turn.turn_number}`,
       classification: turn.classification,
       description: turn.description,
@@ -763,7 +786,7 @@ export interface ApiClient {
   fetchBootstrap: () => Promise<{ ready: boolean; scenarios: ScenarioMetadata[]; tools: ToolReadiness[] }>;
   searchPromptScenarios: (query: string, role?: ScenarioRoleFilter, signal?: AbortSignal) => Promise<PromptScenarioSearchItem[]>;
   fetchPromptScenario: (scenarioId: string, signal?: AbortSignal) => Promise<ScenarioMetadata>;
-  createRun: (message: string, conversationId: string | null, signal?: AbortSignal, mode?: ExecutionMode) => Promise<RunJobDto>;
+  createRun: (message: string, conversationId: string | null, signal?: AbortSignal, mode?: ExecutionMode, replaceTurn?: number) => Promise<RunJobDto>;
   getRun: (runId: string) => Promise<RunStateDto>;
   cancelRun: (runId: string) => Promise<{ success: boolean }>;
   subscribeRunEvents: (runId: string, lastSequence: number, callbacks: ApiClientCallbacks, expected?: RunCorrelationContext) => () => void;
@@ -825,18 +848,24 @@ export function createApiClient(baseUrl = '/api'): ApiClient {
       return scenario;
     },
 
-    async createRun(message: string, conversationId: string | null, signal?: AbortSignal, mode: ExecutionMode = 'trustedsql') {
+    async createRun(message: string, conversationId: string | null, signal?: AbortSignal, mode: ExecutionMode = 'trustedsql', replaceTurn?: number) {
       if (typeof message !== 'string' || !message.trim() || message.length > MAX_CHAT_QUERY) {
         throw safeError('Chat message is empty or exceeds the bounded limit');
       }
       if (conversationId !== null && !CONVERSATION_ID.test(conversationId)) {
         throw safeError('Conversation identity is invalid');
       }
+      if (replaceTurn !== undefined && (!isPositiveInteger(replaceTurn) || conversationId === null)) {
+        throw safeError('Replacement turn identity is invalid');
+      }
       if (mode !== 'trustedsql' && mode !== 'direct') throw safeError('Execution mode is invalid');
+      const body = replaceTurn === undefined
+        ? { message: message.trim(), conversationId, mode }
+        : { message: message.trim(), conversationId, mode, replaceTurn };
       const response = await fetch(`${baseUrl}/runs`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ message: message.trim(), conversationId, mode }),
+        body: JSON.stringify(body),
         signal,
       });
       if (response.status !== 202) throw safeError(`Create run failed (${response.status})`);

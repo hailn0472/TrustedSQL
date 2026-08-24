@@ -321,10 +321,9 @@ class DemoRequestHandler(BaseHTTPRequestHandler):
                 body = self._read_json()
                 if body is None:
                     return
-                if set(body) not in (
-                    {"message", "conversationId"},
-                    {"message", "conversationId", "mode"},
-                ):
+                required_fields = {"message", "conversationId"}
+                allowed_fields = required_fields | {"mode", "replaceTurn"}
+                if not required_fields.issubset(body) or not set(body).issubset(allowed_fields):
                     self._error(400, "invalid_request", "body fields are not allowlisted")
                     return
                 if not isinstance(body["message"], str):
@@ -337,7 +336,19 @@ class DemoRequestHandler(BaseHTTPRequestHandler):
                 if mode not in {"trustedsql", "direct"}:
                     self._error(400, "invalid_request", "mode must be trustedsql or direct")
                     return
-                self._json(202, self.manager.submit(body["message"], body["conversationId"], mode))
+                replace_turn = body.get("replaceTurn")
+                if replace_turn is not None and (type(replace_turn) is not int or replace_turn < 1):
+                    self._error(400, "invalid_request", "replaceTurn must be a positive integer")
+                    return
+                self._json(
+                    202,
+                    self.manager.submit(
+                        body["message"],
+                        body["conversationId"],
+                        mode,
+                        replace_turn,
+                    ),
+                )
                 return
             route = self._run_path()
             if route is None or route[1] != "cancel":

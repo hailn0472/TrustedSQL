@@ -27,6 +27,8 @@ DIRECT_SETTING_ID = "direct_sql"
 DIRECT_MODULES = ("C0", "M6", "X1")
 INTERACTIVE_SCENARIO_KEY = "multiturn"
 INTERACTIVE_SAMPLE_ID = "interactive-multiturn"
+INTERACTIVE_ROLE = "student"
+INTERACTIVE_USER_ID = 40
 MAX_CHAT_TURNS = 20
 MAX_CHAT_QUERY_CHARS = 2_000
 _SAFE_RUN_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$")
@@ -252,8 +254,8 @@ class TrustedSqlRuntimeAdapter:
         return {
             "key": INTERACTIVE_SCENARIO_KEY,
             "canonical_id": INTERACTIVE_SAMPLE_ID,
-            "role": "lecturer",
-            "user_id": 1,
+            "role": INTERACTIVE_ROLE,
+            "user_id": INTERACTIVE_USER_ID,
             "turn_type": "multi",
             "turns": normalized,
         }
@@ -596,8 +598,8 @@ class TrustedSqlRuntimeAdapter:
         prefix = {
             "key": INTERACTIVE_SCENARIO_KEY,
             "canonical_id": INTERACTIVE_SAMPLE_ID,
-            "role": "lecturer",
-            "user_id": 1,
+            "role": INTERACTIVE_ROLE,
+            "user_id": INTERACTIVE_USER_ID,
             "turn_type": "multi",
             "turns": [{"turn_id": turn_number, "nlq": nlq}],
         }
@@ -695,8 +697,8 @@ class TrustedSqlRuntimeAdapter:
         prefix = {
             "key": INTERACTIVE_SCENARIO_KEY,
             "canonical_id": INTERACTIVE_SAMPLE_ID,
-            "role": "lecturer",
-            "user_id": 1,
+            "role": INTERACTIVE_ROLE,
+            "user_id": INTERACTIVE_USER_ID,
             "turn_type": "multi",
             "turns": [{"turn_id": turn_number, "nlq": nlq}],
         }

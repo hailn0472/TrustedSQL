@@ -543,6 +543,11 @@ aside.left-scenario-rail {
   padding: 8px;
 }
 
+.prompt-library-item.turn-replacement-option {
+  border-color: var(--color-deny-border);
+  background: linear-gradient(90deg, var(--color-deny-bg), var(--bg-surface) 36%);
+}
+
 .prompt-library-item-header {
   display: flex;
   align-items: center;
@@ -580,6 +585,13 @@ aside.left-scenario-rail {
   border: 1px solid var(--color-deny-border);
   background: var(--color-deny-bg);
   color: var(--color-deny);
+}
+
+.turn-edit-hint {
+  color: var(--color-deny);
+  font: 700 7.5px var(--font-mono);
+  letter-spacing: 0.25px;
+  white-space: nowrap;
 }
 
 .prompt-library-item p {
@@ -632,10 +644,40 @@ aside.left-scenario-rail {
   text-transform: uppercase;
 }
 
-.scenario-tag.multiturn {
+.scenario-tag.rag {
+  background: var(--color-active-bg);
+  color: var(--color-active);
+  border: 1px solid var(--color-active-border);
+}
+
+.scenario-tag.benign {
+  background: var(--color-allow-bg);
+  color: var(--color-allow);
+  border: 1px solid var(--color-allow-border);
+}
+
+.scenario-tag.rbac {
+  background: var(--color-warn-bg);
+  color: var(--color-warn);
+  border: 1px solid var(--color-warn-border);
+}
+
+.scenario-tag.pi {
+  background: var(--color-deny-bg);
+  color: var(--color-deny);
+  border: 1px solid var(--color-deny-border);
+}
+
+.scenario-tag.mt {
   background: var(--color-purple-bg);
   color: var(--color-purple);
   border: 1px solid var(--color-purple-border);
+}
+
+.scenario-tag.other {
+  background: var(--color-neutral-bg);
+  color: var(--color-neutral-text);
+  border: 1px solid var(--color-neutral-border);
 }
 
 .scenario-source {

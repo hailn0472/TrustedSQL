@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ExecutionMode, PromptScenarioSearchItem, ScenarioMetadata, ScenarioRoleFilter, ToolReadiness } from '../app/types';
+import { ExecutionMode, PromptScenarioSearchItem, ScenarioMetadata, ScenarioRoleFilter, ScenarioTurn, ToolReadiness } from '../app/types';
 import {
   AlertCircle,
   Check,
@@ -25,7 +25,20 @@ interface ScenarioRailProps {
   onSearchScenarios: (query: string, role: ScenarioRoleFilter) => Promise<PromptScenarioSearchItem[]>;
   onImportScenario: (scenarioId: string) => Promise<ScenarioMetadata>;
   onRemoveScenario: (scenarioKey: string) => void;
+  onCopyScenarioTurn: (scenarioKey: string, turn: ScenarioTurn) => void;
 }
+
+type ScenarioTagKind = 'rag' | 'benign' | 'rbac' | 'pi' | 'mt' | 'other';
+
+const scenarioTag = (canonicalId: string): { kind: ScenarioTagKind; label: string } => {
+  const normalized = canonicalId.toUpperCase();
+  if (normalized.startsWith('RAG-')) return { kind: 'rag', label: 'RAG' };
+  if (normalized.startsWith('ST-BENIGN-')) return { kind: 'benign', label: 'BENIGN' };
+  if (normalized.startsWith('ST-RBAC-')) return { kind: 'rbac', label: 'RBAC' };
+  if (normalized.startsWith('ST-PI-')) return { kind: 'pi', label: 'PI' };
+  if (normalized.startsWith('MT-')) return { kind: 'mt', label: 'MT' };
+  return { kind: 'other', label: 'OTHER' };
+};
 
 export const ScenarioRail: React.FC<ScenarioRailProps> = ({
   scenarios,
@@ -37,11 +50,12 @@ export const ScenarioRail: React.FC<ScenarioRailProps> = ({
   onSearchScenarios,
   onImportScenario,
   onRemoveScenario,
+  onCopyScenarioTurn,
 }) => {
   const [expandedKeys, setExpandedKeys] = useState<Set<string>>(new Set());
   const [copiedTurn, setCopiedTurn] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [roleFilter, setRoleFilter] = useState<ScenarioRoleFilter>('all');
+  const [roleFilter, setRoleFilter] = useState<ScenarioRoleFilter>('student');
   const [searchResults, setSearchResults] = useState<PromptScenarioSearchItem[]>([]);
   const [searching, setSearching] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -53,12 +67,40 @@ export const ScenarioRail: React.FC<ScenarioRailProps> = ({
   const bypassedInDirectMode = (toolId: string) =>
     ['policy_engine', 'trustedsql'].includes(toolId);
 
-  const copyPrompt = async (scenarioKey: string, turnNumber: number, nlq?: string) => {
-    if (!nlq) return;
-    const identity = `${scenarioKey}:${turnNumber}`;
+  const fallbackCopy = (text: string): boolean => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    let copied = false;
     try {
-      await navigator.clipboard.writeText(nlq);
+      copied = document.execCommand('copy');
+    } finally {
+      textarea.remove();
+    }
+    return copied;
+  };
+
+  const copyPrompt = async (scenarioKey: string, turn: ScenarioTurn) => {
+    if (!turn.nlq) return;
+    const identity = `${scenarioKey}:${turn.optionId ?? `turn-${turn.turnNumber}`}`;
+    try {
+      let copied = false;
+      if (navigator.clipboard?.writeText) {
+        try {
+          await navigator.clipboard.writeText(turn.nlq);
+          copied = true;
+        } catch {
+          copied = false;
+        }
+      }
+      if (!copied) copied = fallbackCopy(turn.nlq);
+      if (!copied) throw new Error('clipboard unavailable');
       setCopiedTurn(identity);
+      onCopyScenarioTurn(scenarioKey, turn);
       window.setTimeout(() => setCopiedTurn((current) => current === identity ? null : current), 1_500);
     } catch {
       setCopiedTurn(null);
@@ -240,6 +282,7 @@ export const ScenarioRail: React.FC<ScenarioRailProps> = ({
           {scenarios.map((item) => {
             const expanded = expandedKeys.has(item.key);
             const selected = item.key === selectedScenarioKey;
+            const tag = scenarioTag(item.canonicalId);
             return (
               <div key={item.key} className={`prompt-library-card ${selected ? 'selected' : ''}`}>
                 <div className="prompt-library-card-header">
@@ -257,11 +300,13 @@ export const ScenarioRail: React.FC<ScenarioRailProps> = ({
                     <span className="prompt-library-heading">
                       <span className="scenario-card-top">
                         <span className="scenario-id-label" data-testid="scenario-id-label">{item.canonicalId}</span>
-                        <span className="scenario-tag multiturn">{item.turnType === 'single' ? 'Single' : 'Multi'} · {item.turnCount}</span>
+                        <span className={`scenario-tag ${tag.kind}`} data-scenario-kind={tag.kind}>
+                          {tag.label} · {item.turnCount}
+                        </span>
                       </span>
-                      <span className="scenario-source">{item.categoryBadge}</span>
+                      <span className="scenario-source">{item.title}</span>
                       <span className="scenario-meta">
-                        {item.role ?? 'unknown role'}{item.userId === undefined ? '' : ` · User ${item.userId}`}
+                        {item.categoryBadge} · {item.role ?? 'unknown role'}{item.userId === undefined ? '' : ` · User ${item.userId}`}
                       </span>
                     </span>
                   </button>
@@ -280,24 +325,29 @@ export const ScenarioRail: React.FC<ScenarioRailProps> = ({
                 {expanded && (
                   <ol id={`prompt-list-${item.key}`} className="prompt-library-list" data-testid="multiturn-prompt-list">
                     {item.turns.map((turn) => {
-                      const copyIdentity = `${item.key}:${turn.turnNumber}`;
+                      const optionId = turn.optionId ?? `turn-${turn.turnNumber}`;
+                      const copyIdentity = `${item.key}:${optionId}`;
+                      const replacesCurrentTurn = turn.replacesTurn === turn.turnNumber;
                       return (
-                        <li key={turn.turnNumber} className="prompt-library-item">
+                        <li key={optionId} className={`prompt-library-item ${replacesCurrentTurn ? 'turn-replacement-option' : ''}`}>
                           <div className="prompt-library-item-header">
                             <span>
                               <MessageSquareText size={12} /> Turn {turn.turnNumber}
                               <span className={`turn-classification ${turn.classification.toLowerCase()}`}>
                                 {turn.classification}
                               </span>
+                              {replacesCurrentTurn && <span className="turn-edit-hint">EDIT SAME TURN</span>}
                             </span>
                             <button
                               type="button"
                               className="btn-copy-prompt"
-                              aria-label={`Copy ${item.canonicalId} turn ${turn.turnNumber} query`}
-                              onClick={() => void copyPrompt(item.key, turn.turnNumber, turn.nlq)}
+                              aria-label={replacesCurrentTurn
+                                ? `Copy ${item.canonicalId} malicious edit for turn ${turn.turnNumber}`
+                                : `Copy ${item.canonicalId} turn ${turn.turnNumber} query`}
+                              onClick={() => void copyPrompt(item.key, turn)}
                             >
                               {copiedTurn === copyIdentity ? <Check size={12} /> : <Copy size={12} />}
-                              {copiedTurn === copyIdentity ? 'Copied' : 'Copy'}
+                              {copiedTurn === copyIdentity ? 'Copied' : replacesCurrentTurn ? 'Copy to edit' : 'Copy'}
                             </button>
                           </div>
                           <p>{turn.nlq}</p>

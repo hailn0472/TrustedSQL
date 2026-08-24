@@ -39,6 +39,7 @@ modules:
   M2:
     engine: trustedsql_m2_intent_gnn
     mode: calibrated
+    hard_deny: false
     device: cpu
     allow_hash_encoder: false
     gnn_authority: false

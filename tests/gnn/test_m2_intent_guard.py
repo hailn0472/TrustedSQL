@@ -60,6 +60,25 @@ def test_strong_signal_denies() -> None:
     assert policy["reason_code"] == "M2_STRONG_SECURITY_SIGNAL"
 
 
+def test_hard_deny_can_be_disabled_without_discarding_m2_evidence() -> None:
+    compact = {
+        "scope": "EXTERNAL_COHORT",
+        "target_relation": "UNRESOLVED",
+        "target_concepts": ["ACADEMIC_RESULT", "STUDENT"],
+        "deny_or_restrict_recommended": True,
+        "security_signals": ["safe_to_external_target"],
+    }
+    policy = evaluate_m2_policy(compact, mode="calibrated", hard_deny=False)
+    hint = build_downstream_hint(compact, policy, "show course averages")
+
+    assert policy["decision"] == "ALLOW"
+    assert policy["reason_code"] == "M2_HARD_DENY_DISABLED"
+    assert policy["hard_deny_would_trigger"] is True
+    assert policy["strong_signals"] == ["safe_to_external_target"]
+    assert hint["recommended_action"] == "restrict_scope"
+    assert hint["review_reason_code"] == "M2_HARD_DENY_DISABLED"
+
+
 def test_aggregate_self_scope_benign_is_not_hard_denied() -> None:
     policy = evaluate_m2_policy(
         {
@@ -127,6 +146,18 @@ def test_m2_returns_module_result_for_strong_signal(monkeypatch) -> None:
     assert all(not key.startswith("old_") for key in result.audit)
 
 
+def test_m2_module_config_disables_hard_deny(monkeypatch) -> None:
+    guard = M2IntentGuard(mode="calibrated")
+    monkeypatch.setattr(guard, "_run_phase", lambda context: _m2_phase_result(["safe_to_external_target"]))
+    result = guard.run(_context(), None, {"hard_deny": False})
+
+    assert result.decision == "ALLOW"
+    assert result.audit["hard_deny_enabled"] is False
+    assert result.audit["hard_deny_would_trigger"] is True
+    assert result.audit["reason_code"] == "M2_HARD_DENY_DISABLED"
+    assert result.artifact["m2_downstream_hint"]["recommended_action"] == "restrict_scope"
+
+
 def test_m2_uses_single_gnn_decision_path(monkeypatch) -> None:
     guard = M2IntentGuard(mode="calibrated")
     monkeypatch.setattr(guard, "_run_phase", lambda context: _m2_phase_result([]))
@@ -135,4 +166,3 @@ def test_m2_uses_single_gnn_decision_path(monkeypatch) -> None:
     assert result.decision == "ALLOW"
     assert result.audit["engine"] == "trustedsql_m2_intent_gnn_v1"
     assert result.audit["reason_code"] == "M2_ALLOW"
-

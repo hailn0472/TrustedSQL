@@ -71,6 +71,23 @@ describe('ST-09 typed API client', () => {
     expect(validateRunStateDto({ runId: 'r', state: 'complete', scenarioKey: 'multiturn', sampleId: 'interactive-multiturn', throughTurn: 1, turnType: 'multi', events: [{ runId: 'r', moduleId: 'M1', streamSequence: 1, eventType: 'unknown' }], finalResult: allow })).toBeNull();
   });
 
+  it('counts Unicode code points consistently with the Python RAG boundary', () => {
+    const ragResult = {
+      runId: 'run-1', sampleId: 'interactive-multiturn', turnId: 1,
+      decision: 'ALLOW', executed: false, dbTouched: false,
+      route: ['chat', 'orchestrator', 'context_memory', 'rag'],
+      mode: 'trustedsql', resultType: 'rag', answer: 'Grounded answer',
+      sources: [{ citation: 1, title: 'tuition.md', uri: 'tuition.md', snippet: `${'x'.repeat(359)}😀` }],
+    };
+    expect(ragResult.sources[0].snippet.length).toBe(361);
+    expect(Array.from(ragResult.sources[0].snippet)).toHaveLength(360);
+    expect(validateFinalResultDto(ragResult)).not.toBeNull();
+    expect(validateFinalResultDto({
+      ...ragResult,
+      sources: [{ ...ragResult.sources[0], snippet: `${ragResult.sources[0].snippet}x` }],
+    })).toBeNull();
+  });
+
   it('uses same-origin bootstrap and strict exact POST body', async () => {
     mockFetch.mockResolvedValueOnce({ ok: true, status: 200, json: async () => validBootstrap });
     const client = createApiClient('/api');

@@ -11,8 +11,10 @@ from __future__ import annotations
 
 import argparse
 import concurrent.futures
+import hashlib
 import os
 import sys
+import tempfile
 import threading
 from collections.abc import Iterable
 from pathlib import Path
@@ -33,6 +35,24 @@ def _corpora(response: Any) -> Iterable[Any]:
         return response
     items = getattr(response, "rag_corpora", None)
     return items if isinstance(items, Iterable) else ()
+
+
+def _upload_path(path: Path, relative: str, staging_dir: Path) -> Path:
+    """Return a path whose basename is safe for the SDK upload header.
+
+    Vertex accepts UTF-8 RagFile display names, but the current SDK also puts
+    the local basename in an ASCII-only HTTP header. Preserve the original
+    relative path as the display name and stage only the local upload path
+    behind a deterministic ASCII symlink when needed.
+    """
+
+    try:
+        path.name.encode("ascii")
+    except UnicodeEncodeError:
+        alias = staging_dir / f"{hashlib.sha256(relative.encode('utf-8')).hexdigest()}{path.suffix}"
+        alias.symlink_to(path)
+        return alias
+    return path
 
 
 def _resolve_corpus(client: Any, types: Any, args: argparse.Namespace) -> str:
@@ -107,7 +127,7 @@ def _args() -> argparse.Namespace:
     parser.add_argument("--chunk-size", type=int, default=512)
     parser.add_argument("--chunk-overlap", type=int, default=100)
     parser.add_argument("--max-embedding-rpm", type=int, default=900)
-    parser.add_argument("--workers", type=int, default=24, help="Concurrent direct-upload workers")
+    parser.add_argument("--workers", type=int, default=4, help="Concurrent direct-upload workers")
     return parser.parse_args()
 
 
@@ -195,35 +215,42 @@ def main() -> int:
         )
         local = threading.local()
 
-        def upload(path: Path) -> str:
-            if not hasattr(local, "client"):
-                local.client = agentplatform.Client(project=args.project, location=args.location)
-            relative = path.relative_to(source_dir).as_posix()
-            local.client.rag.upload_file(
-                corpus_name=corpus_name,
-                path=str(path),
-                display_name=relative,
-                upload_rag_file_config=upload_config,
-            )
-            return relative
-
         failures: list[tuple[str, str]] = []
         completed = len(existing)
-        with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as executor:
-            futures = {executor.submit(upload, path): path for path in pending}
-            for future in concurrent.futures.as_completed(futures):
-                path = futures[future]
-                try:
-                    future.result()
-                    completed += 1
-                except Exception as exc:  # keep indexing independent files
-                    failures.append((path.relative_to(source_dir).as_posix(), str(exc)))
-                processed = completed + len(failures)
-                if processed % 25 == 0 or processed == len(files):
-                    print(
-                        f"Processed {processed}/{len(files)}; indexed={completed}; failed={len(failures)}",
-                        flush=True,
-                    )
+        with tempfile.TemporaryDirectory(prefix="trustedsql-rag-upload-") as temporary:
+            staging_dir = Path(temporary)
+            upload_paths = {
+                path: _upload_path(path, path.relative_to(source_dir).as_posix(), staging_dir)
+                for path in pending
+            }
+
+            def upload(path: Path) -> str:
+                if not hasattr(local, "client"):
+                    local.client = agentplatform.Client(project=args.project, location=args.location)
+                relative = path.relative_to(source_dir).as_posix()
+                local.client.rag.upload_file(
+                    corpus_name=corpus_name,
+                    path=str(upload_paths[path]),
+                    display_name=relative,
+                    upload_rag_file_config=upload_config,
+                )
+                return relative
+
+            with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as executor:
+                futures = {executor.submit(upload, path): path for path in pending}
+                for future in concurrent.futures.as_completed(futures):
+                    path = futures[future]
+                    try:
+                        future.result()
+                        completed += 1
+                    except Exception as exc:  # keep indexing independent files
+                        failures.append((path.relative_to(source_dir).as_posix(), str(exc)))
+                    processed = completed + len(failures)
+                    if processed % 25 == 0 or processed == len(files):
+                        print(
+                            f"Processed {processed}/{len(files)}; indexed={completed}; failed={len(failures)}",
+                            flush=True,
+                        )
         if failures:
             for relative, error in failures[:20]:
                 print(f"FAILED {relative}: {error}", flush=True)
