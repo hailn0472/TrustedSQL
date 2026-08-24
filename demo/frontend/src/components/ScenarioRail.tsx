@@ -102,10 +102,10 @@ export const ScenarioRail: React.FC<ScenarioRailProps> = ({
   };
 
   return (
-    <aside className="left-scenario-rail" aria-label="Prompt library">
+    <aside className="left-scenario-rail" aria-label="Scenarios">
       <div>
         <h2 className="rail-section-header">
-          <span>Prompt Library</span>
+          <span>Scenarios</span>
           <span className="prompt-library-count">{scenarios.length}</span>
         </h2>
 
@@ -122,7 +122,7 @@ export const ScenarioRail: React.FC<ScenarioRailProps> = ({
                     className="prompt-library-toggle"
                     aria-expanded={expanded}
                     aria-controls={`prompt-list-${item.key}`}
-                    aria-label={`${item.canonicalId} prompt library`}
+                    aria-label={`${item.canonicalId} scenario`}
                     onClick={() => toggleScenario(item.key)}
                   >
                     <span className="prompt-library-toggle-icon">
@@ -145,8 +145,8 @@ export const ScenarioRail: React.FC<ScenarioRailProps> = ({
                     type="button"
                     className="btn-remove-scenario"
                     disabled={disabled}
-                    aria-label={`Remove ${item.canonicalId} from Prompt Library`}
-                    title="Remove from Prompt Library"
+                    aria-label={`Remove ${item.canonicalId} from Scenarios`}
+                    title="Remove from Scenarios"
                     onClick={() => removeScenario(item.key)}
                   >
                     <X size={14} />
@@ -190,7 +190,7 @@ export const ScenarioRail: React.FC<ScenarioRailProps> = ({
               </div>
             );
           })}
-          {!scenarios.length && <div className="prompt-library-empty">Prompt library unavailable</div>}
+          {!scenarios.length && <div className="prompt-library-empty">No scenarios loaded</div>}
         </div>
       </div>
 

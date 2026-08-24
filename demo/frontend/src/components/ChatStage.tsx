@@ -316,7 +316,7 @@ export const ChatStage: React.FC<ChatStageProps> = ({
             </span>
           </div>
           <div className="chat-sub-meta">
-            {scenario?.canonicalId ?? 'No scenario selected'} prompt library · {sessionIdentity.role}/User {sessionIdentity.userId} · {chatTurns.length} chat turns
+            {scenario?.canonicalId ?? 'No scenario selected'} scenario · {sessionIdentity.role}/User {sessionIdentity.userId} · {chatTurns.length} chat turns
           </div>
         </div>
       </div>
